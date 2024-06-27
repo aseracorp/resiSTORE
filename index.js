@@ -17,24 +17,24 @@ for (const file of servapps) {
   // list all screenshots in the directory servapps/${file}/screenshots
   const screenshots = fs.readdirSync(`./servapps/${file}/screenshots`)
   for (const screenshot of screenshots) {
-    servapp.screenshots.push(`https://azukaar.github.io/cosmos-servapps-official/servapps/${file}/screenshots/${screenshot}`)
+    servapp.screenshots.push(`https://aseracorp.github.io/resiSTORE/servapps/${file}/screenshots/${screenshot}`)
   }
 
   if(fs.existsSync(`./servapps/${file}/artefacts`)) {
     const artefacts = fs.readdirSync(`./servapps/${file}/artefacts`)
     for(const artefact of artefacts) {
-      servapp.artefacts[artefact] = (`https://azukaar.github.io/cosmos-servapps-official/servapps/${file}/artefacts/${artefact}`)
+      servapp.artefacts[artefact] = (`https://aseracorp.github.io/resiSTORE/servapps/${file}/artefacts/${artefact}`)
     }
   }
 
-  servapp.icon = `https://azukaar.github.io/cosmos-servapps-official/servapps/${file}/icon.png`
+  servapp.icon = `https://aseracorp.github.io/resiSTORE/servapps/${file}/icon.png`
   //Common Format,used by most
-  const YMLComposeSource =  `https://azukaar.github.io/cosmos-servapps-official/servapps/${file}/docker-compose.yml`;
+  const YMLComposeSource =  `https://aseracorp.github.io/resiSTORE/servapps/${file}/docker-compose.yml`;
   if(fs.existsSync(`./servapps/${file}/docker-compose.yml`)) {
     servapp.compose = YMLComposeSource;
   }
   //Cosmos Legacy Format
-  const CosmosComposeSource =  `https://azukaar.github.io/cosmos-servapps-official/servapps/${file}/cosmos-compose.json`; 
+  const CosmosComposeSource =  `https://aseracorp.github.io/resiSTORE/servapps/${file}/cosmos-compose.json`; 
   if(fs.existsSync(`./servapps/${file}/cosmos-compose.json`)) {
     servapp.compose = CosmosComposeSource;
     }
@@ -59,10 +59,10 @@ for (const servapp of servappsJSON) {
   servapp.compose = `http://localhost:3000/servapps/${servapp.id}/cosmos-compose.json`
   servapp.icon = `http://localhost:3000/servapps/${servapp.id}/icon.png`
   for (let i = 0; i < servapp.screenshots.length; i++) {
-    servapp.screenshots[i] = servapp.screenshots[i].replace('https://azukaar.github.io/cosmos-servapps-official', 'http://localhost:3000')
+    servapp.screenshots[i] = servapp.screenshots[i].replace('https://aseracorp.github.io/resiSTORE', 'http://localhost:3000')
   }
   for (const artefact in servapp.artefacts) {
-    servapp.artefacts[artefact] = servapp.artefacts[artefact].replace('https://azukaar.github.io/cosmos-servapps-official', 'http://localhost:3000')
+    servapp.artefacts[artefact] = servapp.artefacts[artefact].replace('https://aseracorp.github.io/resiSTORE', 'http://localhost:3000')
   }
 }
 
