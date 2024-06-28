@@ -1,0 +1,12 @@
+{
+  "name": "Calimero KNX-Server",
+  "description": "KNXnet/IP-Server mit Calimero",
+  "longDescription": "<p>Calimero bietet den KNX (secure) Protokollstack für Clients, KNXnet/IP Server und Geräte.</p><p>Das Ziel der Bibliothek ist es, saubere und schlanke Schnittstellen zu KNX-Funktionen anzubieten, einschliesslich</p><ul><li>KNXnet/IP (secure) Tunneling, Routing, lokale Geräteverwaltung und Busüberwachung</li><li>Zugriff über KNX IP, KNX USB, KNX RF USB, TP-UART, und FT1. 2</li><li>Prozesskommunikation</li><li>Managementprozesse</li><li>KNX-Eigenschaftszugang</li><li>Übersetzung von Datenpunkttyp und Eigenschaftstyp</li><li>Netzpufferung für zustands- und befehlsbasierte Datenpunktwerte</li><li>BAOS (Bus Access Object Server) Client-Unterstützung (Protokoll v2.1)</li><li>Eine Protokoll-API, die den OSI-Schichten 2 bis 7 ähnelt</li></ul>",
+  "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
+  "repository": "https://github.com/calimero-project/calimero-server",
+  "image": "https://hub.docker.com/r/calimeroproject/knxserver",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}

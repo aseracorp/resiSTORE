@@ -1,0 +1,36 @@
+{ 
+  "cosmos-installer": {
+  },
+  "services": {
+    "{ServiceName}": {
+      "image": "calimeroproject/knxserver:latest",
+      "container_name": "{ServiceName}",
+      "restart": "unless-stopped",
+      "UID": 1000,
+      "GID": 1000,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "network_mode": "host",
+      "labels": {
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Calimero/icon.png"
+      },
+      "post_install": [
+        "wget -O /usr/app/server-config-default.xml http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/server-config.xml && cp -n /usr/app/server-config-default.xml /usr/app/server-config.xml"
+      ],
+      "command": "--no-stdin server-config.xml",
+      "devices": [
+        "/dev/ttyACM1:/dev/ttyACM1:rwm"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-app",
+          "target": "/usr/app",
+          "type": "volume"
+        }
+      ]
+    }
+  }
+}
