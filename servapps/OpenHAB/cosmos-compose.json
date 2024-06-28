@@ -53,7 +53,7 @@
       "routes": [
         {
           "name": "{ServiceName}",
-          "description": "Expose {ServiceName} to the web",
+          "description": "{ServiceName} im Netzwerk veröffentlichen",
           "useHost": true,
           "target": "http://{ServiceName}:8080",
           "mode": "SERVAPP",

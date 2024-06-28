@@ -1,0 +1,12 @@
+{
+  "name": "InfluxDB",
+  "description": "InfluxDB ist eine Open-Source-Zeitreihendatenbank, die für Echtzeit-Analyseaufgaben entwickelt wurde.",
+  "longDescription": "InfluxDB ist die Plattform für Zeitreihendaten, die für hohe Schreib- und Abfragelasten ausgelegt ist. Mit InfluxDB können Sie große Mengen an Zeitstempeldaten sammeln, speichern und verarbeiten, einschließlich Metriken und Ereignisse für Anwendungsfälle wie DevOps-Überwachung, Anwendungsmetriken, IoT-Sensoren und Ereignisüberwachung.",
+  "tags": ["Network"],
+  "repository": "https://github.com/influxdata/influxdb",
+  "image": "https://hub.docker.com/_/influxdb",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}

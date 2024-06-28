@@ -23,7 +23,7 @@
       "routes": [
         {
           "name": "{ServiceName}",
-          "description": "Expose {ServiceName} to the web",
+          "description": "{ServiceName} im Netzwerk veröffentlichen",
           "useHost": true,
           "target": "http://{ServiceName}:3000",
           "mode": "SERVAPP",
