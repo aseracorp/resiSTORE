@@ -1,0 +1,12 @@
+{
+  "name": "Node-RED",
+  "description": "Low-Code-Programmierung für ereignisgesteuerte Anwendungen",
+  "longDescription": "Node-RED ist ein Programmierwerkzeug, mit dem sich Hardwaregeräte, APIs und Online-Dienste auf neue und interessante Weise miteinander verbinden lassen.  Es bietet einen browserbasierten Editor, der es einfach macht, Abläufe unter Verwendung der breiten Palette von Knoten zu verdrahten, die mit einem einzigen Mausklick zur Laufzeit bereitgestellt werden können.",
+  "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
+  "repository": "https://github.com/node-red/node-red",
+  "image": "https://hub.docker.com/r/nodered/node-red",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Grafana",
+  "description": "Grafana ist ein vollständiger Observability-Stack, mit dem Sie Metriken, Protokolle und Traces überwachen und analysieren können. Es ermöglicht Ihnen, Ihre Daten abzufragen, zu visualisieren, zu alarmieren und zu verstehen, unabhängig davon, wo sie gespeichert sind.",
+  "longDescription": "<p>Grafana open source ist eine quelloffene Visualisierungs- und Analysesoftware.</p><p>Visualisierungen: Schnelle und flexible clientseitige Diagramme mit einer Vielzahl von Optionen. Panel-Plugins bieten viele verschiedene Möglichkeiten zur Visualisierung von Metriken und Protokollen.</p><p>Dynamische Dashboards: Erstellen Sie dynamische und wiederverwendbare Dashboards mit Template-Variablen, die als Dropdowns am oberen Rand des Dashboards erscheinen.</p><p>Erforschen Sie Metriken: Erforschen Sie Ihre Daten durch Ad-hoc-Abfragen und dynamische Drilldowns. Teilen Sie die Ansicht und vergleichen Sie verschiedene Zeitbereiche, Abfragen und Datenquellen nebeneinander.</p><p>Erforschen Sie Logs: Erleben Sie die Magie des Wechsels von Metriken zu Protokollen mit erhaltenen Etikettenfiltern. Durchsuchen Sie schnell alle Ihre Protokolle oder streamen Sie sie live.</p><p>Benachrichtigung: Definieren Sie visuell Warnregeln für Ihre wichtigsten Metriken. Grafana wertet kontinuierlich aus und sendet Benachrichtigungen an Systeme wie Slack, PagerDuty, VictorOps, OpsGenie.</p><p>Mixed Data Sources: Mischen Sie verschiedene Datenquellen im selben Diagramm! Sie können eine Datenquelle pro Abfrage festlegen. Dies funktioniert sogar für benutzerdefinierte Datenquellen.</p>",
+  "tags": ["Network"],
+  "repository": "https://github.com/grafana/grafana",
+  "image": "https://hub.docker.com/r/grafana/grafana",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}

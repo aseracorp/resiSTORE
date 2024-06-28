@@ -3,7 +3,7 @@
   },
   "services": {
     "{ServiceName}": {
-      "image": "lscr.io/linuxserver/homeassistant:latest",
+      "image": "openhab/openhab:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
       "UID": 1000,
@@ -14,30 +14,48 @@
       "environment": [
         "PUID=1000",
         "PGID=1000",
-        "TZ=auto",
-        "PROXY_HOSTNAME=0.0.0.0/0"
+        "CRYPTO_POLICY=unlimited"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/icon.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/OpenHAB/icon.png"
       },
       "volumes": [
         {
-          "source": "{ServiceName}-config",
-          "target": "/config",
+          "source": "/etc/localtime",
+          "target": "/etc/localtime",
+          "type": "bind",
+          "read_only": "true"       
+        },
+        {
+          "source": "/etc/timezone",
+          "target": "/etc/timezone",
+          "type": "bind",
+          "read_only": "true"       
+        },
+        {
+          "source": "{ServiceName}-addons",
+          "target": "/openhab/addons",
+          "type": "volume"
+        },
+        {
+          "source": "{ServiceName}-conf",
+          "target": "/openhab/conf",
+          "type": "volume"
+        },
+        {
+          "source": "{ServiceName}-userdate",
+          "target": "/openhab/userdata",
           "type": "volume"
         }
-      ],
-      "post_install": [
-        "wget -O /config/configuration.yaml http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml"
       ],
       "routes": [
         {
           "name": "{ServiceName}",
           "description": "Expose {ServiceName} to the web",
           "useHost": true,
-          "target": "http://{ServiceName}:8123",
+          "target": "http://{ServiceName}:8080",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
