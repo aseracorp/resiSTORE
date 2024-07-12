@@ -4,7 +4,7 @@
   "longDescription": "Der open Home Automation Bus (openHAB, ausgesprochen ˈəʊpənˈhæb) ist eine quelloffene, technologieunabhängige Heimautomatisierungsplattform, die als Zentrum Ihres intelligenten Hauses läuft! Sie ist in der Lage, eine Vielzahl von anderen Geräten und Systemen zu integrieren. openHAB bindet andere Hausautomationssysteme, (intelligente) Geräte und andere Technologien in eine einzige Lösung ein. Es bietet eine einheitliche Benutzeroberfläche und einen gemeinsamen Ansatz für Automatisierungsregeln über das gesamte System hinweg, unabhängig von der Anzahl der beteiligten Hersteller und Subsysteme. Ihnen das flexibelste Werkzeug zu geben, das es gibt, um fast jeden Wunsch in der Hausautomation zu verwirklichen; wenn Sie es sich vorstellen können, stehen die Chancen gut, dass Sie es mit openHAB umsetzen können.",
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services"],
   "repository": "https://github.com/openhab",
-  "image": "https://hub.docker.com/r/openhab/openhab",
+  "image": "openhab/openhab",
   "supported_architectures": [
     "amd64",
     "arm64",
