@@ -7,6 +7,8 @@ const configFile = require('./config.json')
 const servapps = fs.readdirSync('./servapps').filter(file => fs.lstatSync(`./servapps/${file}`).isDirectory())
 
 let servappsJSON = []
+let translationJSON = []
+translationJSON.en = {}
 
 for (const file of servapps) {
   const servapp = require(`./servapps/${file}/description.json`)
@@ -37,7 +39,18 @@ for (const file of servapps) {
   const CosmosComposeSource =  `https://aseracorp.github.io/resiSTORE/servapps/${file}/cosmos-compose.json`; 
   if(fs.existsSync(`./servapps/${file}/cosmos-compose.json`)) {
     servapp.compose = CosmosComposeSource;
-    }
+  }
+
+  //i18n / translations
+  translationJSON['en'][servapp.name+'.description'] = servapp.description
+  translationJSON['en'][servapp.name+'.longDescription'] = servapp.longDescription
+  for (const language in servapp.translation) {
+    translationJSON[language] = translationJSON[language] || {}
+    for (const translation in servapp.translation[language]) {
+      translationJSON[language][servapp.name+'.'+translation] = servapp.translation[language][translation]
+    }    
+    //translationJSON[language][servapp.name] = servapp.translation[language]
+  }
 
   servappsJSON.push(servapp)
 }
@@ -54,6 +67,11 @@ let apps = {
 
 fs.writeFileSync('./servapps.json', JSON.stringify(servappsJSON, null, 2))
 fs.writeFileSync('./index.json', JSON.stringify(apps, null, 2))
+
+// consolidate i18n / translations
+for (language in translationJSON) {
+  fs.writeFileSync('./locales/'+language+'.json', JSON.stringify(translationJSON[language], null, 2))
+}
 
 for (const servapp of servappsJSON) {
   servapp.compose = `http://localhost:3000/servapps/${servapp.id}/cosmos-compose.json`

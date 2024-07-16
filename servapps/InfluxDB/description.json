@@ -1,7 +1,17 @@
 {
   "name": "InfluxDB",
-  "description": "InfluxDB ist eine Open-Source-Zeitreihendatenbank, die für Echtzeit-Analyseaufgaben entwickelt wurde.",
-  "longDescription": "InfluxDB ist die Plattform für Zeitreihendaten, die für hohe Schreib- und Abfragelasten ausgelegt ist. Mit InfluxDB können Sie große Mengen an Zeitstempeldaten sammeln, speichern und verarbeiten, einschließlich Metriken und Ereignisse für Anwendungsfälle wie DevOps-Überwachung, Anwendungsmetriken, IoT-Sensoren und Ereignisüberwachung.",
+  "description": "InfluxDB is the leading open source time series database for metrics, events, and real-time analytics.",
+  "longDescription": "InfluxDB is the time series data platform designed to handle high write and query workloads. Using InfluxDB, you can collect, store, and process large amounts of timestamped data, including metrics and events for use cases such as DevOps monitoring, application metrics, IoT sensors, and event monitoring.",
+  "translation": {
+    "de": {
+      "description": "InfluxDB ist eine Open-Source-Zeitreihendatenbank, die für Echtzeit-Analyseaufgaben entwickelt wurde.",
+      "longDescription": "InfluxDB ist die Plattform für Zeitreihendaten, die für hohe Schreib- und Abfragelasten ausgelegt ist. Mit InfluxDB können Sie große Mengen an Zeitstempeldaten sammeln, speichern und verarbeiten, einschließlich Metriken und Ereignisse für Anwendungsfälle wie DevOps-Überwachung, Anwendungsmetriken, IoT-Sensoren und Ereignisüberwachung."
+    },
+    "de-CH": {
+      "description": "InfluxDB ist eine Open-Source-Zeitreihendatenbank, die für Echtzeit-Analyseaufgaben entwickelt wurde.",
+      "longDescription": "InfluxDB ist die Plattform für Zeitreihendaten, die für hohe Schreib- und Abfragelasten ausgelegt ist. Mit InfluxDB können Sie grosse Mengen an Zeitstempeldaten sammeln, speichern und verarbeiten, einschliesslich Metriken und Ereignisse für Anwendungsfälle wie DevOps-Überwachung, Anwendungsmetriken, IoT-Sensoren und Ereignisüberwachung."
+    }
+  },
   "tags": ["Network"],
   "repository": "https://github.com/influxdata/influxdb",
   "image": "https://hub.docker.com/_/influxdb",

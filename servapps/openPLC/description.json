@@ -1,7 +1,13 @@
 {
   "name": "openPLC",
-  "description": "openPLC Runtime v3: Eine Multi-Hardware-Suite für speicherprogrammierbare Steuerungen basierend auf Beremiz IDE",
-  "longDescription": "OpenPLC ist eine quelloffene speicherprogrammierbare Steuerung, die auf einer einfach zu bedienenden Software basiert. Es ist die erste voll funktionsfähige, standardisierte Open-Source-SPS, sowohl in Software als auch in Hardware. Das OpenPLC-Projekt wurde in Übereinstimmung mit dem IEC 61131-3-Standard entwickelt, der die grundlegende Software-Architektur und Programmiersprachen für SPSen definiert.",
+  "description": "openPLC Runtime v3: A multi-hardware Programmable Logic Controller Suite based on Beremiz IDE",
+  "longDescription": "OpenPLC is an open-source Programmable Logic Controller that is based on an easy to use software. It is the first fully functional standardized open source PLC, both in software and in hardware. The OpenPLC project was created in accordance with the IEC 61131-3 standard, which defines the basic software architecture and programming languages for PLCs.",
+  "translation": {
+    "de": {
+      "description": "openPLC Runtime v3: Eine Multi-Hardware-Suite für speicherprogrammierbare Steuerungen basierend auf Beremiz IDE",
+      "longDescription": "OpenPLC ist eine quelloffene speicherprogrammierbare Steuerung, die auf einer einfach zu bedienenden Software basiert. Es ist die erste voll funktionsfähige, standardisierte Open-Source-SPS, sowohl in Software als auch in Hardware. Das OpenPLC-Projekt wurde in Übereinstimmung mit dem IEC 61131-3-Standard entwickelt, der die grundlegende Software-Architektur und Programmiersprachen für SPSen definiert."
+    }
+  },
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
   "repository": "https://github.com/aseracorp/OpenPLC_v3",
   "image": "ghcr.io/aseracorp/openplc_v3:latest",
