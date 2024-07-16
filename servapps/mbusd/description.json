@@ -1,0 +1,18 @@
+{
+  "name": "mbusd Modbus-Gateway",
+  "description": "Modbus TCP to Modbus RTU (RS-232/485) gateway",
+  "longDescription": "mbusd is open-source Modbus TCP to Modbus RTU (RS-232/485) gateway. It presents a network of RTU slaves as single TCP slave.<br />That is a TCP-Slave (or server) which acts as a RTU-master to get data from Modbus RTU-slave devices.<ul><li>Small footprint - suitable to run on embedded devices and SBCs like Raspberry Pi</li><li>Multi-master - multiple TCP masters can access slave devices in RTU network using same gateway</li><li>Robustness - can retry requests with mismatched response CRC</li><li>Flexible RTU modes - speed/parity/stop-bits/timeouts can be configured for RTU network</li><li>Support for both of automatic and manual (using RTS bit) direction control types for RS-485 transceivers</li></ul>",
+  "translation": {
+    "de": {
+      "description": "Gateway Modbus RTU (RS-232/485) zu Modbus TCP",
+      "longDescription": "mbusd ist ein Open-Source Modbus TCP zu Modbus RTU (RS-232/485) Gateway. Es stellt ein Netzwerk von RTU-Slaves als einzelnen TCP-Slave dar.<br />Das ist ein TCP-Slave (oder Server), der als RTU-Master agiert, um Daten von Modbus RTU-Slave-Geräten zu erhalten.<ul><li>Geringer Platzbedarf - geeignet für den Betrieb auf eingebetteten Geräten und SBCs wie Raspberry Pi</li><li>Multi-Master - mehrere TCP-Master können über dasselbe Gateway auf Slave-Geräte im RTU-Netzwerk zugreifen</li><li>Robustheit - kann Anfragen mit nicht übereinstimmender Antwort CRC wiederholen</li><li>Flexible RTU-Modi - Geschwindigkeit/Parität/Stop-Bits/Timeouts können für das RTU-Netzwerk konfiguriert werden</li><li>KNX-Eigenschaftszugang</li><li>Unterstützung von automatischen und manuellen (mit RTS-Bit) Richtungssteuerungsarten für RS-485-Transceiver</li></ul>"
+    }
+  },
+  "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
+  "repository": "https://github.com/3cky/mbusd",
+  "image": "https://hub.docker.com/r/3cky/mbusd",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}

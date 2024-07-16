@@ -1,7 +1,13 @@
 {
   "name": "OpenHAB",
-  "description": "Empowering the smart home",
-  "longDescription": "Der open Home Automation Bus (openHAB, ausgesprochen ˈəʊpənˈhæb) ist eine quelloffene, technologieunabhängige Heimautomatisierungsplattform, die als Zentrum Ihres intelligenten Hauses läuft! Sie ist in der Lage, eine Vielzahl von anderen Geräten und Systemen zu integrieren. openHAB bindet andere Hausautomationssysteme, (intelligente) Geräte und andere Technologien in eine einzige Lösung ein. Es bietet eine einheitliche Benutzeroberfläche und einen gemeinsamen Ansatz für Automatisierungsregeln über das gesamte System hinweg, unabhängig von der Anzahl der beteiligten Hersteller und Subsysteme. Ihnen das flexibelste Werkzeug zu geben, das es gibt, um fast jeden Wunsch in der Hausautomation zu verwirklichen; wenn Sie es sich vorstellen können, stehen die Chancen gut, dass Sie es mit openHAB umsetzen können.",
+  "description": "a vendor and technology agnostic open source automation software for your home",
+  "longDescription": "The open Home Automation Bus (openHAB, pronounced ˈəʊpənˈhæb) is an open source, technology agnostic home automation platform which runs as the center of your smart home! Its ability to integrate a multitude of other devices and systems. openHAB includes other home automation systems, (smart) devices and other technologies into a single solution. To provide a uniform user interface and a common approach to automation rules across the entire system, regardless of the number of manufacturers and sub-systems involved. Giving you the most flexible tool available to make almost any home automation wish come true; if you can think it, odds are that you can implement it with openHAB.",
+  "translation": {
+    "de": {
+      "description": "Eine hersteller- und technologieunabhängige Open-Source-Automatisierungssoftware für Ihr Zuhause",
+      "longDescription": "Der open Home Automation Bus (openHAB, ausgesprochen ˈəʊpənˈhæb) ist eine quelloffene, technologieunabhängige Heimautomatisierungsplattform, die als Zentrum Ihres intelligenten Hauses läuft! Sie ist in der Lage, eine Vielzahl von anderen Geräten und Systemen zu integrieren. openHAB bindet andere Hausautomationssysteme, (intelligente) Geräte und andere Technologien in eine einzige Lösung ein. Es bietet eine einheitliche Benutzeroberfläche und einen gemeinsamen Ansatz für Automatisierungsregeln über das gesamte System hinweg, unabhängig von der Anzahl der beteiligten Hersteller und Subsysteme. Ihnen das flexibelste Werkzeug zu geben, das es gibt, um fast jeden Wunsch in der Hausautomation zu verwirklichen; wenn Sie es sich vorstellen können, stehen die Chancen gut, dass Sie es mit openHAB umsetzen können."
+    }
+  },
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services"],
   "repository": "https://github.com/openhab",
   "image": "openhab/openhab",
