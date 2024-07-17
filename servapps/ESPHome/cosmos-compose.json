@@ -3,13 +3,13 @@
     "form": [
       {
         "name": "storagePath",
-        "label": "Where do you want to store the data ?",
+        "label": "Where do you want to store the data?",
         "initialValue": "{DefaultDataPath}",
         "type": "text"
       },
       {
         "name": "useping",
-        "label": "Do you want to use ping instead of mDNS ?",
+        "label": "Do you want to use ping instead of mDNS?",
         "initialValue": "false",
         "type": "select",
         "options": [
@@ -19,13 +19,13 @@
       },
       {
         "name": "username",
-        "label": "What should be the username? ",
+        "label": "What should be the username?",
         "initialValue": "admin",
         "type": "text"
       },
       {
         "name": "password",
-        "label": "What should be the password? ",
+        "label": "What should be the password?",
         "initialValue": "admin",
         "type": "text"
       }
@@ -35,7 +35,18 @@
         "type": "warning",
         "label": "As it is impossible to include all the configuration options in the installer, After install edit the URL  ESP Home and update http://esphome:6052 to http://<ip-of-cosmos-server>:6052"
       }
-    ]
+    ],
+    "translation": {
+      "de": {
+        "form.storagePath.label": "Wo wollen Sie die Daten speichern?",
+        "form.useping.label": "Möchten Sie ping anstelle von mDNS verwenden?",
+        "form.useping.options.true": "Ja",
+        "form.useping.options.false": "Nein",
+        "form.username.label": "Wie soll der Benutzername lauten?",
+        "form.password.label": "Wie sollte das Passwort lauten?",
+        "post-install.label": "Da es unmöglich ist, alle Konfigurationsoptionen in das Installationsprogramm aufzunehmen, bearbeiten Sie nach der Installation die URL ESP Home und aktualisieren Sie http://esphome:6052 auf http://<ip-of-cosmos-server>:6052"
+      }
+    }
   },
   "minVersion": "0.9.0",
   "services": {
