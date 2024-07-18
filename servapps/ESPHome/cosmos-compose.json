@@ -2,12 +2,6 @@
   "cosmos-installer": {
     "form": [
       {
-        "name": "storagePath",
-        "label": "Where do you want to store the data?",
-        "initialValue": "{DefaultDataPath}",
-        "type": "text"
-      },
-      {
         "name": "useping",
         "label": "Do you want to use ping instead of mDNS?",
         "initialValue": "false",
@@ -32,7 +26,6 @@
     ],
     "translation": {
       "de": {
-        "form.storagePath.label": "Wo wollen Sie die Daten speichern?",
         "form.useping.label": "Möchten Sie ping anstelle von mDNS verwenden?",
         "form.useping.options": [ ["true", "Ja"],
                                   ["false", "Nein"] ],
@@ -49,9 +42,9 @@
       "NetworkMode": "host",
       "volumes": [
         {
-          "source": "{Context.storagePath}/{ServiceName}",
+          "source": "{ServiceName}-config",
           "target": "/config",
-          "type": "bind"
+          "type": "volume"
         },
         {
           "source": "/etc/localtime",
