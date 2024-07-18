@@ -37,7 +37,7 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mbusd/icon.png"
       },
-      "entrypoint": "/usr/bin/mbusd -d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
+      "entrypoint": "/usr/bin/mbusd -S -d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
       "devices": [
         "/dev/ttyACM0:/dev/ttyS0:rwm"
       ],
