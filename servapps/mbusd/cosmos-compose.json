@@ -1,5 +1,25 @@
-{ 
+{
   "cosmos-installer": {
+    "form": [
+      {
+        "name": "baudrate",
+        "label": "Baudrate",
+        "initialValue": "9600",
+        "type": "text"
+      },
+      {
+        "name": "mode",
+        "label": "Mode",
+        "initialValue": "8N1",
+        "type": "text"
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.baudrate.label": "Baudrate",
+        "form.mode.label": "Modus"
+      }
+    }
   },
   "services": {
     "{ServiceName}": {
@@ -17,9 +37,7 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mbusd/icon.png"
       },
-      "post_install": [
-        "wget -O /etc/mbusd.conf http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/server-config.xml"
-      ],
+      "entrypoint": "/usr/bin/mbusd -d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
       "devices": [
         "/dev/ttyACM0:/dev/ttyS0:rwm"
       ],
