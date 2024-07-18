@@ -36,7 +36,7 @@
       "environment": [
         "KNX_ADDRESS={Context.knxAddress}"
       ],
-      "entrypoint" : "wget -O /usr/app/docker-entrypoint.sh http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/docker-entrypoint.sh && chmod +x docker-entrypoint.sh && docker-entrypoint.sh && calimero-server-3.0-SNAPSHOT/bin/calimero-server --no-stdin server-config.xml",
+      "entrypoint" : "/bin/sh -c \"wget -O /usr/app/docker-entrypoint.sh http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/docker-entrypoint.sh && chmod +x docker-entrypoint.sh && docker-entrypoint.sh && calimero-server-3.0-SNAPSHOT/bin/calimero-server --no-stdin server-config.xml\"",
       "devices": [
         "/dev/ttyACM1:/dev/ttyACM1:rwm"
       ],
