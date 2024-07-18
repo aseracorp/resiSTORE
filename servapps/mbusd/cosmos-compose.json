@@ -1,7 +1,19 @@
 {
   "cosmos-installer": {
-    "form": [
-      {
+    "form": [ 
+    {
+      "name": "serialPort",
+      "label": "serial Port",
+      "initialValue": "/dev/ttyACM2",
+      "type": "select",
+      "options": [
+        ["/dev/ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> Coprocessor"],
+        ["/dev/ttyACM1", "/dev/ttyACM1 -> Serialport 1 -> KNX, RS485 or RS232"],
+        ["/dev/ttyACM2", "/dev/ttyACM2 -> Serialport 2 -> RS485 or RS232"],
+        ["/dev/ttyACM3", "/dev/ttyACM3 -> Serialport 3 -> RS485 or RS232"]
+      ]
+    },
+    {
         "name": "baudrate",
         "label": "Baudrate",
         "initialValue": "9600",
@@ -35,8 +47,15 @@
           ["8N1", "8N1: 8 Datenbits, keine Parität, 1 Stoppbit"],
           ["8E1", "8E1: 8 Datenbits, gerade Parität, 1 Stoppbit"],
           ["8O1", "8O1: 8 Datenbits, ungerade Parität, 1 Stoppbit"],
-          ["8N2", "8N2: 8 Datenbits, eine Parität, 2 Stoppbit"]
-        ]
+          ["8N2", "8N2: 8 Datenbits, keine Parität, 2 Stoppbit"]
+        ],
+        "form.serialPort.label": "serieller Anschluss",
+        "form.serialPort.options": [
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> Koprocessor"],
+          ["/dev/ttyACM1", "/dev/ttyACM1 -> Serieller Anschluss 1 -> KNX, RS485 oder RS232"],
+          ["/dev/ttyACM2", "/dev/ttyACM2 -> Serieller Anschluss 2 -> RS485 oder RS232"],
+          ["/dev/ttyACM3", "/dev/ttyACM3 -> Serieller Anschluss 3 -> RS485 oder RS232"]
+        ]        
       }
     }
   },
@@ -58,7 +77,7 @@
       },
       "entrypoint": "/usr/bin/mbusd -S -d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
       "devices": [
-        "/dev/ttyACM0:/dev/ttyS0:rwm"
+        "{Context.serialPort}:/dev/ttyS0:rwm"
       ],
       "volumes": [
         {
