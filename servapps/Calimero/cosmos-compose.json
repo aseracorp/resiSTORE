@@ -1,5 +1,18 @@
-{ 
+{
   "cosmos-installer": {
+    "form": [
+      {
+        "name": "knxAddress",
+        "label": "KNX-Address of your IP-Router",
+        "initialValue": "7.1.0",
+        "type": "text"
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.knxAddress.label": "KNX-Addresse Ihres IP-Routers"
+      }
+    }
   },
   "services": {
     "{ServiceName}": {
@@ -18,9 +31,12 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Calimero/icon.png"
       },
       "post_install": [
-        "wget -O /usr/app/server-config-default.xml http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/server-config.xml && cp -n /usr/app/server-config-default.xml /usr/app/server-config.xml"
+        "wget http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/docker-entrypoint.sh && chmod +x docker-entrypoint.sh"
       ],
-      "command": "--no-stdin server-config.xml",
+      "environment": [
+        "KNX_ADDRESS={Context.knxAddress}"
+      ],
+      "entrypoint" : "wget -O /usr/app/docker-entrypoint.sh http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/docker-entrypoint.sh && chmod +x docker-entrypoint.sh && docker-entrypoint.sh && calimero-server-3.0-SNAPSHOT/bin/calimero-server --no-stdin server-config.xml",
       "devices": [
         "/dev/ttyACM1:/dev/ttyACM1:rwm"
       ],
