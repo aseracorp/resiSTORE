@@ -40,8 +40,10 @@
       "de": {
         "form.storagePath.label": "Wo wollen Sie die Daten speichern?",
         "form.useping.label": "Möchten Sie ping anstelle von mDNS verwenden?",
-        "form.useping.options.true": "Ja",
-        "form.useping.options.false": "Nein",
+        "form.useping.options": [
+          ["true", "Ja"],
+          ["false", "Nein"]
+        ],
         "form.username.label": "Wie soll der Benutzername lauten?",
         "form.password.label": "Wie sollte das Passwort lauten?",
         "post-install.label": "Da es unmöglich ist, alle Konfigurationsoptionen in das Installationsprogramm aufzunehmen, bearbeiten Sie nach der Installation die URL ESP Home und aktualisieren Sie http://esphome:6052 auf http://<ip-of-cosmos-server>:6052"
