@@ -30,12 +30,6 @@
         "type": "text"
       }
     ],
-    "post-install": [
-      {
-        "type": "warning",
-        "label": "As it is impossible to include all the configuration options in the installer, After install edit the URL  ESP Home and update http://esphome:6052 to http://<ip-of-cosmos-server>:6052"
-      }
-    ],
     "translation": {
       "de": {
         "form.storagePath.label": "Wo wollen Sie die Daten speichern?",
@@ -43,8 +37,7 @@
         "form.useping.options": [ ["true", "Ja"],
                                   ["false", "Nein"] ],
         "form.username.label": "Wie soll der Benutzername lauten?",
-        "form.password.label": "Wie sollte das Passwort lauten?",
-        "post-install.label": "Da es unmöglich ist, alle Konfigurationsoptionen in das Installationsprogramm aufzunehmen, bearbeiten Sie nach der Installation die URL ESP Home und aktualisieren Sie http://esphome:6052 auf http://<ip-of-cosmos-server>:6052"
+        "form.password.label": "Wie sollte das Passwort lauten?"
       }
     }
   },
