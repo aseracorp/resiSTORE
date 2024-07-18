@@ -5,19 +5,38 @@
         "name": "baudrate",
         "label": "Baudrate",
         "initialValue": "9600",
-        "type": "text"
+        "type": "select",
+        "options": [
+          ["9600", "9600"],
+          ["19200", "19200"],
+          ["38400", "38400"],
+          ["57600", "57600"],
+          ["76800", "76800"],
+          ["115200", "115200"]
+        ]
       },
       {
         "name": "mode",
         "label": "Mode",
         "initialValue": "8N1",
-        "type": "text"
+        "type": "select",
+        "options": [
+          ["8N1", "8N1: 8 databits, no parity, 1 stoppbit"],
+          ["8E1", "8E1: 8 databits, even parity, 1 stoppbit"],
+          ["8O1", "8O1: 8 databits, odd parity, 1 stoppbit"],
+          ["8N2", "8N2: 8 databits, no parity, 2 stoppbit"]
+        ]
       }
     ],
     "translation": {
       "de": {
-        "form.baudrate.label": "Baudrate",
-        "form.mode.label": "Modus"
+        "form.mode.label": "Modus",
+        "form.mode.options": [
+          ["8N1", "8N1: 8 Datenbits, keine Parität, 1 Stoppbit"],
+          ["8E1", "8E1: 8 Datenbits, gerade Parität, 1 Stoppbit"],
+          ["8O1", "8O1: 8 Datenbits, ungerade Parität, 1 Stoppbit"],
+          ["8N2", "8N2: 8 Datenbits, eine Parität, 2 Stoppbit"]
+        ]
       }
     }
   },
