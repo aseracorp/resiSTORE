@@ -61,7 +61,7 @@
   },
   "services": {
     "{ServiceName}": {
-      "image": "3cky/mbusd:latest",
+      "image": "ghcr.io/aseracorp/mbusd:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
       "UID": 1000,
@@ -75,7 +75,7 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mbusd/icon.png"
       },
-      "entrypoint": "/usr/bin/mbusd -S -d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
+      "command": "-d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
       "devices": [
         "{Context.serialPort}:/dev/ttyS0:rwm"
       ],
