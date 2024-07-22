@@ -9,7 +9,7 @@
 wget -O /usr/app/docker-entrypoint.sh http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/server-config.xml
 
 #replace values with env-vars from cosmos-installer
-sed -i 's/KNX_ADDRESS/'"$KNX_ADDRESS"'/g' server-config.xml
+sed -i 's/KNX_ADDRESS/'"$KNX_ADDRESS"'/g' /usr/app/docker-entrypoint.sh
 
 # Run the standard container command.
 exec "$@"
