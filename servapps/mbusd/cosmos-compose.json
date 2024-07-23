@@ -75,9 +75,9 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mbusd/icon.png"
       },
-      "command": "-d -L - -p /dev/ttyS0 -s {Context.baudrate} -m {Context.mode}",
+      "command": "-d -L - -p /dev/ttyModbus -s {Context.baudrate} -m {Context.mode}",
       "devices": [
-        "{Context.serialPort}:/dev/ttyS0:rwm"
+        "{Context.serialPort}:/dev/ttyModbus:rwm"
       ],
       "volumes": [
         {

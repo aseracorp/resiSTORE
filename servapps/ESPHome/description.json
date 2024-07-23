@@ -1,10 +1,10 @@
 {
   "name": "ESPHome",
+  "description": "Powerfull Firmware and OTA-Flasher with simple YAML-Configuration for ESP-based Devices",
   "longDescription": "ESPhome is a platform for creating custom firmware for ESP8266 and ESP32 chips using YAML configuration files. It converts these definitions into C++ firmware for easy integration of various smart devices.</p><p>ESPhome is seamlessly integrated with Home Assistant, an open source platform for home automation. Through this integration, devices configured via ESPhome are automatically recognised and added to Home Assistant setups.</p><p>The platform has a solid community and extensive documentation. Together with features such as over-the-air (OTA) updates, this makes ESPhome a favourite among smart home enthusiasts.",
-  "description": "ESPHome is a system to control your microcontrollers by simple yet powerful configuration files and control them remotely through Home Automation systems.",
   "translation": {
     "de": {
-      "description": "ESPHome ist ein System, mit dem Sie Ihre Mikrocontroller mit Hilfe von einfachen, aber leistungsfähigen Konfigurationsdateien steuern und über Home Automation Systeme fernsteuern können.",
+      "description": "Leistungsstarke Firmware und OTA-Flasher mit einfacher YAML-Konfiguration für ESP-basierte Geräte",
       "longDescription": "<p>ESPhome ist eine Plattform zur Erstellung benutzerdefinierter Firmware für ESP8266- und ESP32-Chips mithilfe von YAML-Konfigurationsdateien. Es wandelt diese Definitionen in C++-Firmware für die einfache Integration von verschiedenen intelligenten Geräten um.</p><p>ESPhome ist nahtlos in Home Assistant integriert, einer Open-Source-Plattform für Hausautomatisierung. Durch diese Integration werden Geräte, die über ESPhome konfiguriert wurden, automatisch erkannt und zu Home Assistant-Setups hinzugefügt.</p><p>Die Plattform verfügt über eine solide Community und eine umfangreiche Dokumentation. Zusammen mit Funktionen wie Over-The-Air (OTA)-Updates macht dies ESPhome zu einem Favoriten unter Smart Home-Enthusiasten.</p>"
     }
   },

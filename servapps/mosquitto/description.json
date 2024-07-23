@@ -1,10 +1,10 @@
 {
   "name": "Mosquitto",
+  "description": "Open source implementation of a server for the MQTT protocol (MQTT-Broker).",
   "longDescription": "Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1. Mosquitto is lightweight and is suitable for use on all devices from low power single board computers to full servers.<br />The MQTT protocol provides a lightweight method of carrying out messaging using a publish/subscribe model. This makes it suitable for Internet of Things messaging such as with low power sensors or mobile devices such as phones, embedded computers or microcontrollers.<br />The Mosquitto project also provides a C library for implementing MQTT clients, and the very popular mosquitto_pub and mosquitto_sub command line MQTT clients.<br /> Mosquitto is part of the Eclipse Foundation, and is an iot.eclipse.org project. The development is driven by Cedalo.",
-  "description": "Mosquitto is an open source implementation of a server for the MQTT protocol.",
   "translation": {
     "de": {
-      "description": "Mosquitto ist eine Open-Source MQTT-Broker.",
+      "description": "Open-Source Implementation eines Servers für das MQTT-Protokoll (MQTT-Broker).",
       "longDescription": "Eclipse Mosquitto ist ein quelloffener (EPL/EDL lizenzierter) Message Broker, der die MQTT-Protokollversionen 5.0, 3.1.1 und 3.1 implementiert. Mosquitto ist leichtgewichtig und eignet sich für den Einsatz auf allen Geräten, von stromsparenden Einplatinencomputern bis hin zu kompletten Servern.<br />Das MQTT-Protokoll bietet eine leichtgewichtige Methode zur Durchführung von Nachrichtenübermittlung unter Verwendung eines Publish/Subscribe-Modells. Dadurch eignet es sich für die Nachrichtenübermittlung im Internet der Dinge, z. B. für Sensoren mit geringem Stromverbrauch oder mobile Geräte wie Telefone, eingebettete Computer oder Mikrocontroller.<br />Das Mosquitto-Projekt bietet auch eine C-Bibliothek zur Implementierung von MQTT-Clients und die sehr beliebten mosquitto_pub und mosquitto_sub MQTT-Clients für die Kommandozeile.<br />Mosquitto ist Teil der Eclipse Foundation und ein iot.eclipse.org-Projekt. Die Entwicklung wird von Cedalo vorangetrieben."
     }
   },

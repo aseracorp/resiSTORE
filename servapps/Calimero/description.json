@@ -1,10 +1,10 @@
 {
-  "name": "Calimero KNX-Server",
-  "description": "KNXnet/IP-Server with Calimero",
+  "name": "Calimero",
+  "description": "KNXnet/IP-Router and Gateway to KNX-TP",
   "longDescription": "<p>Calimero provides the KNX (secure) protocol stack for clients, KNXnet/IP servers, and devices.</p><p>The library's objective is to offer clean and lean interfaces to KNX functionality, including</p><ul><li>KNXnet/IP (secure) tunneling, routing, local device management, and bus monitoring</li><li>Access over KNX IP, KNX USB, KNX RF USB, TP-UART, and FT1.2</li><li>Process communication</li><li>Management procedures</li><li>KNX property access</li><li>Datapoint type and property type translation</li><li>Network buffering for state- and command-based datapoint values</li><li>BAOS (Bus Access Object Server) client support (protocol v2.1) </li><li>A protocol API that resembles OSI layers 2 to 7</li></ul>",
   "translation": {
     "de": {
-      "description": "KNXnet/IP-Server mit Calimero",
+      "description": "KNXnet/IP-Router und Gateway zu KNX-TP",
       "longDescription": "<p>Calimero bietet den KNX (secure) Protokollstack für Clients, KNXnet/IP Server und Geräte.</p><p>Das Ziel der Bibliothek ist es, saubere und schlanke Schnittstellen zu KNX-Funktionen anzubieten, einschliesslich</p><ul><li>KNXnet/IP (secure) Tunneling, Routing, lokale Geräteverwaltung und Busüberwachung</li><li>Zugriff über KNX IP, KNX USB, KNX RF USB, TP-UART, und FT1. 2</li><li>Prozesskommunikation</li><li>Managementprozesse</li><li>KNX-Eigenschaftszugang</li><li>Übersetzung von Datenpunkttyp und Eigenschaftstyp</li><li>Netzpufferung für zustands- und befehlsbasierte Datenpunktwerte</li><li>BAOS (Bus Access Object Server) Client-Unterstützung (Protokoll v2.1)</li><li>Eine Protokoll-API, die den OSI-Schichten 2 bis 7 ähnelt</li></ul>"
     }
   },

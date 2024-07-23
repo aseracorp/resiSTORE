@@ -143,7 +143,6 @@
         "ADDITIONAL_ADDRESS5={Context.additionalAddress5}"
       ],
       "devices": [
-        "/dev/ttyACM0:/dev/ttyACM0:rwm",
         "{Context.serialPort}:/dev/ttyKNX:rwm"
       ]
     }
