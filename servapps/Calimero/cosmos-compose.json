@@ -2,21 +2,118 @@
   "cosmos-installer": {
     "form": [
       {
-        "name": "knxAddress",
-        "label": "KNX-Address of your IP-Router",
+        "name": "friendlyName",
+        "label": "Full Name (f.e. shown in ETS)",
+        "initialValue": "Calimero KNXnet/IP-Router",
+        "type": "text"
+      },
+      {
+        "name": "discovery",
+        "label": "Should the Server be discoverable?",
+        "initialValue": "true",
+        "type": "select",
+        "options": [
+          ["true", "yes"],
+          ["false", "no"]
+        ]
+      },
+      {
+        "name": "discoveryListenIf",
+        "label": "Interface the server will be listening for discovery-requests",
+        "initialValue": "all",
+        "type": "text"
+      },
+      {
+        "name": "discoveryOutIf",
+        "label": "Interface the server will be answering to discovery-requests",
+        "initialValue": "all",
+        "type": "text"
+      },
+      {
+        "name": "listenIf",
+        "label": "Interface the server will be working on (has to be the correct host Interface)",
+        "initialValue": "eth0",
+        "type": "text"
+      },
+      {
+        "name": "serialPort",
+        "label": "The serialport used for KNX-TP",
+        "initialValue": "/dev/ttyACM1",
+        "type": "select",
+        "options": [
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> Coprocessor"],
+          ["/dev/ttyACM1", "/dev/ttyACM1 -> Serialport 1 -> KNX, RS485 or RS232"],
+          ["/dev/ttyACM2", "/dev/ttyACM2 -> Serialport 2 -> RS485 or RS232"],
+          ["/dev/ttyACM3", "/dev/ttyACM3 -> Serialport 3 -> RS485 or RS232"]
+        ]
+      },
+      {
+        "name": "physAddress",
+        "label": "physical Address of your IP-Router",
         "initialValue": "7.1.0",
+        "type": "text"
+      },
+      {
+        "name": "additionalAddress1",
+        "label": "physical Address No.1 for KNXnet/IP-Clients",
+        "initialValue": "7.1.1",
+        "type": "text"
+      },
+      {
+        "name": "additionalAddress2",
+        "label": "physical Address No.2 for KNXnet/IP-Clients",
+        "initialValue": "7.1.2",
+        "type": "text"
+      },
+      {
+        "name": "additionalAddress3",
+        "label": "physical Address No.3 for KNXnet/IP-Clients",
+        "initialValue": "7.1.3",
+        "type": "text"
+      },
+      {
+        "name": "additionalAddress4",
+        "label": "physical Address No.4 for KNXnet/IP-Clients",
+        "initialValue": "7.1.4",
+        "type": "text"
+      },
+      {
+        "name": "additionalAddress5",
+        "label": "physical Address No.5 for KNXnet/IP-Clients",
+        "initialValue": "7.1.5",
         "type": "text"
       }
     ],
     "translation": {
       "de": {
-        "form.knxAddress.label": "KNX-Addresse Ihres IP-Routers"
+        "form.friendlyName.label": "Vollständiger Name (wird z.B. in der ETS angezeigt)",
+        "form.discovery.label": "Soll der Server im Netzwerk auffindbar sein?",
+        "form.discovery.options": [
+          ["true", "Ja"],
+          ["false", "Nein"]
+        ],
+        "form.discoveryListenIf.label": "Interface, auf dem der Server auf Anfragen hört",
+        "form.discoveryOutIf.label": "Interface, auf dem der Server auf Anfragen antwortet",
+        "form.listenIf.label": "Interface für KNXnet/IP-Kommunikation (muss das korrekte host-Interface sein)",
+        "form.serialPort.label": "Schnittstelle, an welcher der KNX-TP angeschlossen ist",
+        "form.serialPort.options": [
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> Koprocessor"],
+          ["/dev/ttyACM1", "/dev/ttyACM1 -> Serieller Anschluss 1 -> KNX, RS485 oder RS232"],
+          ["/dev/ttyACM2", "/dev/ttyACM2 -> Serieller Anschluss 2 -> RS485 oder RS232"],
+          ["/dev/ttyACM3", "/dev/ttyACM3 -> Serieller Anschluss 3 -> RS485 oder RS232"]
+        ],
+        "form.physAddress.label": "physikalische Addresse Ihres IP-Routers",
+        "form.additionalAddress1.label": "1. Physikalische Addresse für KNXnet/IP-Clients",
+        "form.additionalAddress2.label": "2. Physikalische Addresse für KNXnet/IP-Clients",
+        "form.additionalAddress3.label": "3. Physikalische Addresse für KNXnet/IP-Clients",
+        "form.additionalAddress4.label": "4. Physikalische Addresse für KNXnet/IP-Clients",
+        "form.additionalAddress5.label": "5. Physikalische Addresse für KNXnet/IP-Clients"
       }
     }
   },
   "services": {
     "{ServiceName}": {
-      "image": "calimeroproject/knxserver:latest",
+      "image": "ghcr.io/aseracorp/calimero:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
       "UID": 1000,
@@ -31,19 +128,23 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Calimero/icon.png"
       },
       "environment": [
-        "KNX_ADDRESS={Context.knxAddress}"
+        "NAME={ServiceName}",
+        "FRIENDLY_NAME={Context.friendlyName}",
+        "DISCOVERY={Context.discovery}",
+        "DISCOVERY_LISTEN_IF={Context.discoveryListenIf}",
+        "DISCOVERY_OUT_IF={Context.discoveryOutIf}",
+        "LISTEN_IF={Context.listenIf}",
+        "SERIAL_PORT=/dev/ttyKNX",
+        "PHYS_ADDRESS={Context.physAddress}",
+        "ADDITIONAL_ADDRESS1={Context.additionalAddress1}",
+        "ADDITIONAL_ADDRESS2={Context.additionalAddress2}",
+        "ADDITIONAL_ADDRESS3={Context.additionalAddress3}",
+        "ADDITIONAL_ADDRESS4={Context.additionalAddress4}",
+        "ADDITIONAL_ADDRESS5={Context.additionalAddress5}"
       ],
-      "entrypoints" : ["/bin/sh", "-c", "wget -O /usr/app/docker-entrypoint.sh http://aseracorp.github.io/resiSTORE/servapps/Calimero/artefacts/docker-entrypoint.sh && chmod +x /usr/app/docker-entrypoint.sh && /usr/app/docker-entrypoint.sh"],
-      "commands": ["/usr/app/calimero-server-3.0-SNAPSHOT/bin/calimero-server", "--no-stdin", "server-config.xml"],
       "devices": [
-        "/dev/ttyACM1:/dev/ttyACM1:rwm"
-      ],
-      "volumes": [
-        {
-          "source": "{ServiceName}-app",
-          "target": "/usr/app",
-          "type": "volume"
-        }
+        "/dev/ttyACM0:/dev/ttyACM0:rwm",
+        "{Context.serialPort}:/dev/ttyKNX:rwm"
       ]
     }
   }
