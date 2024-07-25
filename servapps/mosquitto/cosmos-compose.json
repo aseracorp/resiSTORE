@@ -22,8 +22,8 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mosquitto/icon.png"
       },
       "ports": [
-        "1883",
-        "9001"
+        "1883:1883",
+        "9001:9001"
       ]
     }
   }

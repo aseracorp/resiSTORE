@@ -69,7 +69,6 @@
       "security_opt": [
         "no-new-privileges:true"
       ],
-      "network_mode": "host",
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
@@ -85,7 +84,9 @@
           "target": "/usr/app",
           "type": "volume"
         }
-      ]
-    }
+      ],
+      "ports": [
+        "502:502"
+      ]    }
   }
 }
