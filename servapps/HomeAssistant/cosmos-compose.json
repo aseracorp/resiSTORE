@@ -46,7 +46,8 @@
         "form.fielBrowserAdminOnly.label": "Möchten Sie den Dateiexplorer nur für Administratoren zugänglich machen?",
         "form.codeServerAdminOnly.label": "Möchten Sie den Studio Code Server nur für Administratoren zugänglich machen?",
         "routes.{ServiceName}.description": "{ServiceName} im Netzwerk veröffentlichen",
-        "routes.{ServiceName}-CodeServer.description": "Studio Code Server im Netzwerk veröffentlichen"
+        "routes.{ServiceName}-CodeServer.description": "Studio Code Server im Netzwerk veröffentlichen (ACHTUNG: Addresse muss frei sein bzw. sich von oben unterscheiden)",
+        "routes.{ServiceName}-Filebrowser.description": "Dateiexplorer im Netzwerk veröffentlichen (ACHTUNG: Addresse muss frei sein bzw. sich von oben unterscheiden)"
       }
     }
   },
@@ -133,7 +134,7 @@
       "routes": [
         {
           "name": "{ServiceName}-Code",
-          "description": "Expose Studio Code Server to the web",
+          "description": "Expose Studio Code Server to the web (WARNING: has to be free / different than the above)",
           "useHost": true,
           "target": "http://{ServiceName}-Code:8443",
           "mode": "SERVAPP",
@@ -152,7 +153,7 @@
     }
     {/if}
     {if Context.useFileBrowser}
-    , "HA-Filebrowser": {
+    , "{ServiceName}-Filebrowser": {
       "image": "filebrowser/filebrowser:s6",
       "container_name": "{ServiceName}-Filebrowser",
       "restart": "unless-stopped",
@@ -195,9 +196,9 @@
       "routes": [
         {
           "name": "{ServiceName}-Filebrowser",
-          "description": "Expose HA-Filebrowser to the web",
+          "description": "Expose {ServiceName}-Filebrowser to the web (WARNING: has to be free / different than the above)",
           "useHost": true,
-          "target": "http://HA-Filebrowser:80",
+          "target": "http://{ServiceName}-Filebrowser:80",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
