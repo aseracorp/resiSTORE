@@ -65,8 +65,23 @@
       },
       "volumes": [
         {
-          "source": "{Context.mountPoint}",
+          "source": "Filebrowser-mount",
           "target": "/srv",
+          "type": "volume"
+        },
+        {
+          "source": "Filebrowser-database",
+          "target": "/database",
+          "type": "volume"
+        },
+        {
+          "source": "Filebrowser-config",
+          "target": "/config",
+          "type": "volume"
+        },
+        {
+          "source": "{Context.mountPoint}",
+          "target": "/srv/host",
           "type": "bind"
         }
       ],
