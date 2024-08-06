@@ -4,13 +4,13 @@
     {
       "name": "serialPort",
       "label": "serial Port",
-      "initialValue": "/dev/ttyACM2",
+      "initialValue": "ttyACM2",
       "type": "select",
       "options": [
-        ["/dev/ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> Coprocessor"],
-        ["/dev/ttyACM1", "/dev/ttyACM1 -> Serialport 1 -> KNX, RS485 or RS232"],
-        ["/dev/ttyACM2", "/dev/ttyACM2 -> Serialport 2 -> RS485 or RS232"],
-        ["/dev/ttyACM3", "/dev/ttyACM3 -> Serialport 3 -> RS485 or RS232"]
+        ["ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> Coprocessor"],
+        ["ttyACM1", "/dev/ttyACM1 -> Serialport 1 -> KNX, RS485 or RS232"],
+        ["ttyACM2", "/dev/ttyACM2 -> Serialport 2 -> RS485 or RS232"],
+        ["ttyACM3", "/dev/ttyACM3 -> Serialport 3 -> RS485 or RS232"]
       ]
     },
     {
@@ -38,7 +38,20 @@
           ["8O1", "8O1: 8 databits, odd parity, 1 stoppbit"],
           ["8N2", "8N2: 8 databits, no parity, 2 stoppbit"]
         ]
+      },
+      {
+        "name": "exposePort",
+        "label": "expose Modbus-Server to local network? (insecure)",
+        "initialValue": false,
+        "type": "checkbox"
+      }{if Context.exposePort}
+      , {
+        "name": "exposedPort",
+        "label": "Which Port would you like to expose to the local network? (May NOT be used by another Service)",
+        "initialValue": "502",
+        "type": "text"
       }
+      {/if}
     ],
     "translation": {
       "de": {
@@ -51,18 +64,20 @@
         ],
         "form.serialPort.label": "serieller Anschluss",
         "form.serialPort.options": [
-          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> Koprocessor"],
-          ["/dev/ttyACM1", "/dev/ttyACM1 -> Serieller Anschluss 1 -> KNX, RS485 oder RS232"],
-          ["/dev/ttyACM2", "/dev/ttyACM2 -> Serieller Anschluss 2 -> RS485 oder RS232"],
-          ["/dev/ttyACM3", "/dev/ttyACM3 -> Serieller Anschluss 3 -> RS485 oder RS232"]
-        ]        
+          ["ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> Koprocessor"],
+          ["ttyACM1", "/dev/ttyACM1 -> Serieller Anschluss 1 -> KNX, RS485 oder RS232"],
+          ["ttyACM2", "/dev/ttyACM2 -> Serieller Anschluss 2 -> RS485 oder RS232"],
+          ["ttyACM3", "/dev/ttyACM3 -> Serieller Anschluss 3 -> RS485 oder RS232"]
+        ],
+        "form.exposePort.label": "Modbus-Server im lokalen Netzwerk veröffentlichen? (unsicher)",
+        "form.exposedPort.label": "Welchen Port möchten Sie für das lokale Netzwerk freigeben? (Darf NICHT von einem anderen Dienst verwendet werden)"
       }
     }
   },
   "services": {
     "{ServiceName}": {
       "image": "ghcr.io/aseracorp/mbusd:latest",
-      "container_name": "{ServiceName}",
+      "container_name": "{ServiceName}-{Context.serialPort}",
       "restart": "unless-stopped",
       "UID": 1000,
       "GID": 1000,
@@ -76,7 +91,7 @@
       },
       "command": "-d -L - -p /dev/ttyModbus -s {Context.baudrate} -m {Context.mode}",
       "devices": [
-        "{Context.serialPort}:/dev/ttyModbus:rwm"
+        "/dev/{Context.serialPort}:/dev/ttyModbus:rwm"
       ],
       "volumes": [
         {
@@ -84,9 +99,12 @@
           "target": "/usr/app",
           "type": "volume"
         }
-      ],
-      "ports": [
-        "502:502"
-      ]    }
+      ]
+      {if Context.exposePort}
+      , "ports": [
+        "{Context.exposedPort}:502"
+      ]
+      {/if}
+    }
   }
 }
