@@ -159,7 +159,11 @@
         {/if}
       ],
       "devices": [
+        {if Context.advancedSettings}
         "{Context.serialPort}:/dev/ttyKNX:rwm"
+        {else}
+        "/dev/ttyACM1:/dev/ttyKNX:rwm"
+        {/if}
       ]
     }
   }
