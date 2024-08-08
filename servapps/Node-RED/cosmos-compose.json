@@ -8,6 +8,7 @@
       "restart": "unless-stopped",
       "UID": 1000,
       "GID": 1000,
+      "user": "1000:dialout",
       "security_opt": [
         "no-new-privileges:true"
       ],
