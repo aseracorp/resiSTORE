@@ -6,8 +6,8 @@
       "image": "eclipse-mosquitto:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
+        "UID": 1000,
+        "GID": 1000,
       "security_opt": [
         "no-new-privileges:true"
       ],
@@ -21,9 +21,25 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mosquitto/icon.png"
       },
-      "ports": [
-        "1883:1883",
-        "9001:9001"
+      "volumes": [
+        {
+          "source": "{ServiceName}-config",
+          "target": "/mosquitto/config",
+          "type": "volume"
+        },
+        {
+          "source": "{ServiceName}-data",
+          "target": "/mosquitto/data",
+          "type": "volume"
+        },
+        {
+          "source": "{ServiceName}-log",
+          "target": "/mosquitto/log",
+          "type": "volume"
+        }
+      ],
+      "post_install": [
+        "printf \"listener 1883\\nallow_anonymous true\" > /mosquitto/config/mosquitto.conf"
       ]
     }
   }
