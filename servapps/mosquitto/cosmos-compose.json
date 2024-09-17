@@ -1,6 +1,29 @@
 { 
   "cosmos-installer": {
+    "form": [
+      {
+        "name": "installWebClient",
+        "label": "Do you want to install a web-based MQTT-Explorer?",
+        "initialValue": true,
+        "type": "checkbox"
+      }
+      {if Context.installWebClient}
+      , {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": true,
+        "type": "checkbox"
+      }
+      {/if}
+    ],
+    "translation": {
+      "de": {
+        "form.installWebClient.label": "Möchten Sie einen webbasierten MQTT-Explorer mit dazu installieren?",
+        "form.adminOnly.label": "Möchten Sie den MQTT-Explorer nur für Administratoren zugänglich machen?"
+      }
+    }
   },
+  "minVersion": "0.8.0",
   "services": {
     "{ServiceName}": {
       "image": "eclipse-mosquitto:latest",
@@ -19,7 +42,9 @@
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mosquitto/icon.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mosquitto/icon.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
       },
       "volumes": [
         {
@@ -42,5 +67,50 @@
         "printf \"listener 1883\\nallow_anonymous true\" > /mosquitto/config/mosquitto.conf"
       ]
     }
+    {if Context.installWebClient}
+     , "MQTT-Explorer": {
+      "container_name": "MQTT-Explorer",
+      "image": "smeagolworms4/mqtt-explorer",
+      "environment": [
+        "HTTP_PORT=80",
+        "CONFIG_PATH=/mqtt-explorer/config",
+        "INITIAL_CONFIG={\"ConnectionManager_connections\":{\"mosquitto\":{\"configVersion\":1,\"certValidation\":false,\"clientId\":\"mqtt-explorer-387011e3\",\"id\":\"mosquitto\",\"name\":\"Mosquitto\",\"encryption\":false,\"subscriptions\":[{\"topic\":\"#\",\"qos\":0},{\"topic\":\"$SYS/#\",\"qos\":0}],\"type\":\"mqtt\",\"host\":\"Mosquitto\",\"port\":1883,\"protocol\":\"mqtt\"}}}"
+      ],
+      "labels": {
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/mosquitto/icon.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
+      },
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "MQTT-Explorer-config",
+          "target": "/mqtt-explorer/config"
+        }
+      ],
+      "routes": [
+        {
+          "name": "MQTT-Explorer",
+          "description": "Expose MQTT-Explorer to the web",
+          "useHost": true,
+          "target": "http://MQTT-Explorer:80",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
+        }
+      ],
+      "restart": "unless-stopped"
+    }
+    {/if}
   }
 }
