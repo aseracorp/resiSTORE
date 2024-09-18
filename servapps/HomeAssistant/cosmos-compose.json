@@ -71,7 +71,9 @@
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/icon.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/icon.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
       },
       "volumes": [
         {
@@ -117,7 +119,9 @@
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://azukaar.github.io/cosmos-servapps-official/servapps/HomeAssistant/CodeServer.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/CodeServer.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
       },
       "volumes": [
         {
@@ -168,13 +172,15 @@
         "FB_NOAUTH=true"
       ],
       "post_install": [
-        "filebrowser config init",
+        "filebrowser config init --viewMode \"list\"",
         "filebrowser users add admin admin"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://azukaar.github.io/cosmos-servapps-official/servapps/HomeAssistant/Filebrowser.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/Filebrowser.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
       },
       "volumes": [
         {

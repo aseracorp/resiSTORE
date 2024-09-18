@@ -63,7 +63,7 @@
         "FB_NOAUTH=true"
       ],
       "post_install": [
-        "filebrowser config init",
+        "filebrowser config init --viewMode \"list\"",
         "filebrowser users add admin admin"
       ],
       "labels": {
