@@ -1,0 +1,18 @@
+{
+  "name": "Scada-LTS",
+  "description": "Scada-LTS is an Open Source SCADA-System.",
+  "longDescription": "Scada-LTS is an Open Source, web-based, multi-platform solution for building your own SCADA (Supervisory Control and Data Acquisiton) system.<br />It comes bundled with many years of experience in real-world SCADA applications for Energy, Water Distribution, Manufacturing Plants, Home Automation, Laboratories... you name it!<br/>Scada-LTS includes everything you need to get started in a few minutes: Communication Protocols, the data acquisition engine, Alarms & Events, HMI Builder and much more.<br/>Our goal is to provide a rock-solid solution for mission-critical applications, while sharing knowledge and benefitting from an international and ever-growing community.",
+  "translation": {
+    "de": {
+      "description": "Scada-LTS ist ein Open Source SCADA-System (Supervisory Control and Data Acquisiton).",
+      "longDescription": "Scada-LTS ist eine Open Source, webbasierte, plattformübergreifende Lösung zum Aufbau Ihres eigenen SCADA-Systems (Supervisory Control and Data Acquisiton).<br/>Es kommt gebündelt mit vielen Jahren Erfahrung in realen SCADA-Anwendungen für Energie, Wasserversorgung, Produktionsanlagen, Heimautomatisierung, Laboratorien ... Sie wissen schon! Kommunikationsprotokolle, die Datenerfassungs-Engine, Alarme & Ereignisse, HMI Builder und vieles mehr.<br/>Unser Ziel ist es, eine grundsolide Lösung für unternehmenskritische Anwendungen zu bieten, während wir unser Wissen teilen und von einer internationalen und ständig wachsenden Gemeinschaft profitieren."
+    }
+  },
+  "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
+  "repository": "https://hub.docker.com/r/scadalts/scadalts",
+  "image": "scadalts/scadalts:latest",
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
+}
