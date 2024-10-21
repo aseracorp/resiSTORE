@@ -10,37 +10,37 @@
       {
         "name": "physAddress",
         "label": "physical Address of your IP-Router",
-        "initialValue": "7.1.0",
+        "initialValue": "1.0.0",
         "type": "text"
       },
       {
         "name": "additionalAddress1",
         "label": "physical Address No.1 for KNXnet/IP-Clients",
-        "initialValue": "7.1.1",
+        "initialValue": "1.0.240",
         "type": "text"
       },
       {
         "name": "additionalAddress2",
         "label": "physical Address No.2 for KNXnet/IP-Clients",
-        "initialValue": "7.1.2",
+        "initialValue": "1.0.241",
         "type": "text"
       },
       {
         "name": "additionalAddress3",
         "label": "physical Address No.3 for KNXnet/IP-Clients",
-        "initialValue": "7.1.3",
+        "initialValue": "1.0.242",
         "type": "text"
       },
       {
         "name": "additionalAddress4",
         "label": "physical Address No.4 for KNXnet/IP-Clients",
-        "initialValue": "7.1.4",
+        "initialValue": "1.0.243",
         "type": "text"
       },
       {
         "name": "additionalAddress5",
         "label": "physical Address No.5 for KNXnet/IP-Clients",
-        "initialValue": "7.1.5",
+        "initialValue": "1.0.244",
         "type": "text"
       },
       {
