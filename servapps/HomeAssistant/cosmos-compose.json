@@ -83,7 +83,10 @@
         }
       ],
       "post_install": [
-        "wget --directory-prefix \"/config/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml"
+        "wget --directory-prefix \"/config/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
+        "wget --directory-prefix \"/config/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
+        "wget --directory-prefix \"/config/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
+        "wget --directory-prefix \"/config/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
       ],
       "routes": [
         {
