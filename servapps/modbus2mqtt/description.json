@@ -1,0 +1,15 @@
+{
+  "name": "modbus2mqtt",
+  "description": "Gateway Modbus to MQTT",
+  "longDescription": "<p></p>",
+  "translation": {
+    "de": {
+      "description": "Gateway von Modbus auf MQTT",
+      "longDescription": "<p></p>"
+    }
+  },
+  "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services", "home assistant"],
+  "repository": "https://github.com/modbus2mqtt/server",
+  "image": "https://hub.docker.com/r/modbus2mqtt/modbus2mqtt-aarch64",
+  "supported_architectures": ["arm64"]
+}
