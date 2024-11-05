@@ -12,8 +12,7 @@
       "command": "/usr/bin/wait-for-it --host=database --port=3306 --timeout=30 --strict -- /usr/local/tomcat/bin/catalina.sh run",
       "depends_on": {
         "{ServiceName}-db": {
-          "condition": "service_healthy",
-          "restart": "true"
+          "condition": "service_healthy"
         }
       },
       "security_opt": [
