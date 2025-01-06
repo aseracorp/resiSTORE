@@ -15,7 +15,7 @@
       }
       {if Context.useFileBrowser}
       , {
-        "name": "fielBrowserAdminOnly",
+        "name": "fileBrowserAdminOnly",
         "label": "Do you want to make the Filebrowser admin only?",
         "initialValue": true,
         "type": "checkbox"
@@ -110,6 +110,9 @@
             "Enabled": true
           },
           "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
         }
       ]
     }
@@ -236,7 +239,7 @@
             "Enabled": true
           },
           "AuthEnabled": true
-          {if Context.adminOnly}
+          {if Context.fileBrowserAdminOnly}
            , "AuthAdmin": true
           {/if}
         }
