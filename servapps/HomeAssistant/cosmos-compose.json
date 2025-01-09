@@ -43,7 +43,7 @@
         "form.useFileBrowser.label": "Möchten Sie einen Dateiexplorer zum Bearbeiten der YAML-Konfiguration installieren?",
         "form.useCodeServer.label": "Möchten Sie einen Studio Code Server zum Bearbeiten der YAML-Konfiguration installieren? (WARNUNG: Funktioniert nur mit güligem SSL-Zertifikat bzw. Let's Encrypt)",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
-        "form.fielBrowserAdminOnly.label": "Möchten Sie den Dateiexplorer nur für Administratoren zugänglich machen?",
+        "form.fileBrowserAdminOnly.label": "Möchten Sie den Dateiexplorer nur für Administratoren zugänglich machen?",
         "form.codeServerAdminOnly.label": "Möchten Sie den Studio Code Server nur für Administratoren zugänglich machen?",
         "routes.{ServiceName}.description": "{ServiceName} im Netzwerk veröffentlichen",
         "routes.{ServiceName}-CodeServer.description": "Studio Code Server im Netzwerk veröffentlichen (ACHTUNG: Addresse muss frei sein bzw. sich von oben unterscheiden)",
@@ -150,10 +150,10 @@
         }        
       ],
       "post_install": [
-        "wget --directory-prefix \"/workspace/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
-        "wget --directory-prefix \"/workspace/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
-        "wget --directory-prefix \"/workspace/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
-        "wget --directory-prefix \"/workspace/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
+        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
+        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
+        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
+        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
       ],
       "routes": [
         {
@@ -220,10 +220,10 @@
         }
       ],
       "post_install": [
-        "wget --directory-prefix \"/srv/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
-        "wget --directory-prefix \"/srv/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
-        "wget --directory-prefix \"/srv/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
-        "wget --directory-prefix \"/srv/\" http://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
+        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
+        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
+        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
+        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
       ],
       "routes": [
         {
