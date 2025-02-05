@@ -46,7 +46,14 @@
       ],
       "links": [
         "Mosquitto"
-      ]
+      ],
+      "healthcheck": {
+        "test": ["CMD-SHELL", "[ ! $TX ] && export TX=0 ; tx=`cat /sys/class/net/eth1/statistics/tx_bytes` && if [ ! $tx -gt $TX ] ; then TX=$tx && exit 1 ; fi"],
+        "interval": 100,
+        "timeout": 10,
+        "retries": 3,
+        "start_period": 600
+      }
     },
     "{ServiceName}-Filebrowser": {
       "image": "filebrowser/filebrowser:s6",
