@@ -1,6 +1,7 @@
 { 
   "cosmos-installer": {
   },
+  "minVersion": "0.16.0",
   "services": {
     "{ServiceName}": {
       "image": "influxdb:latest",

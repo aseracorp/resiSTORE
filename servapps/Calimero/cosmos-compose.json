@@ -120,6 +120,7 @@
       }
     }
   },
+  "minVersion": "0.16.0",
   "services": {
     "{ServiceName}": {
       "image": "ghcr.io/aseracorp/calimero:latest",

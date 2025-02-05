@@ -51,7 +51,7 @@
       }
     }
   },
-  "minVersion": "0.8.0",
+  "minVersion": "0.16.0",
   "services": {
     "{ServiceName}": {
       "image": "lscr.io/linuxserver/homeassistant:latest",
