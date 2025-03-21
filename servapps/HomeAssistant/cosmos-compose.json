@@ -6,48 +6,11 @@
         "label": "Do you want to make this service admin only?",
         "initialValue": false,
         "type": "checkbox"
-      },
-      {
-        "name": "useFileBrowser",
-        "label": "Do you want to install a Filebrowser for editing the YAML-Configuration-files?",
-        "initialValue": true,
-        "type": "checkbox"
-      }
-      {if Context.useFileBrowser}
-      , {
-        "name": "fileBrowserAdminOnly",
-        "label": "Do you want to make the Filebrowser admin only?",
-        "initialValue": true,
-        "type": "checkbox"
-      }
-      {/if}
-      {if not Context.useFileBrowser}
-      , {
-        "name": "useCodeServer",
-        "label": "Do you want to install a Studio Code Server for editing the YAML-Configuration-files? (WARNING: only works with valid SSL-Certificate / Let's Encrypt)",
-        "initialValue": false,
-        "type": "checkbox"
-      }
-      {/if}
-      {if Context.useCodeServer}
-      , {
-        "name": "codeServerAdminOnly",
-        "label": "Do you want to make the Studio Code Server admin only?",
-        "initialValue": true,
-        "type": "checkbox"
-      }
-      {/if}
-    ],
+      }    ],
     "translation": {
       "de": {
-        "form.useFileBrowser.label": "Möchten Sie einen Dateiexplorer zum Bearbeiten der YAML-Konfiguration installieren?",
-        "form.useCodeServer.label": "Möchten Sie einen Studio Code Server zum Bearbeiten der YAML-Konfiguration installieren? (WARNUNG: Funktioniert nur mit güligem SSL-Zertifikat bzw. Let's Encrypt)",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
-        "form.fileBrowserAdminOnly.label": "Möchten Sie den Dateiexplorer nur für Administratoren zugänglich machen?",
-        "form.codeServerAdminOnly.label": "Möchten Sie den Studio Code Server nur für Administratoren zugänglich machen?",
-        "routes.{ServiceName}.description": "{ServiceName} im Netzwerk veröffentlichen",
-        "routes.{ServiceName}-CodeServer.description": "Studio Code Server im Netzwerk veröffentlichen (ACHTUNG: Addresse muss frei sein bzw. sich von oben unterscheiden)",
-        "routes.{ServiceName}-Filebrowser.description": "Dateiexplorer im Netzwerk veröffentlichen (ACHTUNG: Addresse muss frei sein bzw. sich von oben unterscheiden)"
+        "routes.{ServiceName}.description": "{ServiceName} im Netzwerk veröffentlichen"
       }
     }
   },
@@ -75,6 +38,12 @@
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
       },
+      "post_install": [
+        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
+        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
+        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
+        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
+      ],
       "volumes": [
         {
           "source": "{ServiceName}-config",
@@ -82,20 +51,6 @@
           "type": "volume"
         }
       ],
-      {if Context.useFileBrowser}
-      "depends_on": {
-        "{ServiceName}-Filebrowser": {
-          "condition": "service_healthy"
-        }
-      },
-      {/if}
-      {if Context.useCodeServer}
-      "depends_on": {
-        "{ServiceName}-Code": {
-          "condition": "service_healthy"
-        }
-      },
-      {/if}
       "routes": [
         {
           "name": "{ServiceName}",
@@ -116,135 +71,5 @@
         }
       ]
     }
-    {if Context.useCodeServer}
-    , "{ServiceName}-Code": {
-      "image": "lscr.io/linuxserver/code-server:latest",
-      "container_name": "{ServiceName}-Code",
-      "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
-      "environment": [
-        "PUID=1000",
-        "PGID=1000",
-        "TZ=auto",
-        "PROXY_DOMAIN={Hostnames.{StaticServiceName}-Code.{StaticServiceName}-Code.host}",
-        "DEFAULT_WORKSPACE=/workspace"
-      ],
-      "labels": {
-        "cosmos-force-network-secured": "true",
-        "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/CodeServer.png",
-        "cosmos-stack": "{ServiceName}",
-        "cosmos-stack-main": "{ServiceName}"
-      },
-      "volumes": [
-        {
-          "source": "{ServiceName}-CodeServer-config",
-          "target": "/config",
-          "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-config",
-          "target": "/workspace",
-          "type": "volume"
-        }        
-      ],
-      "post_install": [
-        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
-        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
-        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
-        "wget --directory-prefix \"/workspace/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
-      ],
-      "routes": [
-        {
-          "name": "{ServiceName}-Code",
-          "description": "Expose Studio Code Server to the web (WARNING: has to be free / different than the above)",
-          "useHost": true,
-          "target": "http://{ServiceName}-Code:8443",
-          "mode": "SERVAPP",
-          "Timeout": 14400000,
-          "ThrottlePerMinute": 12000,
-          "BlockCommonBots": true,
-          "SmartShield": {
-            "Enabled": true
-          },
-          "AuthEnabled": true
-          {if Context.codeServerAdminOnly}
-           , "AuthAdmin": true
-          {/if}
-        }
-      ]
-    }
-    {/if}
-    {if Context.useFileBrowser}
-    , "{ServiceName}-Filebrowser": {
-      "image": "filebrowser/filebrowser:s6",
-      "container_name": "{ServiceName}-Filebrowser",
-      "restart": "unless-stopped",
-      "tty": true,
-      "stdin_open": true,
-      "UID": 1000,
-      "GID": 1000,
-      "environment": [
-        "PUID=1000",
-        "PGID=1000",
-        "TZ=auto",
-        "FB_NOAUTH=true"
-      ],
-      "post_install": [
-        "filebrowser config init --viewMode \"list\"",
-        "filebrowser users add admin admin"
-      ],
-      "labels": {
-        "cosmos-force-network-secured": "true",
-        "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/Filebrowser.png",
-        "cosmos-stack": "{ServiceName}",
-        "cosmos-stack-main": "{ServiceName}"
-      },
-      "volumes": [
-        {
-          "source": "{ServiceName}-config",
-          "target": "/srv",
-          "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-Filebrowser-database",
-          "target": "/database",
-          "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-Filebrowser-config",
-          "target": "/config",
-          "type": "volume"
-        }
-      ],
-      "post_install": [
-        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
-        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
-        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
-        "wget --directory-prefix \"/srv/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
-      ],
-      "routes": [
-        {
-          "name": "{ServiceName}-Filebrowser",
-          "description": "Expose {ServiceName}-Filebrowser to the web (WARNING: has to be free / different than the above)",
-          "useHost": true,
-          "target": "http://{ServiceName}-Filebrowser:80",
-          "mode": "SERVAPP",
-          "Timeout": 14400000,
-          "ThrottlePerMinute": 12000,
-          "BlockCommonBots": true,
-          "SmartShield": {
-            "Enabled": true
-          },
-          "AuthEnabled": true
-          {if Context.fileBrowserAdminOnly}
-           , "AuthAdmin": true
-          {/if}
-        }
-      ]
-    }
-    {/if}
   }
 }

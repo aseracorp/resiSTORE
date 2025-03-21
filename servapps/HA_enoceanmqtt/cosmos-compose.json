@@ -8,9 +8,16 @@
         "type": "checkbox"
       }
     ],
+    "post-install": [
+      {
+        "type": "info",
+        "label": "Service installed. Please add your configuration in the docker volume via Filebrowser: volumes/{ServiceName}-config/_data/enoceanmqtt.conf"
+      }
+    ],
     "translation": {
       "de": {
-        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
+        "post-install[0].label": "Dienst installiert. Bitte fügen Sie Ihre Konfiguration über den Filebrowser in das Docker-Volume ein: volumes/{ServiceName}-config/_data/enoceanmqtt.conf"
       }
     }
   },
@@ -54,68 +61,6 @@
         "retries": 3,
         "start_period": 600
       }
-    },
-    "{ServiceName}-Filebrowser": {
-      "image": "filebrowser/filebrowser:s6",
-      "container_name": "{ServiceName}-Filebrowser",
-      "restart": "unless-stopped",
-      "tty": true,
-      "stdin_open": true,
-      "UID": 1000,
-      "GID": 1000,
-      "environment": [
-        "PUID=1000",
-        "PGID=1000",
-        "TZ=auto",
-        "FB_NOAUTH=true"
-      ],
-      "post_install": [
-        "filebrowser config init --viewMode \"list\"",
-        "filebrowser users add admin admin"
-      ],
-      "labels": {
-        "cosmos-force-network-secured": "true",
-        "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/HA_enoceanmqtt/icon.png",
-        "cosmos-stack": "{ServiceName}",
-        "cosmos-stack-main": "{ServiceName}"
-      },
-      "volumes": [
-        {
-          "source": "{ServiceName}-config",
-          "target": "/srv",
-          "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-Filebrowser-database",
-          "target": "/database",
-          "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-Filebrowser-config",
-          "target": "/config",
-          "type": "volume"
-        }
-      ],
-      "routes": [
-        {
-          "name": "{ServiceName}",
-          "description": "Expose {ServiceName}-Configuration to the web",
-          "useHost": true,
-          "target": "http://{ServiceName}-Filebrowser:80",
-          "mode": "SERVAPP",
-          "Timeout": 14400000,
-          "ThrottlePerMinute": 12000,
-          "BlockCommonBots": true,
-          "SmartShield": {
-            "Enabled": true
-          },
-          "AuthEnabled": true
-          {if Context.adminOnly}
-           , "AuthAdmin": true
-          {/if}
-        }
-      ]
     }
   }
 }
