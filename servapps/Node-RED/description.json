@@ -6,6 +6,14 @@
     "de": {
       "description": "Grafische Programmierumgebung für ereignisgesteuerte Anwendungen und Automatisierungen mit minimalem Programmieraufwand",
       "longDescription": "Node-RED ist ein Programmierwerkzeug, mit dem sich Hardwaregeräte, APIs und Online-Dienste auf neue und interessante Weise miteinander verbinden lassen.  Es bietet einen browserbasierten Editor, der es einfach macht, Abläufe unter Verwendung der breiten Palette von Knoten zu verdrahten, die mit einem einzigen Mausklick zur Laufzeit bereitgestellt werden können."
+    },
+    "fr": {
+      "longDescription": "Node-RED est un outil de programmation permettant de connecter entre eux des périphériques matériels, des API et des services en ligne de manière innovante et intéressante.<br />Il fournit un éditeur basé sur un navigateur qui facilite la connexion entre les flux à l'aide d'une large gamme de nœuds disponibles dans la palette, qui peuvent être déployés dans son environnement d'exécution en un seul clic.",
+      "description": "Programmation graphique low code pour les applications et automatisations basées sur les événements"
+    },
+    "it": {
+      "longDescription": "Node-RED è uno strumento di programmazione che consente di collegare dispositivi hardware, API e servizi online in modi nuovi e interessanti.<br />Fornisce un editor basato su browser che semplifica il collegamento dei flussi utilizzando l'ampia gamma di nodi disponibili nella tavolozza, che possono essere distribuiti nel suo runtime con un solo clic.",
+      "description": "programmazione grafica low code per applicazioni basate su eventi e automazioni"
     }
   },
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],

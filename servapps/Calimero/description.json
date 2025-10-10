@@ -6,6 +6,14 @@
     "de": {
       "description": "KNXnet/IP-Router und Gateway zu KNX-TP",
       "longDescription": "<p>Calimero bietet den KNX (secure) Protokollstack für Clients, KNXnet/IP Server und Geräte.</p><p>Das Ziel der Bibliothek ist es, saubere und schlanke Schnittstellen zu KNX-Funktionen anzubieten, einschliesslich</p><ul><li>KNXnet/IP (secure) Tunneling, Routing, lokale Geräteverwaltung und Busüberwachung</li><li>Zugriff über KNX IP, KNX USB, KNX RF USB, TP-UART, und FT1. 2</li><li>Prozesskommunikation</li><li>Managementprozesse</li><li>KNX-Eigenschaftszugang</li><li>Übersetzung von Datenpunkttyp und Eigenschaftstyp</li><li>Netzpufferung für zustands- und befehlsbasierte Datenpunktwerte</li><li>BAOS (Bus Access Object Server) Client-Unterstützung (Protokoll v2.1)</li><li>Eine Protokoll-API, die den OSI-Schichten 2 bis 7 ähnelt</li></ul>"
+    },
+    "fr": {
+      "description": "Routeur KNXnet/IP et passerelle vers KNX-TP",
+      "longDescription": "<p>Calimero fournit la pile de protocoles KNX (sécurisée) pour les clients, les serveurs KNXnet/IP et les appareils. </p><p>L'objectif de la bibliothèque est d'offrir des interfaces claires et simples pour les fonctionnalités KNX, notamment</p><ul><li>Tunneling KNXnet/IP (sécurisé), routage, gestion des appareils locaux et surveillance du bus</li><li>Accès via KNX IP, KNX USB, KNX RF USB, TP-UART et FT1.2</li><li>Communication de processus</li><li>Procédures de gestion</li><li>Accès aux propriétés KNX</li><li>Conversion des types de points de données et des types de propriétés</li><li>Mise en mémoire tampon réseau pour les valeurs de points de données basées sur l'état et les commandes</li><li>Prise en charge du client BAOS (Bus Access Object Server) (protocole v2.1) </li><li>Une API de protocole qui ressemble aux couches OSI 2 à 7</li></ul>"
+    },
+    "it": {
+      "description": "Router KNXnet/IP e gateway per KNX-TP",
+      "longDescription": "<p>Calimero fornisce lo stack di protocolli KNX (sicuro) per client, server KNXnet/IP e dispositivi. </p><p>L'obiettivo della libreria è quello di offrire interfacce pulite e snelle alle funzionalità KNX, tra cui</p><ul><li>tunneling KNXnet/IP (sicuro), routing, gestione dei dispositivi locali e monitoraggio del bus</li><li>accesso tramite KNX IP, KNX USB, KNX RF USB, TP-UART e FT1.2</li><li>Comunicazione di processo</li><li>Procedure di gestione</li><li>Accesso alle proprietà KNX</li><li>Traduzione del tipo di punto dati e del tipo di proprietà</li><li>Buffer di rete per valori di punti dati basati su stato e comando</li><li>Supporto client BAOS (Bus Access Object Server) (protocollo v2.1) </li><li>API di protocollo simile ai livelli OSI da 2 a 7</li></ul>"
     }
   },
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
