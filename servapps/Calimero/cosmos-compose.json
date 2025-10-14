@@ -75,7 +75,7 @@
       {
         "name": "listenIf",
         "label": "Interface the server will be working on (has to be the correct host Interface)",
-        "initialValue": "eth0",
+        "initialValue": "br-lan",
         "type": "text"
       },
       {
@@ -156,7 +156,7 @@
         "DISCOVERY=true",
         "DISCOVERY_LISTEN_IF=all",
         "DISCOVERY_OUT_IF=all",
-        "LISTEN_IF=eth0"
+        "LISTEN_IF=br-lan"
         {/if}
       ],
       "devices": [
