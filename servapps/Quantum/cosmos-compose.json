@@ -1,0 +1,126 @@
+{ 
+  "cosmos-installer": {
+    "form": [
+      {
+        "name": "advanced",
+        "label": "Quantum exposes host files ( / + /opt/docker/volumes ) to admins. Do you want to change this behaviour?",
+        "initialValue": false,
+        "type": "checkbox"
+      }
+      {if Context.advanced}
+      , {
+        "name": "mountPointRoot",
+        "label": "What folder do you want to have available in Quantum? (Default: /)",
+        "initialValue": "/",
+        "type": "text"
+      },
+      {
+        "name": "mountPointVolumes",
+        "label": "What folder do you want to have available in Quantum? (Default: /opt/docker/volumes)",
+        "initialValue": "/opt/docker/volumes",
+        "type": "text"
+      },
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": false,
+        "type": "checkbox"
+      }
+    {/if}
+    ],
+    "translation": {
+      "de": {
+        "form.advanced.label": "Quantum macht das Host-Dateisystem ( / + /opt/docker/volumes ) für Administratoren sichtbar. Möchten Sie dieses Verhalten ändern?",
+        "form.mountPointRoot.label": "Welchen Ordner möchten Sie im Dateiexplorer zur Verfügung haben? (Standard: /)",
+        "form.mountPointVolumes.label": "Welchen Ordner möchten Sie im Dateiexplorer zur Verfügung haben? (Standard: /opt/docker/volumes)",
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.advanced.label": "Quantum rend le système de fichiers hôte ( / + /opt/docker/volumes ) visible pour les administrateurs. Souhaitez-vous modifier ce comportement ?",
+        "form.mountPointRoot.label": "Quel dossier souhaitez-vous avoir à disposition dans l'explorateur de fichiers ? (Par défaut : /)",
+        "form.mountPointVolumes.label": "Quel dossier souhaitez-vous avoir à disposition dans l'explorateur de fichiers ? (Par défaut : /opt/docker/volumes)",
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.advanced.label": "Quantum rende visibile agli amministratori il file system host ( / + /opt/docker/volumes ). Desiderate modificare questo comportamento?",
+        "form.mountPointRoot.label": "Quale cartella desideri avere a disposizione nell'esploratore di file? (Impostazione predefinita: /)",
+        "form.mountPointVolumes.label": "Quale cartella desideri avere a disposizione nell'esploratore di file? (Impostazione predefinita: /opt/docker/volumes)",
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
+      }
+    }
+  },
+  "minVersion": "0.19.0-unstable5",
+  "services": {
+    "{ServiceName}": {
+      "image": "gtstef/filebrowser:latest",
+      "container_name": "{ServiceName}",
+      "restart": "unless-stopped",
+      "tty": true,
+      "stdin_open": true,
+      "UID": 0,
+      "GID": 0,
+      "environment": [
+        "PUID=0",
+        "PGID=0",
+        "TZ=auto"
+      ],
+      "post_install": [
+        "wget --directory-prefix \"/data/\" https://aseracorp.github.io/resiSTORE/servapps/Quantum/artefacts/config.yaml"
+      ],
+      "labels": {
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Quantum/icon.png"
+      },
+      "volumes": [
+        {
+          "source": "{ServiceName}-data",
+          "target": "/data",
+          "type": "volume"
+        },
+        {if not Context.advanced}
+        {
+          "source": "/",
+          "target": "/host",
+          "type": "bind"
+        },
+        {
+          "source": "/opt/docker/volumes",
+          "target": "/volumes",
+          "type": "bind"
+        }
+        {else}
+        {
+          "source": "{Context.mountPointRoot}",
+          "target": "/host",
+          "type": "bind"
+        },
+        {
+          "source": "{Context.mountPointVolumes}",
+          "target": "/volumes",
+          "type": "bind"
+        }
+        {/if}
+      ],
+      "routes": [
+        {
+          "name": "{ServiceName}",
+          "description": "Expose {ServiceName} to the web",
+          "useHost": true,
+          "target": "http://{ServiceName}:80",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+server:
+  port: 80
+  sources:
+    - path: "/host"
+      config:
+        defaultEnabled: true
+      name: "Host"
+    - path: "/volumes"
+      config:
+        defaultEnabled: true
+      name: "ServApp Volumes"
+
+auth:
+  methods:
+    proxy:
+      enabled: true
+      header: "X-Forwarded-User"  # or "Remote-User"
+      createUser: true
+
+frontend:
+  name: "Quantum Filebrowser"
