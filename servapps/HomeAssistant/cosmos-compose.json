@@ -29,7 +29,8 @@
         "PUID=1000",
         "PGID=1000",
         "TZ=auto",
-        "PROXY_HOSTNAME=0.0.0.0/0"
+        "PROXY_HOSTNAME=0.0.0.0/0",
+        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -38,12 +39,6 @@
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
       },
-      "post_install": [
-        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/configuration.yaml",
-        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/automations.yaml",
-        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scenes.yaml",
-        "wget --directory-prefix \"/config/\" https://aseracorp.github.io/resiSTORE/servapps/HomeAssistant/artefacts/scripts.yaml"
-      ],
       "volumes": [
         {
           "source": "{ServiceName}-config",

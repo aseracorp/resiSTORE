@@ -17,4 +17,4 @@ scene: !include scenes.yaml
 http:
   use_x_forwarded_for: True
   trusted_proxies:
-    - !env_var PROXY_HOSTNAME
+    - 0.0.0.0/0
