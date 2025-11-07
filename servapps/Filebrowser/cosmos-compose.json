@@ -3,7 +3,7 @@
     "form": [
       {
         "name": "advanced",
-        "label": "Filebrowser exposes host files ( / + /var/lib/docker/volumes ) to admins. Do you want to change this behaviour?",
+        "label": "Filebrowser exposes host files ( / + /opt/docker/volumes ) to admins. Do you want to change this behaviour?",
         "initialValue": false,
         "type": "checkbox"
       }
@@ -16,8 +16,8 @@
       },
       {
         "name": "mountPointVolumes",
-        "label": "What folder do you want to have available in Filebrowser? (Default: /var/lib/docker/volumes)",
-        "initialValue": "/var/lib/docker/volumes",
+        "label": "What folder do you want to have available in Filebrowser? (Default: /opt/docker/volumes)",
+        "initialValue": "/opt/docker/volumes",
         "type": "text"
       },
       {
@@ -27,14 +27,14 @@
         "type": "checkbox"
       },
       {
-        "name": "noAuth",
-        "label": "Uncheck to enable Filebrowser authentication (defaults to using Cosmos authentication)",
-        "initialValue": true,
+        "name": "Auth",
+        "label": "Check to enable Filebrowser authentication (defaults to using Cosmos authentication)",
+        "initialValue": false,
         "type": "checkbox"
       }
     {/if}
     ],
-    {if not Context.noAuth}
+    {if Context.Auth}
     "post-install": [
       {
         "type": "warning",
@@ -44,15 +44,15 @@
     {/if}
     "translation": {
       "de": {
-        "form.advanced.label": "Filebrowser macht dasHost-Dateisystem ( / + /var/lib/docker/volumes ) für Administratoren sichtbar. Möchten Sie dieses Verhalten ändern?",
+        "form.advanced.label": "Filebrowser macht das Host-Dateisystem ( / + /opt/docker/volumes ) für Administratoren sichtbar. Möchten Sie dieses Verhalten ändern?",
         "form.mountPointRoot.label": "Welchen Ordner möchten Sie im Dateiexplorer zur Verfügung haben? (Standard: /)",
-        "form.mountPointVolumes.label": "Welchen Ordner möchten Sie im Dateiexplorer zur Verfügung haben? (Standard: /var/lib/docker/volumes)",
+        "form.mountPointVolumes.label": "Welchen Ordner möchten Sie im Dateiexplorer zur Verfügung haben? (Standard: /opt/docker/volumes)",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
-        "form.noAuth.label": "Deaktivieren Sie diese Option, um die Filebrowser-Authentifizierung zu aktivieren (standardmäßig wird Cosmos zur Authentifizierung verwendet)",
+        "form.Auth.label": "Deaktivieren Sie diese Option, um die Filebrowser-Authentifizierung zu aktivieren (standardmäßig wird Cosmos zur Authentifizierung verwendet)",
         "post-install.warning": "Es wurde ein Standardkonto mit admin / admin als Anmeldeinformationen erstellt. Bitte ändern Sie dies"
       },
       "de-CH": {
-        "form.noAuth.label": "Deaktivieren Sie diese Option, um die Filebrowser-Authentifizierung zu aktivieren (standardmässig wird Cosmos zur Authentifizierung verwendet)"
+        "form.Auth.label": "Deaktivieren Sie diese Option, um die Filebrowser-Authentifizierung zu aktivieren (standardmässig wird Cosmos zur Authentifizierung verwendet)"
       }
     }
   },
@@ -70,7 +70,7 @@
         "PUID=0",
         "PGID=0",
         "TZ=auto"
-        {if Context.noAuth}
+        {if not Context.Auth}
         , "FB_NOAUTH=true"
         {/if}
       ],
@@ -85,17 +85,17 @@
       },
       "volumes": [
         {
-          "source": "Filebrowser-mount",
+          "source": "{ServiceName}-mount",
           "target": "/srv",
           "type": "volume"
         },
         {
-          "source": "Filebrowser-database",
+          "source": "{ServiceName}-database",
           "target": "/database",
           "type": "volume"
         },
         {
-          "source": "Filebrowser-config",
+          "source": "{ServiceName}-config",
           "target": "/config",
           "type": "volume"
         },
@@ -106,7 +106,7 @@
           "type": "bind"
         },
         {
-          "source": "/var/lib/docker/volumes",
+          "source": "/opt/docker/volumes",
           "target": "/srv/volumes",
           "type": "bind"
         }
