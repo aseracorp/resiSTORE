@@ -68,8 +68,8 @@
       ]
     }
     {if Context.installWebClient}
-     , "MQTT-Explorer": {
-      "container_name": "MQTT-Explorer",
+     , "{ServiceName}-MQTT-Explorer": {
+      "container_name": "{ServiceName}-MQTT-Explorer",
       "image": "smeagolworms4/mqtt-explorer",
       "environment": [
         "HTTP_PORT=80",
@@ -86,16 +86,16 @@
       "volumes": [
         {
           "type": "volume",
-          "source": "MQTT-Explorer-config",
+          "source": "{ServiceName}-MQTT-Explorer-config",
           "target": "/mqtt-explorer/config"
         }
       ],
       "routes": [
         {
-          "name": "MQTT-Explorer",
+          "name": "{ServiceName}-MQTT-Explorer",
           "description": "Expose MQTT-Explorer to the web",
           "useHost": true,
-          "target": "http://MQTT-Explorer:80",
+          "target": "http://{ServiceName}-MQTT-Explorer:80",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
