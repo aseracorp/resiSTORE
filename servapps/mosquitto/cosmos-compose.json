@@ -26,7 +26,7 @@
   "minVersion": "0.16.0",
   "services": {
     "{ServiceName}": {
-      "image": "eclipse-mosquitto:latest",
+      "image": "woahbase/alpine-mosquitto",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
         "UID": 1000,
@@ -37,7 +37,8 @@
       "environment": [
         "PUID=1000",
         "PGID=1000",
-        "TZ=auto"
+        "MOSQUITTO__listener=1883",
+        "MOSQUITTO__allow_anonymous=true"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -48,23 +49,15 @@
       },
       "volumes": [
         {
-          "source": "{ServiceName}-config",
-          "target": "/mosquitto/config",
-          "type": "volume"
-        },
-        {
           "source": "{ServiceName}-data",
           "target": "/mosquitto/data",
           "type": "volume"
         },
         {
-          "source": "{ServiceName}-log",
-          "target": "/mosquitto/log",
-          "type": "volume"
+          "source": "/etc/localtime",
+          "target": "/etc/localtime",
+          "type": "bind"
         }
-      ],
-      "post_install": [
-        "printf \"listener 1883\\nallow_anonymous true\" > /mosquitto/config/mosquitto.conf"
       ]
     }
     {if Context.installWebClient}
