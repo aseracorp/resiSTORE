@@ -14,8 +14,28 @@ auth:
   methods:
     proxy:
       enabled: true
-      header: "X-Forwarded-User"  # or "Remote-User"
+      header: "X-Cosmos-User"
       createUser: true
 
 frontend:
   name: "Quantum Filebrowser"
+ 
+userDefaults:
+  preview:
+    highQuality: true
+    image: true
+    video: true
+    motionVideoPreview: true
+    office: true
+    popup: true
+    folder: true
+  permissions:
+    api: false
+    admin: false
+    modify: true
+    share: false
+    realtime: false
+    delete: true
+    create: true
+    download: true
+  disableOnlyOfficeExt: ".md .txt .pdf"   # list of file extensions to disable onlyoffice editor for
