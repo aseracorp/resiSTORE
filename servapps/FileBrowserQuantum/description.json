@@ -1,5 +1,5 @@
 {
-  "name": "Quantum Filebrowser",
+  "name": "FileBrowser Quantum",
   "longDescription": "FileBrowser Quantum provides an easy way to access and manage your files from the web. It has a modern responsive interface that has many advanced features to manage users, access, sharing, and file preview and editing.<br/>This version is called \"Quantum\" because it packs tons of advanced features into a tiny easy to run file. Unlike the majority of alternative options, FileBrowser Quantum is simple to install and easy to configure.<br />The goal for this repo is to become the best open-source self-hosted file browsing application that exists -- all for free. This repo will always be free and open-source.",
   "description": "The best free self-hosted web-based file manager with multiple sources, OIDC authentication, and real-time indexing.",
   "translation": {

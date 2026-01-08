@@ -23,7 +23,7 @@
       {
         "name": "adminOnly",
         "label": "Do you want to make this service admin only?",
-        "initialValue": false,
+        "initialValue": true,
         "type": "checkbox"
       }
     {/if}
@@ -55,26 +55,26 @@
       "image": "gtstef/filebrowser:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "depends_on": {
-        "{ServiceName}-init": {
-          "condition": "service_completed_successfully"
-        }
-      },
       "tty": true,
       "stdin_open": true,
       "user": "root",
+      "entrypoint": [
+        "/bin/sh",
+        "-c",
+        "curl -C - https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml -o data/aseracorp.yaml && chmod 444 data/aseracorp.yaml && cp -u data/aseracorp.yaml data/config.yaml && ./filebrowser"
+      ],
       "environment": [
         "FILEBROWSER_DATABASE=data/database.db",
         "FILEBROWSER_CONFIG=data/config.yaml",
         "FILEBROWSER_ADMIN_PASSWORD={Passwords.0}"
       ],
       "post_install": [
-        "wget --directory-prefix \"/data/\" https://aseracorp.github.io/resiSTORE/servapps/Quantum/artefacts/config.yaml"
+        "wget --directory-prefix \"/data/\" https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Quantum/icon.png",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
       },
@@ -122,30 +122,20 @@
             "Enabled": true
           },
           "AuthEnabled": true
+          {if not Context.advanced}
+           , "AuthAdmin": true
+          {/if}
           {if Context.adminOnly}
            , "AuthAdmin": true
           {/if}
         }
-      ]
-    },
-    "{ServiceName}-init": {
-      "image": "curlimages/curl:latest",
-      "container_name": "{ServiceName}-init",
-      "restart": "no",
-      "command": "curl --no-clobber https://aseracorp.github.io/resiSTORE/servapps/Quantum/artefacts/config.yaml -o /home/filebrowser/data/config.yaml",
-      "labels": {
-        "cosmos-force-network-secured": "true",
-        "cosmos-auto-update": "true",
-        "cosmos-stack": "{ServiceName}",
-        "cosmos-stack-main": "{ServiceName}"
-      },
-      "volumes": [
-        {
-          "source": "{ServiceName}-data",
-          "target": "/home/filebrowser/data",
-          "type": "volume"
-        }
-      ]
+      ],
+      "healthcheck": {
+        "test": ["CMD", "curl", "-f", "http://localhost:80/health"],
+        "interval": 5,
+        "timeout": 3,
+        "retries": 10
+      }
     }
   }
 }
