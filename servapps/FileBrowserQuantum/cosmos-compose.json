@@ -49,7 +49,7 @@
       }
     }
   },
-  "minVersion": "0.19.0",
+  "minVersion": "0.20.0-unstable3",
   "services": {
     "{ServiceName}": {
       "image": "gtstef/filebrowser:latest",
@@ -131,10 +131,14 @@
         }
       ],
       "healthcheck": {
-        "test": ["CMD", "curl", "-f", "http://localhost:80/health"],
-        "interval": 5,
+        "test": [
+          "CMD-SHELL",
+          "curl -Is http://localhost:80/health | head -n 1"
+        ],
+        "interval": 30,
         "timeout": 3,
-        "retries": 10
+        "retries": 3,
+        "start_period": 10
       }
     }
   }
