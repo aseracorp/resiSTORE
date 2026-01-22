@@ -4,8 +4,8 @@
     "description": "SearXNG is an open-source metasearch engine focused on privacy and user control.",
   "translation": {
     "de": {
-      "description": "Scada-LTS ist ein Open Source SCADA-System (Supervisory Control and Data Acquisiton).",
-      "longDescription": "Scada-LTS ist eine Open Source, webbasierte, plattformübergreifende Lösung zum Aufbau Ihres eigenen SCADA-Systems (Supervisory Control and Data Acquisiton).<br/>Es kommt gebündelt mit vielen Jahren Erfahrung in realen SCADA-Anwendungen für Energie, Wasserversorgung, Produktionsanlagen, Heimautomatisierung, Laboratorien ... Sie wissen schon! Kommunikationsprotokolle, die Datenerfassungs-Engine, Alarme & Ereignisse, HMI Builder und vieles mehr.<br/>Unser Ziel ist es, eine grundsolide Lösung für unternehmenskritische Anwendungen zu bieten, während wir unser Wissen teilen und von einer internationalen und ständig wachsenden Gemeinschaft profitieren."
+      "description": "SearXNG ist eine Open-Source-Metasuchmaschine, deren Schwerpunkt auf Datenschutz und Benutzerkontrolle liegt.",
+      "longDescription": "SearXNG ist eine datenschutzkonforme Open-Source-Metasuchmaschine, die Ergebnisse aus verschiedenen Suchmaschinen aggregiert und dabei die Privatsphäre der Nutzer respektiert. Sie ermöglicht es Nutzern, ohne Nachverfolgung zu suchen, und bietet anpassbare Sucheinstellungen. SearXNG kann selbst gehostet oder auf öffentlichen Instanzen genutzt werden, sodass Nutzer die Kontrolle über ihre Sucherfahrung behalten."
     },
     "fr": {
       "longDescription": "SearXNG est un métamoteur de recherche open source respectueux de la vie privée qui agrège les résultats de divers moteurs de recherche tout en respectant la confidentialité des utilisateurs. Il permet aux utilisateurs d'effectuer des recherches sans être suivis et offre des préférences de recherche personnalisables. SearXNG peut être auto-hébergé ou utilisé sur des instances publiques, ce qui permet aux utilisateurs de contrôler leur expérience de recherche.",
