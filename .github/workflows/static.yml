@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ["master", "unstable"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,12 +31,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Checkout the `unstable` branch
+      - uses: actions/checkout@v4
+        with:
+          ref: unstable
+          # Put the checked out files inside the `big-island-buses/heleon` folder
+          path: unstable
+          clean: false
+      # Delete the .git folder from `unstable`
+      # This turns the files into a plain folder instead of a git repository
+      - run: rm -rf unstable/.git
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          include: "unstable/**"
+          find: "https://aseracorp.github.io/resiSTORE/"
+          replace: "https://aseracorp.github.io/resiSTORE/unstable/"
+          regex: false
+
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
+
       - name: Build index
-        run: node index.js
+        run: node index.js && cd unstable && node index.js
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
