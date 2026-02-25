@@ -2,11 +2,36 @@
   "cosmos-installer": {
     "form": [
       {
+        "name": "oidc",
+        "label": "Do you want to login with your Cosmos Login using the OpenID-Feature?",
+        "initialValue": false,
+        "type": "checkbox"
+      },
+      {if Context.oidc}
+      {
+        "type": "info",
+        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID {Context.oidcClientId} and Redirect: https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback"
+      },
+      {
+        "name": "oidcClientId",
+        "label": "Your OpenID Client-ID",
+        "initialValue": "homeassistant",
+        "type": "text"
+      },
+      {
+        "name": "oidcClientSecret",
+        "label": "Your OpenID Client-Secret (Copied from the OpenID Page in Cosmos)",
+        "initialValue": "",
+        "type": "text"
+      },
+      {/if}
+      {
         "name": "adminOnly",
         "label": "Do you want to make this service admin only?",
         "initialValue": false,
         "type": "checkbox"
-      }    ],
+      }
+    ],
     "translation": {
       "de": {
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
@@ -30,7 +55,17 @@
         "PGID=1000",
         "TZ=auto",
         "PROXY_HOSTNAME=0.0.0.0/0",
-        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
+        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy{if Context.oidc}
+        |aseracorp/docker-mods:homeassistant-oidc",
+        "OIDC_CLIENT_ID={Context.oidcClientId}",
+        "OIDC_CLIENT_SECRET={Context.oidcClientSecret}",
+        "OIDC_CONFIGURE_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/.well-known/openid-configuration",
+        "OIDC_USERNAME_FIELD=sub",
+        "OIDC_SCOPE=openid",
+        "OIDC_BLOCK_LOGIN=false",
+        "OIDC_OPENID_TEXT=Cosmos-Login",
+        "OIDC_CREATE_USER=true
+        {/if}"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",

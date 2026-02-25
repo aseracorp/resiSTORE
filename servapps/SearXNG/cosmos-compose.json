@@ -4,6 +4,7 @@
        "{ServiceName}": {
           "container_name": "{ServiceName}",
           "image": "searxng/searxng:latest",
+          "restart": "unless-stopped",
           "networks": {
              "{ServiceName}-net": {}
           },
@@ -12,6 +13,11 @@
                 "source": "{ServiceName}-data",
                 "target": "/etc/searxng",
                 "type": "volume"
+             },
+             {
+                "Type": "volume",
+                "Source": "{ServiceName}-cache",
+                "Target": "/var/cache/searxng"
              }
           ],
           "routes": [
@@ -55,15 +61,16 @@
        "{ServiceName}-redis": {
           "container_name": "{ServiceName}-redis",
           "hostname": "{ServiceName}-redis",
-          "image": "redis:alpine",
-          "command": "redis-server --save \"\" --appendonly no",
+          "image": "docker.io/valkey/valkey:8-alpine",
+          "command": "valkey-server --save 30 1 --loglevel warning --ignore-warnings ARM64-COW-BUG",
+          "restart": "unless-stopped",
           "networks": {
              "{ServiceName}-net": {}
           },
           "tmpfs": [
              {
                 "source": "{ServiceName}-redistemp",
-                "target": "/var/lib/redis",
+                "target": "/data",
                 "type": "volume"
              }
           ],
