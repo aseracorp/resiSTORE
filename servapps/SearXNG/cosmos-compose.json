@@ -15,9 +15,9 @@
                 "type": "volume"
              },
              {
-                "Type": "volume",
-                "Source": "{ServiceName}-cache",
-                "Target": "/var/cache/searxng"
+                "type": "volume",
+                "source": "{ServiceName}-cache",
+                "target": "/var/cache/searxng"
              }
           ],
           "routes": [
