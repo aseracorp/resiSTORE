@@ -49,7 +49,7 @@
       }
     }
   },
-  "minVersion": "0.22.2",
+  "minVersion": "0.21.0",
   "services": {
     "{ServiceName}": {
       "image": "gtstef/filebrowser:latest",
