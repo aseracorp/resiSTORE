@@ -9,7 +9,7 @@
       },
       {if Context.oidc}
       {
-        "type": "info",
+        "type": "warning",
         "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID {Context.oidcClientId} and Redirect: https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback"
       },
       {
@@ -20,7 +20,7 @@
       },
       {
         "name": "oidcClientSecret",
-        "label": "Your OpenID Client-Secret (Copied from the OpenID Page in Cosmos)",
+        "label": "Your OpenID Client-Secret",
         "initialValue": "",
         "type": "text"
       },
@@ -50,13 +50,21 @@
       "security_opt": [
         "no-new-privileges:true"
       ],
+      {if not Context.oidc}
+      "environment": [
+        "PUID=1000",
+        "PGID=1000",
+        "TZ=auto",
+        "PROXY_HOSTNAME=0.0.0.0/0",        
+        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
+      ],
+      {else}
       "environment": [
         "PUID=1000",
         "PGID=1000",
         "TZ=auto",
         "PROXY_HOSTNAME=0.0.0.0/0",
-        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy{if Context.oidc}
-        |aseracorp/docker-mods:homeassistant-oidc",
+        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy|aseracorp/docker-mods:homeassistant-oidc",
         "OIDC_CLIENT_ID={Context.oidcClientId}",
         "OIDC_CLIENT_SECRET={Context.oidcClientSecret}",
         "OIDC_CONFIGURE_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/.well-known/openid-configuration",
@@ -64,9 +72,9 @@
         "OIDC_SCOPE=openid",
         "OIDC_BLOCK_LOGIN=false",
         "OIDC_OPENID_TEXT=Cosmos-Login",
-        "OIDC_CREATE_USER=true
-        {/if}"
+        "OIDC_CREATE_USER=true"
       ],
+      {/if}
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
