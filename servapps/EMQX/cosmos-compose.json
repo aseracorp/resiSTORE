@@ -23,7 +23,7 @@
       ],
       "labels": {
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://azukaar.github.io/cosmos-servapps-official/servapps/EMQX/icon.png"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/EMQX/icon.png"
       },
       "volumes": [
         {
