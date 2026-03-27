@@ -10,7 +10,7 @@
       {if Context.oidc}
       {
         "type": "warning",
-        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID {Context.oidcClientId} and Redirect: https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback"
+        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID {Context.oidcClientId} and Redirect:<br/><i>https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback</i>"
       },
       {
         "name": "oidcClientId",
