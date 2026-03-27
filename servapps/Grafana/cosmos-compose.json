@@ -14,7 +14,16 @@
       ],
       "environment": [
         "PUID=1000",
-        "PGID=1000"
+        "PGID=1000",
+        "GF_AUTH_PROXY_ENABLED=true",
+        "GF_AUTH_PROXY_HEADER_NAME=X-Cosmos-User"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-data",
+          "target": "/var/lib/grafana",
+          "type": "volume"
+        }
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
