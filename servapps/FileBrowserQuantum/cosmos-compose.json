@@ -49,7 +49,7 @@
       }
     }
   },
-  "minVersion": "0.20.0-unstable3",
+  "minVersion": "0.22.2",
   "services": {
     "{ServiceName}": {
       "image": "gtstef/filebrowser:latest",
@@ -58,18 +58,13 @@
       "tty": true,
       "stdin_open": true,
       "user": "root",
-      "entrypoint": [
-        "/bin/sh",
-        "-c",
-        "curl -C - https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml -o data/aseracorp.yaml && chmod 444 data/aseracorp.yaml && cp -u data/aseracorp.yaml data/config.yaml && ./filebrowser"
-      ],
       "environment": [
         "FILEBROWSER_DATABASE=data/database.db",
         "FILEBROWSER_CONFIG=data/config.yaml",
         "FILEBROWSER_ADMIN_PASSWORD={Passwords.0}"
       ],
       "post_install": [
-        "wget --directory-prefix \"/data/\" https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml"
+        "wget -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
