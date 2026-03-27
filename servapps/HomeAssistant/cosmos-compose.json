@@ -10,11 +10,15 @@
       {if Context.oidc}
       {
         "type": "warning",
-        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID {Context.oidcClientId} and Redirect:<br/><i>https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback</i>"
+        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID \" {Context.oidcClientId} \" and Redirect:"
+      },
+      {
+        "type": "warning",
+        "label": "https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback"
       },
       {
         "name": "oidcClientId",
-        "label": "Your OpenID Client-ID",
+        "label": "Your OpenID Client-ID (Please copy from the created OpenID client on the OpenID page.)",
         "initialValue": "homeassistant",
         "type": "text"
       },
