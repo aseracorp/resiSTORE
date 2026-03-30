@@ -52,15 +52,10 @@
           "source": "{ServiceName}-data",
           "target": "/var/lib/influxdb3",
           "type": "volume"
-        },
-        {
-          "source": "{ServiceName}-token",
-          "target": "/token",
-          "type": "volume"
         }
       ],
       "post_install": [
-        "influxdb3 create database --retention-period 30d default && influxdb3 create token --admin | grep Token | sed 's/^.\\{7\\}//' > /token/token"
+        "influxdb3 create token --admin | grep Token | sed 's/^.\\{7\\}//' > /var/lib/influxdb3/token && influxdb3 create database --retention-period 30d default --token $(cat /var/lib/influxdb3/token)"
       ]
     },
     "{ServiceName}-explorer": {
@@ -69,6 +64,9 @@
       "restart": "unless-stopped",
       "UID": 1000,
       "GID": 1000,
+      "depends_on": {
+        "InfluxDB": {}
+      },
       "security_opt": [
         "no-new-privileges:true"
       ],
@@ -114,13 +112,13 @@
           "target": "/ca-certs"
         },
         {
-          "source": "{ServiceName}-token",
-          "target": "/token",
+          "source": "{ServiceName}-data",
+          "target": "/var/lib/influxdb3",
           "type": "volume"
         }
       ],
       "post_install": [
-        "wget -O config/config.json https://aseracorp.github.io/resiSTORE/servapps/InfluxDB/artefacts/config.json && apk update && apk add yq && TOKEN=$(cat /token/token) && yq -i '.DEFAULT_API_TOKEN = env(TOKEN)' config/config.json"
+        "wget -O config/config.json https://aseracorp.github.io/resiSTORE/servapps/InfluxDB/artefacts/config.json && apk update && apk add yq && TOKEN=$(cat /var/lib/influxdb3/token) && yq -i '.DEFAULT_API_TOKEN = env(TOKEN)' config/config.json"
       ],
       "routes": [
         {
