@@ -1,5 +1,32 @@
 { 
   "cosmos-installer": {
+    "form": [
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": false,
+        "type": "checkbox"
+      },
+      {
+        "name": "autoAssign",
+        "type": "warning",
+        "label": "IMPORTANT: after first Login with the Admin Account, you need to remove the following line in the Compose-Template: \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
+        "form.autoAssign.label": "WICHTIG: Nach der ersten Anmeldung mit dem Admin-Konto müssen Sie folgende Zeile aus dem Compose entfernen: \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
+      },
+      "fr": {
+        "form.adminOnly.label": "Souhaitez-vous réserver l'accès à ce service aux administrateurs uniquement ?",
+        "form.autoAssign.label": "IMPORTANT : après vous être connecté pour la première fois avec le compte administrateur, vous devez supprimer la ligne suivante dans le modèle de rédaction : \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
+      },
+      "it": {
+        "form.adminOnly.label": "Souhaitez-vous réserver l'accès à ce service aux administrateurs uniquement ?",
+        "form.autoAssign.label": "IMPORTANTE: dopo aver effettuato il primo accesso con l'account amministratore, è necessario rimuovere la seguente riga dal modello di composizione: \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
+      }
+    }
   },
   "minVersion": "0.16.0",
   "services": {
@@ -14,7 +41,17 @@
       ],
       "environment": [
         "PUID=1000",
-        "PGID=1000"
+        "PGID=1000",
+        "GF_AUTH_PROXY_ENABLED=true",
+        "GF_AUTH_PROXY_HEADER_NAME=X-Cosmos-User",
+        "GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-data",
+          "target": "/var/lib/grafana",
+          "type": "volume"
+        }
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -35,6 +72,9 @@
             "Enabled": true
           },
           "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
         }
       ]
     }

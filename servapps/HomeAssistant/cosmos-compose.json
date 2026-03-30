@@ -38,8 +38,7 @@
     ],
     "translation": {
       "de": {
-        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
-        "routes.{ServiceName}.description": "{ServiceName} im Netzwerk veröffentlichen"
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
       }
     }
   },
