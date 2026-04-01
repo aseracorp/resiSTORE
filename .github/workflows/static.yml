@@ -29,14 +29,17 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # Checkout the `unstable` branch
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          clean: false
 
       # Checkout the `unstable` branch
       - uses: actions/checkout@v4
         with:
           ref: unstable
-          # Put the checked out files inside the `big-island-buses/heleon` folder
+          # Put the checked out files inside the `unstable` folder
           path: unstable
           clean: false
       # Delete the .git folder from `unstable`
