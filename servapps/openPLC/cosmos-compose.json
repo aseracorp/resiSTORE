@@ -7,7 +7,6 @@
       "image": "ghcr.io/autonomy-logic/openplc-runtime:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "user": "1000:1000",
       "cap_drop": [
         "ALL"
       ],
@@ -32,16 +31,15 @@
           "name": "{ServiceName}",
           "description": "{ServiceName} im Netzwerk veröffentlichen",
           "useHost": true,
-          "target": "http://{ServiceName}:8443",
+          "host": "0.0.0.0:8443",
+          "target": "tcp://{ServiceName}:8443",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
           "BlockCommonBots": true,
-          "AcceptInsecureHTTPSTarget": true,
           "SmartShield": {
             "Enabled": true
-          },
-          "AuthEnabled": false
+          }
         }
       ]
     }
