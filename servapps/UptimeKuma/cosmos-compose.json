@@ -105,9 +105,6 @@
         "security_opt": [
           "no-new-privileges:true"
         ],
-        "ports": [
-          "2375:2375"
-        ],
         "labels": {
           "cosmos-force-network-secured": "true",
           "cosmos-auto-update": "true",

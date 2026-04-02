@@ -25,7 +25,6 @@
     "{ServiceName}": {
       "container_name": "{ServiceName}",
       "image": "prom/prometheus",
-      "user": "1000:1000",
       "security_opt": [
         "no-new-privileges:true"
       ],
