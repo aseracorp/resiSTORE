@@ -1,5 +1,24 @@
 { 
   "cosmos-installer": {
+    "form": [
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": false,
+        "type": "checkbox"
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
+      }
+    }
   },
   "minVersion": "0.16.0",
   "services": {
@@ -7,14 +26,12 @@
       "image": "openhab/openhab:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
       "security_opt": [
         "no-new-privileges:true"
       ],
       "environment": [
-        "PUID=1000",
-        "PGID=1000",
+        "USER_ID=1000",
+        "GROUP_ID=1000",
         "CRYPTO_POLICY=unlimited"
       ],
       "labels": {
@@ -27,13 +44,13 @@
           "source": "/etc/localtime",
           "target": "/etc/localtime",
           "type": "bind",
-          "read_only": "true"       
+          "mode": "ro"
         },
         {
           "source": "/etc/timezone",
           "target": "/etc/timezone",
           "type": "bind",
-          "read_only": "true"       
+          "mode": "ro"
         },
         {
           "source": "{ServiceName}-addons",
@@ -65,6 +82,9 @@
             "Enabled": true
           },
           "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
         }
       ]
     }

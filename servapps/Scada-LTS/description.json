@@ -17,8 +17,8 @@
     }
   },
   "tags": ["smart home",  "home automation", "IoT", "Raspberry Pi", "local server", "privacy", "control", "automation", "devices", "services","Developer"],
-  "repository": "https://hub.docker.com/r/scadalts/scadalts",
-  "image": "scadalts/scadalts:latest",
+  "repository": "https://github.com/SCADA-LTS/Scada-LTS",
+  "image": "https://hub.docker.com/r/scadalts/scadalts",
   "supported_architectures": [
     "amd64",
     "arm64"

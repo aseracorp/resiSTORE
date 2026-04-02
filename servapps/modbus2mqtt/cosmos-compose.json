@@ -11,6 +11,12 @@
     "translation": {
       "de": {
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
       }
     }
   },
@@ -21,12 +27,13 @@
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/modbus2mqtt/icon.png",
-        "cosmos-stack": "{ServiceName}",
-        "cosmos-stack-main": "{ServiceName}"
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/modbus2mqtt/icon.png"
       },
       "image": "ghcr.io/modbus2mqtt/modbus2mqtt",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "volumes": [
         {
           "source": "{ServiceName}-data",
@@ -36,7 +43,8 @@
         {
           "type": "bind",
           "source": "/etc/localtime",
-          "target": "/etc/localtime"
+          "target": "/etc/localtime",
+          "mode": "ro"
         }
 
       ],

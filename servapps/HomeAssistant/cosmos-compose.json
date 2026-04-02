@@ -9,6 +9,7 @@
       },
       {if Context.oidc}
       {
+        "name": "oidcWarning",
         "type": "warning",
         "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID \" {Context.oidcClientId} \" and Redirect:"
       },
@@ -38,7 +39,25 @@
     ],
     "translation": {
       "de": {
+        "form.oidcClientSecret.label": "Ihr OpenID-Client-Secret",
+        "form.oidcClientId.label": "Ihre OpenID-Client-ID (Bitte kopieren Sie diese vom erstellten OpenID-Client auf der OpenID-Seite.)",
+        "form.oidcWarning.label": "Bitte rufen Sie die OpenID-Seite in Cosmos auf und erstellen Sie eine OpenID mit der Client-ID \"{Context.oidcClientId}\" und der Umleitungs-URL:",
+        "form.oidc.label": "Möchten Sie sich mit Ihrem Cosmos-Login über die OpenID-Funktion anmelden?",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.oidcClientSecret.label": "Votre clé secrète OpenID",
+        "form.oidcClientId.label": "Votre identifiant client OpenID (Veuillez le copier à partir du client OpenID créé sur la page OpenID.)",
+        "form.oidcWarning.label": "Rendez-vous sur la page OpenID de Cosmos et créez un OpenID avec l'identifiant client « {Context.oidcClientId} » et la redirection :",
+        "form.oidc.label": "Souhaitez-vous vous connecter avec votre identifiant Cosmos en utilisant la fonctionnalité OpenID ?",
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.oidcClientSecret.label": "Il tuo segreto client OpenID",
+        "form.oidcClientId.label": "Il tuo ID cliente OpenID (copialo dal cliente OpenID creato nella pagina OpenID)",
+        "form.oidcWarning.label": "Vai alla pagina OpenID in Cosmos e crea un OpenID con Client-ID \"{Context.oidcClientId}\" e Redirect:",
+        "form.oidc.label": "Vuoi effettuare l'accesso con il tuo account Cosmos utilizzando la funzione OpenID?",
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
       }
     }
   },
@@ -48,25 +67,17 @@
       "image": "lscr.io/linuxserver/homeassistant:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
       "security_opt": [
         "no-new-privileges:true"
       ],
-      {if not Context.oidc}
-      "environment": [
-        "PUID=1000",
-        "PGID=1000",
-        "TZ=auto",
-        "PROXY_HOSTNAME=0.0.0.0/0",        
-        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
-      ],
-      {else}
       "environment": [
         "PUID=1000",
         "PGID=1000",
         "TZ=auto",
         "PROXY_HOSTNAME=0.0.0.0/0",
+        {if not Context.oidc}
+        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
+        {else}
         "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy|aseracorp/docker-mods:homeassistant-oidc",
         "OIDC_CLIENT_ID={Context.oidcClientId}",
         "OIDC_CLIENT_SECRET={Context.oidcClientSecret}",
@@ -76,8 +87,8 @@
         "OIDC_BLOCK_LOGIN=false",
         "OIDC_OPENID_TEXT=Cosmos-Login",
         "OIDC_CREATE_USER=true"
+        {/if}
       ],
-      {/if}
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
