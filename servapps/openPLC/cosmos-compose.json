@@ -1,36 +1,19 @@
 { 
   "cosmos-installer": {
-    "form": [
-      {
-        "name": "adminOnly",
-        "label": "Do you want to make this service admin only?",
-        "initialValue": false,
-        "type": "checkbox"
-      }
-    ],
-    "translation": {
-      "de": {
-        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
-      },
-      "fr": {
-        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
-      },
-      "it": {
-        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
-      }
-    }
   },
-  "minVersion": "0.16.0",
+  "minVersion": "0.22.4",
   "services": {
     "{ServiceName}": {
-      "image": "ghcr.io/aseracorp/openplc_v3:latest",
+      "image": "ghcr.io/autonomy-logic/openplc-runtime:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
-      "privileged": true,
-      "security_opt": [
-        "no-new-privileges:true"
+      "user": "1000:1000",
+      "cap_drop": [
+        "ALL"
+      ],
+      "cap_add": [
+        "SYS_NICE",
+        "SYS_RESOURCE"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -39,8 +22,8 @@
       },
       "volumes": [
         {
-          "source": "OpenPLC-persistent",
-          "target": "/persistent",
+          "source": "{ServiceName}-data",
+          "target": "/var/run/runtime",
           "type": "volume"
         }
       ],
@@ -49,18 +32,16 @@
           "name": "{ServiceName}",
           "description": "{ServiceName} im Netzwerk veröffentlichen",
           "useHost": true,
-          "target": "http://{ServiceName}:8080",
+          "target": "http://{ServiceName}:8443",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
           "BlockCommonBots": true,
+          "AcceptInsecureHTTPSTarget": true,
           "SmartShield": {
             "Enabled": true
           },
-          "AuthEnabled": true
-          {if Context.adminOnly}
-           , "AuthAdmin": true
-          {/if}
+          "AuthEnabled": false
         }
       ]
     }
