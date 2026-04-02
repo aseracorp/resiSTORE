@@ -4,8 +4,8 @@
   "description": "Paperless-ngx is a document management system that transforms your physical documents into a searchable online archive so you can keep, well, less paper.",
   "translation": {
     "de": {
-      "description": "openPLC Runtime v3: Eine Multi-Hardware-Suite für speicherprogrammierbare Steuerungen basierend auf Beremiz IDE",
-      "longDescription": "OpenPLC ist eine quelloffene speicherprogrammierbare Steuerung, die auf einer einfach zu bedienenden Software basiert. Es ist die erste voll funktionsfähige, standardisierte Open-Source-SPS, sowohl in Software als auch in Hardware. Das OpenPLC-Projekt wurde in Übereinstimmung mit dem IEC 61131-3-Standard entwickelt, der die grundlegende Software-Architektur und Programmiersprachen für SPSen definiert."
+      "description": "Paperless-ngx ist ein Dokumentenmanagementsystem, das Ihre physischen Dokumente in ein durchsuchbares Online-Archiv umwandelt, sodass Sie – nun ja – weniger Papier aufbewahren müssen.",
+      "longDescription": "<p>Paperless-ngx ist ein von der Community unterstütztes Open-Source-Dokumentenmanagementsystem, das Ihre physischen Dokumente in ein durchsuchbares Online-Archiv umwandelt, sodass Sie – nun ja – weniger Papier aufbewahren müssen.</p><p>Diese Version von Paperless-ngx ist mit PostgreSQL als Datenbankserver sowie mit Apache-, Tika- und Gotenberg-Servern konfiguriert, um die Verarbeitung von Office-Dokumenten (Word, Excel, PowerPoint und deren LibreOffice-Entsprechungen) zu unterstützen. </p>"
     },
     "fr": {
       "longDescription": "<p>Paperless-ngx est un système de gestion de documents open source soutenu par la communauté qui transforme vos documents physiques en archives en ligne consultables afin que vous puissiez conserver moins de papier. </p><p>Cette version de Paperless-ngx est configurée à l'aide de PostgreSQL comme serveur de base de données, ainsi que des serveurs Apache, Tika et Gotenberg pour prendre en charge les documents Office (Word, Excel, Power Point et leurs équivalents LibreOffice). </p>",

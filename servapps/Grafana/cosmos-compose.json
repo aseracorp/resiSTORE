@@ -2,6 +2,12 @@
   "cosmos-installer": {
     "form": [
       {
+        "name": "plugins",
+        "label": "install additional Plugins? (comma seperated, populates Env-var: GF_PLUGINS_PREINSTALL)",
+        "initialValue": "grafana-clickhouse-datasource",
+        "type": "text"
+      },
+      {
         "name": "adminOnly",
         "label": "Do you want to make this service admin only?",
         "initialValue": false,
@@ -15,14 +21,17 @@
     ],
     "translation": {
       "de": {
+        "form.plugins.label": "Zusätzliche Plugins installieren? (Komma-getrennt, füllt die Umgebungsvariable GF_PLUGINS_PREINSTALL)",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?",
         "form.autoAssign.label": "WICHTIG: Nach der ersten Anmeldung mit dem Admin-Konto müssen Sie folgende Zeile aus dem Compose entfernen: \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
       },
       "fr": {
+        "form.plugins.label": "Installer des plugins supplémentaires ? (séparés par des virgules, cette valeur est enregistrée dans la variable d'environnement : GF_PLUGINS_PREINSTALL)",
         "form.adminOnly.label": "Souhaitez-vous réserver l'accès à ce service aux administrateurs uniquement ?",
         "form.autoAssign.label": "IMPORTANT : après vous être connecté pour la première fois avec le compte administrateur, vous devez supprimer la ligne suivante dans le modèle de rédaction : \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
       },
       "it": {
+        "form.plugins.label": "Installare plugin aggiuntivi? (separati da virgola, popola la variabile d'ambiente: GF_PLUGINS_PREINSTALL)",
         "form.adminOnly.label": "Souhaitez-vous réserver l'accès à ce service aux administrateurs uniquement ?",
         "form.autoAssign.label": "IMPORTANTE: dopo aver effettuato il primo accesso con l'account amministratore, è necessario rimuovere la seguente riga dal modello di composizione: \"GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin\""
       }
@@ -44,6 +53,7 @@
         "PGID=1000",
         "GF_AUTH_PROXY_ENABLED=true",
         "GF_AUTH_PROXY_HEADER_NAME=X-Cosmos-User",
+        "GF_PLUGINS_PREINSTALL={Context.plugins}",
         "GF_USERS_AUTO_ASSIGN_ORG_ROLE=Admin"
       ],
       "volumes": [
