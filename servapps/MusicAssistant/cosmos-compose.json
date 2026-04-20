@@ -47,6 +47,11 @@
           "source": "{ServiceName}-data",
           "target": "/data",
           "type": "volume"
+        },
+        {
+          "source": "{ServiceName}-cache",
+          "target": "/cache",
+          "type": "volume"
         }
       ],
       "routes": [
