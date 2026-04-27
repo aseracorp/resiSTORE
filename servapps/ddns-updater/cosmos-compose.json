@@ -18,23 +18,32 @@
         "label": "Enter your desired Provider (Only tested with deSEC)",
         "initialValue": "desec",
         "type": "text"
+      },
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": true,
+        "type": "checkbox"
       }
     ],
     "translation": {
       "de": {
         "form.hostname.label": "Geben Sie die Domäne (FQDN) ein, die auf Ihre öffentlich zugängliche WAN-IPv4-Adresse verweist",
         "form.token.label": "Geben Sie Ihren Zugriffstoken ein (um auf Ihr deSEC-Konto zuzugreifen)",
-        "form.provider.label": "Geben Sie den gewünschten Anbieter ein (nur mit deSEC getestet)"
+        "form.provider.label": "Geben Sie den gewünschten Anbieter ein (nur mit deSEC getestet)",
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
       },
       "fr": {
         "form.hostname.label": "Saisissez le domaine (FQDN) qui pointe vers votre adresse IPv4 WAN accessible au public",
         "form.token.label": "Saisissez votre jeton d'accès (pour accéder à votre compte deSEC)",
-        "form.provider.label": "Saisissez le fournisseur de votre choix (testé uniquement avec deSEC)"
+        "form.provider.label": "Saisissez le fournisseur de votre choix (testé uniquement avec deSEC)",
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
       },
       "it": {
         "form.hostname.label": "Inserisci il dominio (FQDN) che rimanda al tuo indirizzo IPv4 WAN accessibile pubblicamente",
         "form.token.label": "Inserisci il tuo token di accesso (per accedere al tuo account deSEC)",
-        "form.provider.label": "Inserisci il provider desiderato (testato solo con deSEC)"
+        "form.provider.label": "Inserisci il provider desiderato (testato solo con deSEC)",
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
       }
     }
   },
@@ -53,7 +62,7 @@
         "cosmos-icon": "https://raw.githubusercontent.com/qdm12/ddns-updater/master/readme/ddnsgopher.svg"
       },
       "environment": [
-        "CONFIG={\"settings\":[{\"provider\":\"{Context.provider}\",\"domain\":\"{Context.hostname}\",\"token\":\"{Context.token}\",\"ip_version\":\"ipv4\",\"ipv6_suffix\":\"\"},{\"provider\":\"{Context.provider}\",\"domain\":\"*.{Context.hostname}\",\"token\":\"{Context.token}\",\"ip_version\":\"ipv4\",\"ipv6_suffix\":\"\"}]}",
+        "CONFIG={\"settings\":[{\"provider\":\"{Context.provider}\",\"domain\":\"{Context.hostname}\",\"token\":\"{Context.token}\"}]}",
         "PERIOD=5m",
         "UPDATE_COOLDOWN_PERIOD=5m",
         "PUBLICIP_FETCHERS=",
@@ -64,6 +73,25 @@
         "PUBLICIP_DNS_TIMEOUT=3s",
         "HTTP_TIMEOUT=10s",
         "LISTENING_ADDRESS=:8000"
+      ],
+      "routes": [
+        {
+          "name": "{ServiceName}",
+          "description": "Expose {ServiceName} to the web",
+          "useHost": true,
+          "target": "http://{ServiceName}:8000",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
+        }
       ]
     }
   }
