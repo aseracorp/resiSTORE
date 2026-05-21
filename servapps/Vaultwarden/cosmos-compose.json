@@ -55,8 +55,10 @@
       "image": "vaultwarden/server:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
-      "UID": 1000,
-      "GID": 1000,
+      "user": "1000:1000",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "environment": [
         "PUID=1000",
         "PGID=1000",

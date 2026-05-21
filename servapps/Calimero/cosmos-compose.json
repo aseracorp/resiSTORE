@@ -84,7 +84,7 @@
         "initialValue": "/dev/ttyACM1",
         "type": "select",
         "options": [
-          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> Coprocessor"],
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serialport 0 -> internal I/O"],
           ["/dev/ttyACM1", "/dev/ttyACM1 -> Serialport 1 -> KNX, RS485 or RS232"],
           ["/dev/ttyACM2", "/dev/ttyACM2 -> Serialport 2 -> RS485 or RS232"],
           ["/dev/ttyACM3", "/dev/ttyACM3 -> Serialport 3 -> RS485 or RS232"]
@@ -106,7 +106,7 @@
         "form.listenIf.label": "Interface für KNXnet/IP-Kommunikation (muss das korrekte host-Interface sein)",
         "form.serialPort.label": "Schnittstelle, an welcher der KNX-TP angeschlossen ist",
         "form.serialPort.options": [
-          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> Koprocessor"],
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Serieller Anschluss 0 -> interne I/O's"],
           ["/dev/ttyACM1", "/dev/ttyACM1 -> Serieller Anschluss 1 -> KNX, RS485 oder RS232"],
           ["/dev/ttyACM2", "/dev/ttyACM2 -> Serieller Anschluss 2 -> RS485 oder RS232"],
           ["/dev/ttyACM3", "/dev/ttyACM3 -> Serieller Anschluss 3 -> RS485 oder RS232"]
@@ -117,6 +117,56 @@
         "form.additionalAddress3.label": "3. Physikalische Addresse für KNXnet/IP-Clients",
         "form.additionalAddress4.label": "4. Physikalische Addresse für KNXnet/IP-Clients",
         "form.additionalAddress5.label": "5. Physikalische Addresse für KNXnet/IP-Clients"
+      },
+      "fr": {
+        "form.friendlyName.label": "Nom complet (tel qu'il apparaît, par exemple, dans l'ETS)",
+        "form.advancedSettings.label": "Paramètres avancés",
+        "form.discovery.label": "Le serveur doit-il être accessible sur le réseau ?",
+        "form.discovery.options": [
+          ["true", "Oui"],
+          ["false", "Non"]
+        ],
+        "form.discoveryListenIf.label": "Interface sur laquelle le serveur écoute les requêtes",
+        "form.discoveryOutIf.label": "Interface par laquelle le serveur répond aux requêtes",
+        "form.listenIf.label": "Interface pour la communication KNXnet/IP (il doit s'agir de l'interface hôte appropriée)",
+        "form.serialPort.label": "Interface à laquelle le KNX-TP est connecté",
+        "form.serialPort.options": [
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Port série 0 -> E/S internes"],
+          ["/dev/ttyACM1", "/dev/ttyACM1 -> Port série 1 -> KNX, RS485 ou RS232"],
+          ["/dev/ttyACM2", "/dev/ttyACM2 -> Port série 2 -> RS485 ou RS232"],
+          ["/dev/ttyACM3", "/dev/ttyACM3 -> Port série 3 -> RS485 ou RS232"]
+        ],
+        "form.physAddress.label": "Indirizzo fisico del router IP",
+        "form.additionalAddress1.label": "1. Adresse physique pour les clients KNXnet/IP",
+        "form.additionalAddress2.label": "2. Adresse physique pour les clients KNXnet/IP",
+        "form.additionalAddress3.label": "3. Adresse physique pour les clients KNXnet/IP",
+        "form.additionalAddress4.label": "4. Adresse physique pour les clients KNXnet/IP",
+        "form.additionalAddress5.label": "5. Adresse physique pour les clients KNXnet/IP"
+      },
+      "it": {
+        "form.friendlyName.label": "Nome completo (visualizzato, ad esempio, nell'ETS)",
+        "form.advancedSettings.label": "Impostazioni avanzate",
+        "form.discovery.label": "Il server deve essere raggiungibile in rete?",
+        "form.discovery.options": [
+          ["true", "Si"],
+          ["false", "No"]
+        ],
+        "form.discoveryListenIf.label": "Interfaccia su cui il server ascolta le richieste",
+        "form.discoveryOutIf.label": "Interfaccia attraverso la quale il server risponde alle richieste",
+        "form.listenIf.label": "Interfaccia per la comunicazione KNXnet/IP (deve essere l'interfaccia host corretta)",
+        "form.serialPort.label": "Interfaccia a cui è collegato il KNX-TP",
+        "form.serialPort.options": [
+          ["/dev/ttyACM0", "/dev/ttyACM0 -> Porta seriale 0 -> I/O interni"],
+          ["/dev/ttyACM1", "/dev/ttyACM1 -> Porta seriale 1 -> KNX, RS485 oppure RS232"],
+          ["/dev/ttyACM2", "/dev/ttyACM2 -> Porta seriale 2 -> RS485 oppure RS232"],
+          ["/dev/ttyACM3", "/dev/ttyACM3 -> Porta seriale 3 -> RS485 oppure RS232"]
+        ],
+        "form.physAddress.label": "Indirizzo fisico del router IP",
+        "form.additionalAddress1.label": "1. Indirizzo fisico per i client KNXnet/IP",
+        "form.additionalAddress2.label": "2. Indirizzo fisico per i client KNXnet/IP",
+        "form.additionalAddress3.label": "3. Indirizzo fisico per i client KNXnet/IP",
+        "form.additionalAddress4.label": "4. Indirizzo fisico per i client KNXnet/IP",
+        "form.additionalAddress5.label": "5. Indirizzo fisico per i client KNXnet/IP"
       }
     }
   },

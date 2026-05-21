@@ -42,6 +42,9 @@
     "{ServiceName}": {
       "image": "ghcr.io/paperless-ngx/paperless-ngx:latest",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "depends_on": {
         "{ServiceName}-db": {},
         "{ServiceName}-broker": {},
@@ -92,9 +95,6 @@
         "cosmos-stack-main": "{ServiceName}"
       },
       "container_name": "{ServiceName}",
-      "networks": {
-        "{ServiceName}-network": {}
-      },
       "routes": [
         {
           "name": "{ServiceName}",
@@ -120,6 +120,9 @@
       "image": "docker.io/library/redis:7",
       "container_name": "{ServiceName}-broker",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "volumes": [
         {
           "source": "{ServiceName}-redisdata",
@@ -133,9 +136,6 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
-      },
-      "networks": {
-        "{ServiceName}-network": {}
       }
     },
 
@@ -143,6 +143,9 @@
       "image": "docker.io/library/postgres:15",
       "container_name": "{ServiceName}-db",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "volumes": [
         {
           "source": "{ServiceName}-pgdata",
@@ -162,9 +165,6 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
-      },
-      "networks": {
-        "{ServiceName}-network": {}
       }
     },
 
@@ -172,15 +172,15 @@
       "image": "docker.io/gotenberg/gotenberg:7.8",
       "container_name": "{ServiceName}-gotenberg",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
-      },
-      "networks": {
-        "{ServiceName}-network": {}
       }
     },
 
@@ -188,21 +188,16 @@
       "image": "docker.io/apache/tika:latest",
       "container_name": "{ServiceName}-tika",
       "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
-      },
-      "networks": {
-        "{ServiceName}-network": {}
       }
-    }
-  },
-  
-  "networks": {
-    "{ServiceName}-network": {
     }
   }
 }

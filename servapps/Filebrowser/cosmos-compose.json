@@ -38,7 +38,7 @@
     "post-install": [
       {
         "type": "warning",
-        "label": "A default account has been created with admin / admin as credentials. Please change them"
+        "label": "A default account has been created with admin / {Passwords.0} as credentials"
       }
     ],
     {/if}
@@ -64,8 +64,6 @@
       "restart": "unless-stopped",
       "tty": true,
       "stdin_open": true,
-      "UID": 0,
-      "GID": 0,
       "environment": [
         "PUID=0",
         "PGID=0",
@@ -74,10 +72,12 @@
         , "FB_NOAUTH=true"
         {/if}
       ],
+      {if Context.Auth}
       "post_install": [
         "filebrowser config init --viewMode \"list\"",
-        "filebrowser users add admin admin"
+        "filebrowser users add admin {Passwords.0}"
       ],
+      {/if}
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
