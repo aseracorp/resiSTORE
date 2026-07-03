@@ -2,35 +2,6 @@
   "cosmos-installer": {
     "form": [
       {
-        "name": "oidc",
-        "label": "Do you want to login with your Cosmos Login using the OpenID-Feature?",
-        "initialValue": false,
-        "type": "checkbox"
-      },
-      {if Context.oidc}
-      {
-        "name": "oidcWarning",
-        "type": "warning",
-        "label": "Please go to the OpenID Page in Cosmos and create an OpenID with Client-ID \" {Context.oidcClientId} \" and Redirect:"
-      },
-      {
-        "type": "warning",
-        "label": "https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/auth/openid/callback"
-      },
-      {
-        "name": "oidcClientId",
-        "label": "Your OpenID Client-ID (Please copy from the created OpenID client on the OpenID page.)",
-        "initialValue": "homeassistant",
-        "type": "text"
-      },
-      {
-        "name": "oidcClientSecret",
-        "label": "Your OpenID Client-Secret",
-        "initialValue": "",
-        "type": "text"
-      },
-      {/if}
-      {
         "name": "adminOnly",
         "label": "Do you want to make this service admin only?",
         "initialValue": false,
@@ -39,29 +10,17 @@
     ],
     "translation": {
       "de": {
-        "form.oidcClientSecret.label": "Ihr OpenID-Client-Secret",
-        "form.oidcClientId.label": "Ihre OpenID-Client-ID (Bitte kopieren Sie diese vom erstellten OpenID-Client auf der OpenID-Seite.)",
-        "form.oidcWarning.label": "Bitte rufen Sie die OpenID-Seite in Cosmos auf und erstellen Sie eine OpenID mit der Client-ID \"{Context.oidcClientId}\" und der Umleitungs-URL:",
-        "form.oidc.label": "Möchten Sie sich mit Ihrem Cosmos-Login über die OpenID-Funktion anmelden?",
         "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
       },
       "fr": {
-        "form.oidcClientSecret.label": "Votre clé secrète OpenID",
-        "form.oidcClientId.label": "Votre identifiant client OpenID (Veuillez le copier à partir du client OpenID créé sur la page OpenID.)",
-        "form.oidcWarning.label": "Rendez-vous sur la page OpenID de Cosmos et créez un OpenID avec l'identifiant client « {Context.oidcClientId} » et la redirection :",
-        "form.oidc.label": "Souhaitez-vous vous connecter avec votre identifiant Cosmos en utilisant la fonctionnalité OpenID ?",
         "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
       },
       "it": {
-        "form.oidcClientSecret.label": "Il tuo segreto client OpenID",
-        "form.oidcClientId.label": "Il tuo ID cliente OpenID (copialo dal cliente OpenID creato nella pagina OpenID)",
-        "form.oidcWarning.label": "Vai alla pagina OpenID in Cosmos e crea un OpenID con Client-ID \"{Context.oidcClientId}\" e Redirect:",
-        "form.oidc.label": "Vuoi effettuare l'accesso con il tuo account Cosmos utilizzando la funzione OpenID?",
         "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
       }
     }
   },
-  "minVersion": "0.16.0",
+  "minVersion": "0.22.23",
   "services": {
     "{ServiceName}": {
       "image": "lscr.io/linuxserver/homeassistant:latest",
@@ -75,19 +34,15 @@
         "PGID=1000",
         "TZ=auto",
         "PROXY_HOSTNAME=0.0.0.0/0",
-        {if not Context.oidc}
-        "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy"
-        {else}
         "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy|aseracorp/docker-mods:homeassistant-oidc",
-        "OIDC_CLIENT_ID={Context.oidcClientId}",
-        "OIDC_CLIENT_SECRET={Context.oidcClientSecret}",
-        "OIDC_CONFIGURE_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/.well-known/openid-configuration",
+        "OIDC_CLIENT_ID={ServiceName}",
+        "OIDC_CONFIGURE_URL={RootProtocol}://{RootHostname}/.well-known/openid-configuration",
         "OIDC_USERNAME_FIELD=sub",
         "OIDC_SCOPE=openid",
         "OIDC_BLOCK_LOGIN=false",
         "OIDC_OPENID_TEXT=Cosmos-Login",
-        "OIDC_CREATE_USER=true"
-        {/if}
+        "OIDC_CREATE_USER=true",
+        "OIDC_VALIDATE_TLS=false"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
