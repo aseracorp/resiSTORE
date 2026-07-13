@@ -61,7 +61,7 @@
       }
     }
   },
-  "minVersion": "0.16.0",
+  "minVersion": "0.22.27",
   "services": {
     "{ServiceName}": {
       "image": "lscr.io/linuxserver/homeassistant:latest",
@@ -81,7 +81,7 @@
         "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy|aseracorp/docker-mods:homeassistant-oidc",
         "OIDC_CLIENT_ID={Context.oidcClientId}",
         "OIDC_CLIENT_SECRET={Context.oidcClientSecret}",
-        "OIDC_CONFIGURE_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/.well-known/openid-configuration",
+        "OIDC_CONFIGURE_URL={RootProtocol}://{RootHostname}/.well-known/openid-configuration",
         "OIDC_USERNAME_FIELD=sub",
         "OIDC_SCOPE=openid",
         "OIDC_BLOCK_LOGIN=false",
