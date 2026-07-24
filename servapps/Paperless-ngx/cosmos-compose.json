@@ -136,7 +136,8 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
-      }
+      },
+      "command": "redis-server --ignore-warnings ARM64-COW-BUG"
     },
 
     "{ServiceName}-db": {
