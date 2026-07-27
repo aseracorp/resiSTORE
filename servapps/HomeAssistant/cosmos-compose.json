@@ -33,7 +33,7 @@
         "PUID=1000",
         "PGID=1000",
         "TZ=auto",
-        "PROXY_HOSTNAME=0.0.0.0/0",
+        "PROXY_HOSTNAME=['0.0.0.0/0','::/0']",
         "DOCKER_MODS=linuxserver/mods:homeassistant-hacs|aseracorp/docker-mods:homeassistant-trustedproxy|aseracorp/docker-mods:homeassistant-oidc",
         "OIDC_CLIENT_ID=__route_{ServiceName}",
         "OIDC_CLIENT_NAME=Cosmos-Login",
