@@ -2,6 +2,7 @@
   "cosmos-installer": {
     "form": [
       {
+        "name": "DBInfo",
         "type": "info",
         "label": "PostgreSQL is used as the database server. Apache Tika and Gotenberg servers are started with paperless and paperless is configured to use these services. These provide support for consuming Office documents (Word, Excel, Power Point and their LibreOffice counterparts."
       },
@@ -13,8 +14,8 @@
       }, 
       {
         "name": "password",
-        "label": "Would you like to change the admin password? (Default: password)",
-        "initialValue": "password",
+        "label": "Would you like to change the admin password? (Default: random)",
+        "initialValue": "{Passwords.0}",
         "type": "password"
       },
       {
@@ -35,12 +36,38 @@
         "initialValue": false,
         "type": "checkbox"
       }
-    ]
+    ],
+    "translation": {
+      "de": {
+        "form.DBInfo.label": "Als Datenbankserver wird PostgreSQL verwendet. Die Apache-Tika- und Gotenberg-Server werden gestartet, und „paperless“ ist so konfiguriert, dass es diese Dienste nutzt. Diese bieten Unterstützung für die Verarbeitung von Office-Dokumenten (Word, Excel, PowerPoint und deren LibreOffice-Entsprechungen).",
+        "form.username.label": "Möchten Sie den Benutzernamen des Administrators ändern? (Standard: admin)",
+        "form.password.label": "Möchten Sie das Administrator-Passwort ändern? (Standard: zufällig generiert)",
+        "form.exportDirectory.label": "Wie lautet der Pfad um Dateien zu exportieren?",
+        "form.consumeDirectory.label": "Wie lautet der Pfad um Dateien zu importieren?",
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.DBInfo.label": "PostgreSQL est utilisé comme serveur de base de données. Les serveurs Apache Tika et Gotenberg sont lancés, et « paperless » est configuré pour utiliser ces services. Ceux-ci prennent en charge le traitement des documents Office (Word, Excel, PowerPoint et leurs équivalents LibreOffice).",
+        "form.username.label": "Souhaitez-vous modifier le nom d'utilisateur de l'administrateur ? (Par défaut : admin)",
+        "form.password.label": "Souhaitez-vous modifier le mot de passe administrateur ? (Par défaut : généré aléatoirement)",
+        "form.exportDirectory.label": "Quel est le chemin d'accès permettant d'exporter des fichiers ?",
+        "form.consumeDirectory.label": "Quel est le chemin d'accès pour importer des fichiers ?",
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.DBInfo.label": "ome server di database viene utilizzato PostgreSQL. Vengono avviati i server Apache Tika e Gotenberg e “paperless” è configurato in modo da utilizzare questi servizi. Questi ultimi offrono il supporto per l’elaborazione di documenti Office (Word, Excel, PowerPoint e le loro controparti LibreOffice).",
+        "form.username.label": "Desidera modificare il nome utente dell'amministratore? (Predefinito: admin)",
+        "form.password.label": "Desidera modificare la password dell'amministratore? (Impostazione predefinita: generata casualmente)",
+        "form.exportDirectory.label": "Qual è il percorso per esportare i file?",
+        "form.consumeDirectory.label": "Qual è il percorso per importare i file?",
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
+      }
+    }
   },
-  "minVersion": "0.9.16",
+  "minVersion": "0.22.30",
   "services": {
     "{ServiceName}": {
-      "image": "ghcr.io/paperless-ngx/paperless-ngx:2.20",
+      "image": "ghcr.io/paperless-ngx/paperless-ngx:latest",
       "restart": "unless-stopped",
       "security_opt": [
         "no-new-privileges:true"
@@ -74,6 +101,7 @@
         }
       ],
       "environment": [
+        "PAPERLESS_SECRET_KEY={Passwords.1}{Passwords.2}{Passwords.3}",
         "PAPERLESS_REDIS=redis://{ServiceName}-broker:6379",
         "PAPERLESS_DBHOST={ServiceName}-db",
         "PAPERLESS_DBPASS={Passwords.0}",
@@ -84,10 +112,17 @@
         "USERMAP_GID=1000",
         "PAPERLESS_ADMIN_USER={Context.username}",
         "PAPERLESS_ADMIN_PASSWORD={Context.password}",
-        "PAPERLESS_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}"
+        "PAPERLESS_URL=https://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}",
+        "PAPERLESS_SOCIAL_AUTO_SIGNUP=true",
+        "PAPERLESS_SOCIALACCOUNT_ALLOW_SIGNUPS=true",
+        "PAPERLESS_SOCIAL_ACCOUNT_SYNC_GROUPS=true",
+        "PAPERLESS_DISABLE_REGULAR_LOGIN=true",
+        "PAPERLESS_REDIRECT_LOGIN_TO_SSO=true",
+        "PAPERLESS_APPS=allauth.socialaccount.providers.openid_connect",
+        "PAPERLESS_SOCIALACCOUNT_PROVIDERS={\"openid_connect\":{\"OAUTH_PKCE_ENABLED\":true,\"APPS\":[{\"provider_id\":\"cosmos\",\"name\":\"Cosmos Cloud\",\"client_id\":\"__route_{ServiceName}\",\"settings\":{\"server_url\":\"{RootProtocol}://{RootHostname}/.well-known/openid-configuration\",\"fetch_userinfo\":true,\"uid_field\":\"sub\"}}],\"SCOPE\":[\"openid\",\"profile\"]}}"
       ],
       "labels": {
-        "cosmos-persistent-env": "PAPERLESS_ADMIN_PASSWORD, PAPERLESS_ADMIN_USER, PAPERLESS_DBPASS",
+        "cosmos-persistent-env": "PAPERLESS_ADMIN_PASSWORD, PAPERLESS_ADMIN_USER, PAPERLESS_DBPASS, PAPERLESS_SECRET_KEY",
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Paperless-ngx/icon.png",
@@ -108,10 +143,12 @@
           "SmartShield": {
             "Enabled": true
           },
-          "AuthEnabled": true
+          "AuthEnabled": true,
           {if Context.adminOnly}
-           , "AuthAdmin": true
+           "AuthAdmin": true,
           {/if}
+          "PublicOpenIDName": "__route_{ServiceName}",
+          "PublicOpenIDRedirectURIs": "{RootProtocol}://{Hostnames.{StaticServiceName}.{StaticServiceName}.host}/accounts/oidc/cosmos/login/callback/"
         }
       ]
     },
