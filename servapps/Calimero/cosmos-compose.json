@@ -188,6 +188,7 @@
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/Calimero/icon.png"
       },
       "environment": [
+        "TZ=auto",
         "NAME={ServiceName}",
         "FRIENDLY_NAME={Context.friendlyName}",
         "SERIAL_PORT=/dev/ttyKNX",
