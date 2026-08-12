@@ -46,7 +46,8 @@
         "OIDC_DISPLAYNAME_FIELD=sub",
         "OIDC_GROUPS_FIELD=roles",
         "OIDC_GROUPS_SCOPE=roles",
-        "OIDC_ADMIN_NAME=admin"
+        "OIDC_ADMIN_NAME=admin",
+        "SETUP_PORT=80"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -67,7 +68,7 @@
           "name": "{ServiceName}",
           "description": "Expose {ServiceName} to the web",
           "useHost": true,
-          "target": "http://{ServiceName}:8123",
+          "target": "http://{ServiceName}:80",
           "mode": "SERVAPP",
           "Timeout": 14400000,
           "ThrottlePerMinute": 12000,
