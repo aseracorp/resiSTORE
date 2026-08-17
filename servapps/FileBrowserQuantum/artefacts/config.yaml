@@ -12,10 +12,11 @@ server:
 
 auth:
   methods:
-    proxy:
-      enabled: true
-      header: "X-Cosmos-User"
-      createUser: true
+    noauth: true  # disables all authentication methods
+#    proxy:
+#      enabled: true
+#      header: "X-Cosmos-User"
+#      createUser: true
 
 frontend:
   name: "Filebrowser Quantum"

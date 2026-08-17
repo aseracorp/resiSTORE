@@ -68,6 +68,7 @@
         "PUBLICIP_FETCHERS=",
         "PUBLICIP_HTTP_PROVIDERS=",
         "PUBLICIPV4_HTTP_PROVIDERS=url:https://checkipv4.dedyn.io/",
+        "RESOLVER_ADDRESS=1.1.1.1:53",
         "PUBLICIPV6_HTTP_PROVIDERS=",
         "PUBLICIP_DNS_PROVIDERS=",
         "PUBLICIP_DNS_TIMEOUT=3s",
