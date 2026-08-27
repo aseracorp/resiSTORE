@@ -2,5 +2,5 @@ servapps.json
 index.json
 servapps_test.json
 todo.txt
-Thumbs.db
-.vscode/settings.json
+node_modules/
+prdiffs/
