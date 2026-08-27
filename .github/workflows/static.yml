@@ -30,13 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout the `unstable` branch
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: master
           clean: false
 
       # Checkout the `unstable` branch
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           ref: unstable
           # Put the checked out files inside the `unstable` folder
@@ -55,19 +55,21 @@ jobs:
           regex: false
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 18.x
+          node-version: '24'
 
       - name: Build index
         run: node index.js && cd unstable && node index.js
+
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
-          # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
