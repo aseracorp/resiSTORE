@@ -727,11 +727,21 @@ function checkComposeSchema(app, rendered, isYaml, composeFileLabel) {
       // Cosmos-Server supported vocabulary). Non-canonical casing is always
       // flagged as a warning - Cosmos's encoding/json binds by field name
       // regardless of case, but the store's canonical spelling is lowercase.
+      //
+      // Some docker-compose idioms have a different, supported Cosmos spelling
+      // (e.g. tmpfs/read_only are only honored as a "tmpfs" entry inside the
+      // volumes array - mount.TypeTmpfs in the docker mount model). For those
+      // we give an actionable message instead of the generic one.
       for (const k of Object.keys(conf)) {
         const nk = normalizeFieldKey(k);
         const canonical = COMPOSE_SERVICE_SUPPORTED.get(nk);
         if (!canonical) {
-          err(app, composeFileLabel, prefix + ': field "' + k + '" is not supported by Cosmos-Server (not in the supported compose vocabulary)');
+          const low = k.toLowerCase();
+          if (low === 'tmpfs' || low === 'read_only' || low === 'readonly') {
+            err(app, composeFileLabel, prefix + ': field "' + k + '" is NOT honored by Cosmos-Server at the service level; express ' + low + ' as a volume mount instead, e.g. volumes: [{ "type": "' + (low === 'tmpfs' ? 'tmpfs' : 'bind') + '", "target": "<path>" }] (only supported via the volumes mount list)');
+          } else {
+            err(app, composeFileLabel, prefix + ': field "' + k + '" is not supported by Cosmos-Server (not in the supported compose vocabulary)');
+          }
         } else if (canonical !== k) {
           warn(app, composeFileLabel, prefix + ': field "' + k + '" should be spelled "' + canonical + '" (canonical Cosmos field name)');
         }
