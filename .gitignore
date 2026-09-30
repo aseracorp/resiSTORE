@@ -4,3 +4,4 @@ servapps_test.json
 todo.txt
 node_modules/
 prdiffs/
+.vscode/settings.json

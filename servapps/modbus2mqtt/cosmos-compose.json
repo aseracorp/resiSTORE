@@ -29,7 +29,7 @@
         "cosmos-auto-update": "true",
         "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/modbus2mqtt/icon.png"
       },
-      "image": "ghcr.io/modbus2mqtt/modbus2mqtt",
+      "image": "ghcr.io/aseracorp/modbus2mqtt",
       "restart": "unless-stopped",
       "security_opt": [
         "no-new-privileges:true"
