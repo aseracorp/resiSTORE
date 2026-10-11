@@ -62,9 +62,10 @@
         "FILEBROWSER_CONFIG=data/config.yaml",
         "FILEBROWSER_ADMIN_PASSWORD={Passwords.0}"
       ],
+      "entrypoint": "/bin/sh /home/filebrowser/data/migrate.sh",
       "post_install": [
-        "wget -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml",
-        "sh -c 'if [ -f data/database.db ] && [ ! -f data/database.sqlite ]; then printf \"\nserver:\n  database:\n    migrateFrom: data/database.db\n\" >> data/config.yaml; fi'"
+        "wget -O data/migrate.sh https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/migrate.sh",
+        "chmod +x data/migrate.sh"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
