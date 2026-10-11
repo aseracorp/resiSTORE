@@ -1,4 +1,4 @@
-{ 
+{
   "cosmos-installer": {
     "form": [
       {
@@ -26,7 +26,7 @@
         "initialValue": true,
         "type": "checkbox"
       }
-    {/if}
+      {/if}
     ],
     "translation": {
       "de": {
@@ -52,24 +52,26 @@
   "minVersion": "0.21.0",
   "services": {
     "{ServiceName}": {
-      "image": "gtstef/filebrowser:latest",
+      "image": "gtstef/filebrowser:2.0.0-stable",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
       "tty": true,
       "stdin_open": true,
       "user": "root",
       "environment": [
-        "FILEBROWSER_DATABASE=data/database.db",
-        "FILEBROWSER_CONFIG=data/config.yaml",
         "FILEBROWSER_ADMIN_PASSWORD={Passwords.0}"
       ],
       "post_install": [
-        "wget -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml"
+        "wget -q -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml || curl -fsSL -o data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml",
+        "if [ -f data/database.db ] && [ ! -f data/database.sqlite ]; then sed -i 's|^    path: \"data/database.sqlite\".*|&\n    migrateFrom: data/database.db|' data/config.yaml; fi",
+        "cp data/config.yaml config.yaml",
+        "./filebrowser init",
+        "sed -i '/migrateFrom/d' data/config.yaml config.yaml"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
-        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/icon.png",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/unstable/servapps/FileBrowserQuantum/icon.png",
         "cosmos-stack": "{ServiceName}",
         "cosmos-stack-main": "{ServiceName}"
       },
