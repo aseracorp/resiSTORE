@@ -62,11 +62,7 @@
         "FILEBROWSER_CONFIG=data/config.yaml",
         "FILEBROWSER_ADMIN_PASSWORD={Passwords.0}"
       ],
-      "entrypoint": "/bin/sh /home/filebrowser/data/migrate.sh",
-      "post_install": [
-        "wget -O data/migrate.sh https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/migrate.sh",
-        "chmod +x data/migrate.sh"
-      ],
+      "entrypoint": "/bin/sh -c 'cd /home/filebrowser && if [ ! -s data/config.yaml ] || ! grep -q \"^http:\" data/config.yaml; then (wget -q -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml || curl -fsSL -o data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml); fi; if [ -f data/database.db ] && [ ! -f data/database.sqlite ] && ! grep -q migrateFrom data/config.yaml; then printf \"\\nserver:\\n  database:\\n    migrateFrom: data/database.db\\n\" >> data/config.yaml; fi; exec ./filebrowser \"$@\"'",
       "labels": {
         "cosmos-force-network-secured": "true",
         "cosmos-auto-update": "true",
