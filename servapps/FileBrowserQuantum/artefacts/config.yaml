@@ -1,7 +1,5 @@
 # FileBrowser Quantum v2.0.0+ configuration (servapp)
-# http: port is the container's internal listen port (route maps :80).
-http:
-  port: 80
+# Managed by the FileBrowserQuantum Cosmos servapp.
 server:
   sources:
     - path: "/volumes"
@@ -25,13 +23,19 @@ server:
           download: true
       name: "Host"
   database:
-    path: "data/database.sqlite"
-    migrateFrom: "data/database.db"
+    path: "data/database.sqlite"          # v2 SQLite database
+    migrateFrom: "data/database.db"       # v1→v2 migration source; removed on fresh install by post_install
+
 auth:
   methods:
-    noauth: true  # access controlled by Cosmos SmartShield
+    proxy:
+      enabled: true
+      header: "X-Cosmos-User"
+      createUser: true
+
 frontend:
   name: "Filebrowser Quantum"
+
 userDefaults:
   preview:
     highQuality: true
@@ -41,9 +45,15 @@ userDefaults:
     office: true
     popup: true
     folder: true
+  fileViewer:
+    disableOnlyOfficeExt: ".md .txt .pdf"
   account:
     permissions:
-      api: false
       admin: false
+      api: false
       share: false
       realtime: false
+
+http:
+  port: 80
+  trustProxyHeaders: true                # behind Cosmos reverse proxy
