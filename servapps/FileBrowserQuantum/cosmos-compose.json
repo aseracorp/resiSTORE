@@ -63,10 +63,8 @@
       ],
       "post_install": [
         "wget -q -O data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml || curl -fsSL -o data/config.yaml https://aseracorp.github.io/resiSTORE/servapps/FileBrowserQuantum/artefacts/config.yaml",
-        "if [ -f data/database.db ] && [ ! -f data/database.sqlite ]; then sed -i 's|^    path: \"data/database.sqlite\".*|&\n    migrateFrom: data/database.db|' data/config.yaml; fi",
-        "cp data/config.yaml config.yaml",
-        "./filebrowser init",
-        "sed -i '/migrateFrom/d' data/config.yaml config.yaml"
+        "if [ ! -f data/database.db ] || [ -f data/database.sqlite ]; then sed -i '/migrateFrom/d' data/config.yaml; fi",
+        "./filebrowser init"
       ],
       "labels": {
         "cosmos-force-network-secured": "true",
@@ -78,65 +76,20 @@
       "volumes": [
         {
           "source": "{ServiceName}-data",
-          "target": "/home/filebrowser/data",
-          "type": "volume"
-        },
-        {if not Context.advanced}
-        {
-          "source": "/",
-          "target": "/host",
-          "type": "bind"
+          "target": "/home/filebrowser/data"
         },
         {
-          "source": "/opt/docker/volumes",
-          "target": "/volumes",
-          "type": "bind"
-        }
-        {else}
-        {
-          "source": "{Context.mountPointRoot}",
-          "target": "/host",
-          "type": "bind"
+          "source": "{mountPointRoot}",
+          "target": "/host"
         },
         {
-          "source": "{Context.mountPointVolumes}",
-          "target": "/volumes",
-          "type": "bind"
-        }
-        {/if}
-      ],
-      "routes": [
-        {
-          "name": "{ServiceName}",
-          "description": "Expose {ServiceName} to the web",
-          "useHost": true,
-          "target": "http://{ServiceName}:80",
-          "mode": "SERVAPP",
-          "Timeout": 14400000,
-          "ThrottlePerMinute": 12000,
-          "BlockCommonBots": true,
-          "SmartShield": {
-            "Enabled": true
-          },
-          "AuthEnabled": true
-          {if not Context.advanced}
-           , "AuthAdmin": true
-          {/if}
-          {if Context.adminOnly}
-           , "AuthAdmin": true
-          {/if}
+          "source": "{mountPointVolumes}",
+          "target": "/volumes"
         }
       ],
-      "healthcheck": {
-        "test": [
-          "CMD-SHELL",
-          "curl -Is http://localhost:80/health | head -n 1"
-        ],
-        "interval": 30,
-        "timeout": 3,
-        "retries": 3,
-        "start_period": 10
-      }
+      "ports": [
+        "80:80"
+      ]
     }
   }
 }
