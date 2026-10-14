@@ -16,8 +16,23 @@
       "longDescription": "<p><b>HOOC</b> è la piattaforma IoT svizzera di riferimento per l'accesso remoto sicuro, allarmi intelligenti, monitoraggio e reportistica. Altamente sicura, scalabile e facile da usare, è il partner essenziale per produttori industriali, ingegneri edili, gestori immobiliari, integratori di sistema e tecnici smart home.</p><p>Con <b>HOOC Connect</b>, i tuoi sistemi di automazione e building restano connessi in modo affidabile al tuo team — da qualsiasi luogo. Il gateway lavora silenziosamente in background e ti consente di:</p><ul><li><b>Accesso remoto</b> — raggiungere in modo sicuro PLC, dispositivi Modbus, controller e altri sistemi tramite una connessione cifrata.</li><li><b>Allarmi</b> — essere avvisato immediatamente quando qualcosa richiede la tua attenzione.</li><li><b>Monitoraggio e report</b> — seguire lo stato dei tuoi impianti e ricevere rapporti periodici.</li><li><b>Raccolta dati</b> — raccogliere dati di tendenza come base per la manutenzione predittiva e le analisi.</li><li><b>Tutto in una piattaforma</b> — gestire ogni sito connesso dal portale di gestione HOOC.</li></ul><p>Le soluzioni HOOC soddisfano i più alti standard di qualità e sicurezza — testate e certificate da esperti indipendenti di cybersecurity. Per iniziare, registra il gateway nel portale di gestione HOOC (my.hooc.me); la piattaforma ti guida nella rapida attivazione.</p>"
     }
   },
-  "tags": ["remote access", "IoT", "monitoring", "alerts", "reporting", "building automation", "industrial automation", "PLC", "Modbus", "smart home"],
+  "tags": [
+    "remote access",
+    "IoT",
+    "monitoring",
+    "alerts",
+    "reporting",
+    "building automation",
+    "industrial automation",
+    "PLC",
+    "Modbus",
+    "smart home"
+  ],
   "repository": "https://www.hooc.ch",
-  "image": "https://hub.docker.com/r/hooc/hooc-connect",
-  "supported_architectures": ["amd64", "arm64", "arm"]
+  "image": "https://ghcr.io/aseracorp/hooc-connect",
+  "supported_architectures": [
+    "amd64",
+    "arm64",
+    "arm"
+  ]
 }

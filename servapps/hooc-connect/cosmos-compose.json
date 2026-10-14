@@ -32,7 +32,7 @@
   "minVersion": "0.16.0",
   "services": {
     "{ServiceName}": {
-      "image": "hooc/hooc-connect:latest",
+      "image": "ghcr.io/aseracorp/hooc-connect:latest",
       "container_name": "{ServiceName}",
       "restart": "unless-stopped",
       "privileged": true,
