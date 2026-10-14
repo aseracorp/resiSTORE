@@ -37,7 +37,7 @@
       "restart": "unless-stopped",
       "privileged": true,
       "network_mode": "host",
-      "command": "--api.address=0.0.0.0 --vpn.linux.bridge={Context.bridge}",
+      "command": "--vpn.linux.bridge={Context.bridge}",
       "devices": [
         "/dev/net/tun:/dev/net/tun"
       ],
