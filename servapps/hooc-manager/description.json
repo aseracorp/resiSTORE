@@ -1,23 +1,37 @@
 {
   "name": "hooc-manager",
   "description": "HOOC Manager — VPN & SPS-Fernzugriff für HOOC-Connect-Gateways",
-  "longDescription": "<p>Der <b>HOOC Manager</b> verwaltet das HOOC Connect Embedded Gateway auf diesem System: Installation/Update per wget-Link aus dem HOOC-Portal, Aktivierung per Schlüssel, Watchdog (alle 30 s), Container-Logs und den eingebetteten Gateway-Status (Live-Abfrage der Gateway-API, kein iframe). HOOC ist ein verschlüsseltes VPN für den Fernzugriff auf SPS- und Modbus-Systeme (OpenWrt).</p>",
+  "longDescription": "<p>Der <b>HOOC Manager</b> verwaltet das HOOC Connect Embedded Gateway auf diesem System: Installation/Update per wget-Link aus dem HOOC-Portal, Aktivierung per Schlüssel, Watchdog (alle 30 s), Container-Logs und den kompletten Status an einem Ort — inklusive Gateway-Name, Serial, Version, VPN-Endpunkt und Bridge (live aus der Gateway-API, kein iframe). HOOC ist ein verschlüsseltes VPN für den Fernzugriff auf SPS- und Modbus-Systeme (OpenWrt).</p>",
   "translation": {
     "en": {
       "description": "HOOC Manager — VPN & remote access for HOOC Connect gateways",
-      "longDescription": "<p>The <b>HOOC Manager</b> manages the HOOC Connect embedded gateway on this system: install/update via wget link from the HOOC portal, activation by key, watchdog (every 30 s), container logs and the embedded gateway status (live gateway-API query, no iframe). HOOC is an encrypted VPN for remote access to PLC and Modbus systems (OpenWrt).</p>"
+      "longDescription": "<p>The <b>HOOC Manager</b> manages the HOOC Connect embedded gateway on this system: install/update via wget link from the HOOC portal, activation by key, watchdog (every 30 s), container logs and the complete status in one place — including gateway name, serial, version, VPN endpoint and bridge (live from the gateway API, no iframe). HOOC is an encrypted VPN for remote access to PLC and Modbus systems (OpenWrt).</p>"
     },
     "fr": {
       "description": "HOOC Manager — VPN et accès à distance pour passerelles HOOC Connect",
-      "longDescription": "<p>Le <b>HOOC Manager</b> gère la passerelle HOOC Connect sur ce système : installation/mise à jour via lien wget depuis le portail HOOC, activation par clé, watchdog (toutes les 30 s), journaux de conteneur et l'état de la passerelle intégré (requête live de l'API passerelle, sans iframe). HOOC est un VPN chiffré pour l'accès à distance aux systèmes PLC et Modbus (OpenWrt).</p>"
+      "longDescription": "<p>Le <b>HOOC Manager</b> gère la passerelle HOOC Connect sur ce système : installation/mise à jour via lien wget depuis le portail HOOC, activation par clé, watchdog (toutes les 30 s), journaux de conteneur et le statut complet en un seul endroit — nom de la passerelle, numéro de série, version, endpoint VPN et bridge (en direct depuis l'API passerelle, sans iframe). HOOC est un VPN chiffré pour l'accès à distance aux systèmes PLC et Modbus (OpenWrt).</p>"
     },
     "it": {
       "description": "HOOC Manager — VPN e accesso remoto per gateway HOOC Connect",
-      "longDescription": "<p>Il <b>HOOC Manager</b> gestisce il gateway HOOC Connect su questo sistema: installazione/aggiornamento tramite link wget dal portale HOOC, attivazione tramite chiave, watchdog (ogni 30 s), log del contenitore e lo stato del gateway integrato (query live dell'API gateway, senza iframe). HOOC è una VPN cifrata per l'accesso remoto a sistemi PLC e Modbus (OpenWrt).</p>"
+      "longDescription": "<p>Il <b>HOOC Manager</b> gestisce il gateway HOOC Connect su questo sistema: installazione/aggiornamento tramite link wget dal portale HOOC, attivazione tramite chiave, watchdog (ogni 30 s), log del contenitore e lo stato completo in un unico posto — nome del gateway, seriale, versione, endpoint VPN e bridge (live dall'API del gateway, senza iframe). HOOC è una VPN cifrata per l'accesso remoto a sistemi PLC e Modbus (OpenWrt).</p>"
     }
   },
-  "tags": ["smart home", "home automation", "IoT", "VPN", "remote access", "PLC", "Modbus", "OpenWrt", "gateway", "automation"],
+  "tags": [
+    "smart home",
+    "home automation",
+    "IoT",
+    "VPN",
+    "remote access",
+    "PLC",
+    "Modbus",
+    "OpenWrt",
+    "gateway",
+    "automation"
+  ],
   "repository": "https://github.com/aseracorp/hooc-manager",
   "image": "https://ghcr.io/aseracorp/hooc-manager",
-  "supported_architectures": ["amd64", "arm64"]
+  "supported_architectures": [
+    "amd64",
+    "arm64"
+  ]
 }
