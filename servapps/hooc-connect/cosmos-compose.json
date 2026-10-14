@@ -1,0 +1,74 @@
+{
+  "cosmos-installer": {
+    "form": [
+      {
+        "name": "bridge",
+        "label": "Bridge interface to bridge the HOOC VPN interface (hooc-tap0) with (e.g. br-lan).",
+        "initialValue": "br-lan",
+        "type": "text"
+      },
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": true,
+        "type": "checkbox"
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.bridge.label": "Bridge-Interface, mit dem das HOOC-VPN-Interface (hooc-tap0) gebrückt wird (z.B. br-lan).",
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.bridge.label": "Interface bridge avec lequel l'interface VPN HOOC (hooc-tap0) est pontée (par ex. br-lan).",
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.bridge.label": "Interfaccia bridge con cui viene collegata l'interfaccia VPN HOOC (hooc-tap0) (es. br-lan).",
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
+      }
+    }
+  },
+  "minVersion": "0.16.0",
+  "services": {
+    "{ServiceName}": {
+      "image": "ghcr.io/aseracorp/hooc-connect:latest",
+      "container_name": "{ServiceName}",
+      "restart": "unless-stopped",
+      "privileged": true,
+      "network_mode": "host",
+      "command": "--vpn.linux.bridge={Context.bridge}",
+      "devices": [
+        "/dev/net/tun:/dev/net/tun"
+      ],
+      "cap_add": [
+        "NET_ADMIN",
+        "NET_BIND_SERVICE"
+      ],
+      "labels": {
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/hooc-connect/icon.png",
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true"
+      },
+      "routes": [
+        {
+          "name": "{ServiceName}",
+          "description": "HOOC Connect Embedded Gateway UI",
+          "useHost": true,
+          "target": "http://{ServiceName}:1323",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
+        }
+      ]
+    }
+  }
+}

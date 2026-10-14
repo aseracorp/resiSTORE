@@ -1,0 +1,38 @@
+{
+  "name": "hooc-connect",
+  "description": "HOOC Connect — secure remote access, alerts, monitoring and reporting for your systems",
+  "longDescription": "<p><b>HOOC</b> is Switzerland's leading IoT platform for secure remote access, smart alerts, monitoring and reporting. Highly secure, scalable and easy to use, it is the essential companion for industrial manufacturers, building engineers, real estate managers, system integrators and smart home technicians.</p><p>With <b>HOOC Connect</b>, your automation and building systems are reliably connected to your team — from anywhere. The gateway quietly runs in the background and lets you:</p><ul><li><b>Remote access</b> — securely reach PLCs, Modbus devices, controllers and other systems over an encrypted connection.</li><li><b>Alerts</b> — get notified instantly when something needs your attention.</li><li><b>Monitoring &amp; reporting</b> — follow the health and status of your installations and receive regular reports.</li><li><b>Data collection</b> — gather trend data that builds the foundation for predictive maintenance and analysis.</li><li><b>All in one platform</b> — manage every connected site from the HOOC Management Portal.</li></ul><p>HOOC solutions meet the highest quality and security standards — tested and certified by independent cyber security experts. To get started, register the gateway in the HOOC Management Portal (my.hooc.me); the platform guides you through the quick activation.</p>",
+  "translation": {
+    "de": {
+      "description": "HOOC Connect — sicherer Fernzugriff, Alarme, Monitoring und Reporting für Ihre Systeme",
+      "longDescription": "<p><b>HOOC</b> ist die führende Schweizer IoT-Plattform für sicheren Fernzugriff, Smart Alerts, Monitoring und Reporting. Hochsicher, skalierbar und einfach zu bedienen — der unverzichtbare Begleiter für Industriehersteller, Gebäudetechniker, Immobilienverwalter, Systemintegratoren und Smart-Home-Techniker.</p><p>Mit <b>HOOC Connect</b> sind Ihre Automations- und Gebäudesysteme zuverlässig mit Ihrem Team verbunden — von überall. Das Gateway arbeitet unauffällig im Hintergrund und erlaubt Ihnen:</p><ul><li><b>Fernzugriff</b> — erreichen Sie SPS, Modbus-Geräte, Steuerungen und weitere Systeme sicher über eine verschlüsselte Verbindung.</li><li><b>Alarme</b> — werden Sie sofort benachrichtigt, wenn etwas Ihre Aufmerksamkeit erfordert.</li><li><b>Monitoring &amp; Reporting</b> — verfolgen Sie den Zustand Ihrer Anlagen und erhalten Sie regelmässige Berichte.</li><li><b>Datenerfassung</b> — sammeln Sie Trenddaten als Grundlage für vorausschauende Wartung und Analysen.</li><li><b>Alles in einer Plattform</b> — verwalten Sie alle verbundenen Standorte im HOOC Management Portal.</li></ul><p>HOOC-Lösungen erfüllen höchste Qualitäts- und Sicherheitsstandards — getestet und zertifiziert durch unabhängige Cybersicherheitsexperten. Zum Start registrieren Sie das Gateway im HOOC Management Portal (my.hooc.me); die Plattform führt Sie durch die schnelle Aktivierung.</p>"
+    },
+    "fr": {
+      "description": "HOOC Connect — accès distant sécurisé, alertes, monitoring et rapports pour vos systèmes",
+      "longDescription": "<p><b>HOOC</b> est la plateforme IoT suisse de référence pour l'accès à distance sécurisé, les alertes intelligentes, le monitoring et les rapports. Hautement sécurisée, évolutive et facile à utiliser, elle est l'alliée essentielle des fabricants industriels, des ingénieurs du bâtiment, des gestionnaires immobiliers, des intégrateurs système et des techniciens domotiques.</p><p>Avec <b>HOOC Connect</b>, vos systèmes d'automatisation et de bâtiment restent fiables connectés à votre équipe — où que vous soyez. La passerelle fonctionne discrètement en arrière-plan et vous permet de :</p><ul><li><b>Accès à distance</b> — atteindre en toute sécurité vos API, appareils Modbus, contrôleurs et autres systèmes via une connexion chiffrée.</li><li><b>Alertes</b> — être notifié immédiatement quand quelque chose requiert votre attention.</li><li><b>Monitoring &amp; rapports</b> — suivre la santé et l'état de vos installations et recevoir des rapports réguliers.</li><li><b>Collecte de données</b> — réunir des données de tendance, base de la maintenance prédictive et des analyses.</li><li><b>Tout en une plateforme</b> — gérer chaque site connecté depuis le portail de gestion HOOC.</li></ul><p>Les solutions HOOC répondent aux normes de qualité et de sécurité les plus élevées — testées et certifiées par des experts indépendants en cybersécurité. Pour démarrer, enregistrez la passerelle dans le portail de gestion HOOC (my.hooc.me) ; la plateforme vous guide lors de l'activation rapide.</p>"
+    },
+    "it": {
+      "description": "HOOC Connect — accesso remoto sicuro, allarmi, monitoraggio e report per i tuoi sistemi",
+      "longDescription": "<p><b>HOOC</b> è la piattaforma IoT svizzera di riferimento per l'accesso remoto sicuro, allarmi intelligenti, monitoraggio e reportistica. Altamente sicura, scalabile e facile da usare, è il partner essenziale per produttori industriali, ingegneri edili, gestori immobiliari, integratori di sistema e tecnici smart home.</p><p>Con <b>HOOC Connect</b>, i tuoi sistemi di automazione e building restano connessi in modo affidabile al tuo team — da qualsiasi luogo. Il gateway lavora silenziosamente in background e ti consente di:</p><ul><li><b>Accesso remoto</b> — raggiungere in modo sicuro PLC, dispositivi Modbus, controller e altri sistemi tramite una connessione cifrata.</li><li><b>Allarmi</b> — essere avvisato immediatamente quando qualcosa richiede la tua attenzione.</li><li><b>Monitoraggio e report</b> — seguire lo stato dei tuoi impianti e ricevere rapporti periodici.</li><li><b>Raccolta dati</b> — raccogliere dati di tendenza come base per la manutenzione predittiva e le analisi.</li><li><b>Tutto in una piattaforma</b> — gestire ogni sito connesso dal portale di gestione HOOC.</li></ul><p>Le soluzioni HOOC soddisfano i più alti standard di qualità e sicurezza — testate e certificate da esperti indipendenti di cybersecurity. Per iniziare, registra il gateway nel portale di gestione HOOC (my.hooc.me); la piattaforma ti guida nella rapida attivazione.</p>"
+    }
+  },
+  "tags": [
+    "remote access",
+    "IoT",
+    "monitoring",
+    "alerts",
+    "reporting",
+    "building automation",
+    "industrial automation",
+    "PLC",
+    "Modbus",
+    "smart home"
+  ],
+  "repository": "https://www.hooc.ch",
+  "image": "https://ghcr.io/aseracorp/hooc-connect",
+  "supported_architectures": [
+    "amd64",
+    "arm64",
+    "arm"
+  ]
+}
