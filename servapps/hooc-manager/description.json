@@ -1,0 +1,23 @@
+{
+  "name": "hooc-manager",
+  "description": "HOOC Manager — VPN & SPS-Fernzugriff für HOOC-Connect-Gateways",
+  "longDescription": "<p>Der <b>HOOC Manager</b> verwaltet das HOOC Connect Embedded Gateway auf diesem System: Installation/Update per wget-Link aus dem HOOC-Portal, Aktivierung per Schlüssel, Watchdog (alle 30 s), Container-Logs und die eingebaute HOOC-Web-UI. HOOC ist ein verschlüsseltes VPN für den Fernzugriff auf SPS- und Modbus-Systeme (OpenWrt).</p>",
+  "translation": {
+    "en": {
+      "description": "HOOC Manager — VPN & remote access for HOOC Connect gateways",
+      "longDescription": "<p>The <b>HOOC Manager</b> manages the HOOC Connect embedded gateway on this system: install/update via wget link from the HOOC portal, activation by key, watchdog (every 30 s), container logs and the built-in HOOC web UI. HOOC is an encrypted VPN for remote access to PLC and Modbus systems (OpenWrt).</p>"
+    },
+    "fr": {
+      "description": "HOOC Manager — VPN et accès à distance pour passerelles HOOC Connect",
+      "longDescription": "<p>Le <b>HOOC Manager</b> gère la passerelle HOOC Connect sur ce système : installation/mise à jour via lien wget depuis le portail HOOC, activation par clé, watchdog (toutes les 30 s), journaux de conteneur et l'interface web HOOC intégrée. HOOC est un VPN chiffré pour l'accès à distance aux systèmes PLC et Modbus (OpenWrt).</p>"
+    },
+    "it": {
+      "description": "HOOC Manager — VPN e accesso remoto per gateway HOOC Connect",
+      "longDescription": "<p>Il <b>HOOC Manager</b> gestisce il gateway HOOC Connect su questo sistema: installazione/aggiornamento tramite link wget dal portale HOOC, attivazione tramite chiave, watchdog (ogni 30 s), log del contenitore e la web UI HOOC integrata. HOOC è una VPN cifrata per l'accesso remoto a sistemi PLC e Modbus (OpenWrt).</p>"
+    }
+  },
+  "tags": ["smart home", "home automation", "IoT", "VPN", "remote access", "PLC", "Modbus", "OpenWrt", "gateway", "automation"],
+  "repository": "https://github.com/aseracorp/hooc-manager",
+  "image": "https://ghcr.io/aseracorp/hooc-manager",
+  "supported_architectures": ["amd64", "arm64"]
+}

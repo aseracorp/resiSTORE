@@ -1,0 +1,103 @@
+{
+  "cosmos-installer": {
+    "form": [
+      {
+        "name": "warn1",
+        "label": "HOOC Connect ist ein verschlüsseltes VPN-Tool für den Fernzugriff auf Modbus/OpenWrt-Systeme. Der Manager lädt das Docker-Image aus dem HOOC-Portal und verwaltet den Container. Alle 30 s prüft ein Watchdog, ob er läuft.",
+        "type": "info"
+      },
+      {
+        "name": "adminOnly",
+        "label": "Do you want to make this service admin only?",
+        "initialValue": true,
+        "type": "checkbox"
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.warn1.label": "HOOC Connect ist ein verschlüsseltes VPN-Tool für den Fernzugriff auf Modbus/OpenWrt-Systeme. Der Manager lädt das Docker-Image aus dem HOOC-Portal und verwaltet den Container. Alle 30 s prüft ein Watchdog, ob er läuft.",
+        "form.adminOnly.label": "Möchten Sie diesen Dienst nur für Administratoren zugänglich machen?"
+      },
+      "fr": {
+        "form.adminOnly.label": "Souhaitez-vous rendre ce service accessible uniquement aux administrateurs ?"
+      },
+      "it": {
+        "form.adminOnly.label": "Desideri rendere questo servizio accessibile solo agli amministratori?"
+      }
+    }
+  },
+  "minVersion": "0.20.0",
+  "services": {
+    "{ServiceName}": {
+      "image": "ghcr.io/aseracorp/hooc-manager:latest",
+      "container_name": "{ServiceName}",
+      "restart": "unless-stopped",
+      "privileged": true,
+      "network_mode": "host",
+      "environment": [
+        "PORT=8095",
+        "HOST=0.0.0.0",
+        "HOOC_API_PORT=1323",
+        "HOOC_DATA_DIR=/data"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-data",
+          "target": "/data",
+          "type": "volume"
+        },
+        {
+          "source": "/var/run/docker.sock",
+          "target": "/var/run/docker.sock",
+          "type": "bind"
+        },
+        {
+          "source": "/dev/net/tun",
+          "target": "/dev/net/tun",
+          "type": "bind"
+        }
+      ],
+      "devices": [
+        "/dev/net/tun:/dev/net/tun"
+      ],
+      "labels": {
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/hooc-manager/icon.png",
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true"
+      },
+      "routes": [
+        {
+          "name": "{ServiceName}",
+          "description": "HOOC Manager",
+          "useHost": true,
+          "target": "http://{ServiceName}:8095",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+           , "AuthAdmin": true
+          {/if}
+        },
+        {
+          "name": "{ServiceName}-hooc",
+          "description": "HOOC Manager - HOOC Web UI",
+          "useHost": true,
+          "target": "http://{ServiceName}:8095/hooc/",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+        }
+      ]
+    }
+  }
+}
