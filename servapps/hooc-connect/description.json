@@ -1,5 +1,5 @@
 {
-  "name": "hooc-connect",
+  "name": "HOOC Connect E",
   "description": "HOOC Connect — secure remote access, alerts, monitoring and reporting for your systems",
   "longDescription": "<p><b>HOOC</b> is Switzerland's leading IoT platform for secure remote access, smart alerts, monitoring and reporting. Highly secure, scalable and easy to use, it is the essential companion for industrial manufacturers, building engineers, real estate managers, system integrators and smart home technicians.</p><p>With <b>HOOC Connect</b>, your automation and building systems are reliably connected to your team — from anywhere. The gateway quietly runs in the background and lets you:</p><ul><li><b>Remote access</b> — securely reach PLCs, Modbus devices, controllers and other systems over an encrypted connection.</li><li><b>Alerts</b> — get notified instantly when something needs your attention.</li><li><b>Monitoring &amp; reporting</b> — follow the health and status of your installations and receive regular reports.</li><li><b>Data collection</b> — gather trend data that builds the foundation for predictive maintenance and analysis.</li><li><b>All in one platform</b> — manage every connected site from the HOOC Management Portal.</li></ul><p>HOOC solutions meet the highest quality and security standards — tested and certified by independent cyber security experts. To get started, register the gateway in the HOOC Management Portal (my.hooc.me); the platform guides you through the quick activation.</p>",
   "translation": {
@@ -28,7 +28,7 @@
     "Modbus",
     "smart home"
   ],
-  "repository": "https://www.hooc.ch",
+  "repository": "https://github.com/aseracorp/hooc-connect",
   "image": "https://ghcr.io/aseracorp/hooc-connect",
   "supported_architectures": [
     "amd64",
