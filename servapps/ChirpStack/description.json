@@ -1,0 +1,23 @@
+{
+  "name": "ChirpStack",
+  "description": "Open-source LoRaWAN Network Server stack for building and managing private LoRaWAN networks.",
+  "longDescription": "<p>ChirpStack is an open-source LoRaWAN&reg; Network Server stack that provides a web interface for managing gateways, devices and applications, as well as a gRPC and REST API for integration.</p><p>This servapp deploys the complete ChirpStack v4 stack as used in production: the network server with built-in web UI, the gateway bridge (Semtech UDP packet-forwarder, port 1700/udp) and BasicStation variants, the gRPC-to-REST API bridge with Swagger UI, plus PostgreSQL, Redis and an MQTT broker (Mosquitto) as its backing services.</p><p>After installation, open the web interface to create your first tenant/application and register your LoRa gateways. Semtech UDP packet-forwarder gateways connect on UDP port 1700; BasicStation gateways connect to the BasicStation gateway bridge (TCP port 3001).</p>",
+  "translation": {
+    "de": {
+      "description": "Open-Source-LoRaWAN-Netzwerkserver-Stack zum Aufbau und zur Verwaltung privater LoRaWAN-Netzwerke.",
+      "longDescription": "<p>ChirpStack ist ein Open-Source-LoRaWAN&reg;-Netzwerkserver-Stack, der eine Weboberfläche zur Verwaltung von Gateways, Geräten und Anwendungen sowie eine gRPC- und REST-API zur Integration bereitstellt.</p><p>Dieser Servapp stellt den kompletten ChirpStack-v4-Stack wie in der Produktion bereit: den Netzwerkserver mit eingebauter Weboberfläche, die Gateway-Bridge (Semtech-UDP-Packet-Forwarder, Port 1700/udp) und BasicStation-Varianten, die gRPC-zu-REST-API-Bridge mit Swagger-UI sowie PostgreSQL, Redis und einen MQTT-Broker (Mosquitto) als Backend-Dienste.</p><p>Nach der Installation öffnen Sie die Weboberfläche, um Ihren ersten Mandanten bzw. Ihre erste Anwendung anzulegen und Ihre LoRa-Gateways zu registrieren. Semtech-UDP-Packet-Forwarder-Gateways verbinden sich über UDP-Port 1700; BasicStation-Gateways über TCP-Port 3001.</p>"
+    },
+    "fr": {
+      "description": "Stack open-source de serveur de réseau LoRaWAN pour construire et gérer des réseaux LoRaWAN privés.",
+      "longDescription": "<p>ChirpStack est un serveur de réseau LoRaWAN&reg; open source qui fournit une interface web pour gérer les passerelles, les appareils et les applications, ainsi qu'une API gRPC et REST pour l'intégration.</p><p>Ce servapp déploie la pile complète ChirpStack v4 telle qu'utilisée en production : le serveur réseau avec interface web intégrée, la passerelle bridge (Semtech UDP packet-forwarder, port 1700/udp) et ses variantes BasicStation, le pont API gRPC-to-REST avec Swagger UI, plus PostgreSQL, Redis et un courtier MQTT (Mosquitto) en tant que services de support.</p><p>Après l'installation, ouvrez l'interface web pour créer votre premier locataire/application et enregistrer vos passerelles LoRa. Les passerelles Semtech UDP packet-forwarder se connectent sur le port UDP 1700 ; les passerelles BasicStation sur le port TCP 3001.</p>"
+    },
+    "it": {
+      "description": "Stack open-source di server di rete LoRaWAN per costruire e gestire reti LoRaWAN private.",
+      "longDescription": "<p>ChirpStack è un server di rete LoRaWAN&reg; open source che fornisce un'interfaccia web per la gestione di gateway, dispositivi e applicazioni, oltre a un'API gRPC e REST per l'integrazione.</p><p>Questo servapp distribuisce l'intero stack ChirpStack v4 come usato in produzione: il server di rete con interfaccia web integrata, il gateway bridge (Semtech UDP packet-forwarder, porta 1700/udp) e le varianti BasicStation, il bridge API gRPC-to-REST con Swagger UI, oltre a PostgreSQL, Redis e un broker MQTT (Mosquitto) come servizi di supporto.</p><p>Dopo l'installazione, aprire l'interfaccia web per creare il primo tenant/applicazione e registrare i gateway LoRa. I gateway Semtech UDP packet-forwarder si collegano sulla porta UDP 1700; i gateway BasicStation sulla porta TCP 3001.</p>"
+    }
+  },
+  "tags": ["lorawan", "lora", "iot", "network server", "gateway", "mqtt", "smart home", "home automation", "local server"],
+  "repository": "https://github.com/chirpstack/chirpstack",
+  "image": "https://hub.docker.com/r/chirpstack/chirpstack",
+  "supported_architectures": ["amd64", "arm64"]
+}
