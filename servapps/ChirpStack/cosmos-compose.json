@@ -1,0 +1,278 @@
+{
+  "cosmos-installer": {
+    "form": [
+      {
+        "name": "adminOnly",
+        "label": "Do you want to restrict the ChirpStack web interface to administrators only?",
+        "initialValue": true,
+        "type": "checkbox"
+      },
+      {
+        "name": "exposeGatewayPort",
+        "label": "Expose the Semtech UDP packet-forwarder port (1700/udp) so LoRa gateways can connect",
+        "initialValue": true,
+        "type": "checkbox"
+      },
+      {
+        "name": "exposeBasicstationPort",
+        "label": "Expose the BasicStation port (3001/tcp) so LoRaWAN BasicStation gateways can connect (e.g. TTS-compatible or ChirpStack Gateway OS gateways)",
+        "initialValue": false,
+        "type": "checkbox"
+      },
+      {
+        "name": "region",
+        "label": "LoRaWAN region / sub-band (must match your gateway's channel plan)",
+        "initialValue": "eu868",
+        "type": "select",
+        "options": [
+          ["eu868", "EU868 (Europe)"],
+          ["us915_1", "US915 sub-band 2"],
+          ["us915_7", "US915 sub-band 8 (common US default)"],
+          ["au915_0", "AU915 sub-band 1"],
+          ["as923_2", "AS923-2 (some Asia-Pacific)"],
+          ["in865", "IN865 (India)"],
+          ["kr920", "KR920 (South Korea)"],
+          ["ru864", "RU864 (Russia)"]
+        ]
+      }
+    ],
+    "translation": {
+      "de": {
+        "form.adminOnly.label": "Möchten Sie die ChirpStack-Weboberfläche nur für Administratoren zugänglich machen?",
+        "form.exposeGatewayPort.label": "Den Semtech-UDP-Packet-Forwarder-Port (1700/udp) freigeben, damit LoRa-Gateways sich verbinden können",
+        "form.exposeBasicstationPort.label": "Den BasicStation-Port (3001/tcp) freigeben, damit LoRaWAN-BasicStation-Gateways sich verbinden können (z. B. TTS-kompatible Gateways oder ChirpStack Gateway OS)",
+        "form.region.label": "LoRaWAN-Region / Sub-Band (muss dem Kanalplan Ihres Gateways entsprechen)"
+      },
+      "fr": {
+        "form.adminOnly.label": "Souhaitez-vous restreindre l'interface web ChirpStack aux administrateurs uniquement ?",
+        "form.exposeGatewayPort.label": "Exposer le port UDP Semtech packet-forwarder (1700/udp) afin que les passerelles LoRa puissent se connecter",
+        "form.exposeBasicstationPort.label": "Exposer le port BasicStation (3001/tcp) afin que les passerelles LoRaWAN BasicStation puissent se connecter (par ex. passerelles compatibles TTS ou ChirpStack Gateway OS)",
+        "form.region.label": "Région LoRaWAN / sous-bande (doit correspondre au plan de canaux de votre passerelle)"
+      },
+      "it": {
+        "form.adminOnly.label": "Vuoi limitare l'interfaccia web di ChirpStack ai soli amministratori?",
+        "form.exposeGatewayPort.label": "Esporre la porta UDP Semtech packet-forwarder (1700/udp) così i gateway LoRa possono connettersi",
+        "form.exposeBasicstationPort.label": "Esporre la porta BasicStation (3001/tcp) così i gateway LoRaWAN BasicStation possono connettersi (ad es. gateway compatibili TTS o ChirpStack Gateway OS)",
+        "form.region.label": "Regione LoRaWAN / sottobanda (deve corrispondere al piano dei canali del vostro gateway)"
+      }
+    }
+  },
+  "minVersion": "0.22.0",
+  "services": {
+    "{ServiceName}": {
+      "image": "chirpstack/chirpstack:4",
+      "container_name": "{ServiceName}",
+      "command": "-c /etc/chirpstack",
+      "restart": "unless-stopped",
+      "depends_on": {
+        "{ServiceName}-postgres": {},
+        "{ServiceName}-mosquitto": {},
+        "{ServiceName}-redis": {}
+      },
+      "environment": [
+        "MQTT_BROKER_HOST={ServiceName}-mosquitto",
+        "REDIS_HOST={ServiceName}-redis",
+        "POSTGRESQL_HOST={ServiceName}-postgres",
+        "TZ=Europe/Zurich"
+      ],
+      "post_install": [
+        "mkdir -p /etc/chirpstack",
+        "wget -q -O /etc/chirpstack/chirpstack.toml https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/chirpstack.toml || curl -fsSL -o /etc/chirpstack/chirpstack.toml https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/chirpstack.toml",
+        "sed -i 's/chirpstack:chirpstack@/chirpstack:{Passwords.0}@/g' /etc/chirpstack/chirpstack.toml"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-config",
+          "target": "/etc/chirpstack",
+          "type": "volume"
+        }
+      ],
+      "labels": {
+        "cosmos-force-network-secured": "true",
+        "cosmos-auto-update": "true",
+        "cosmos-icon": "https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/icon.png",
+        "cosmos-stack": "{ServiceName}",
+        "cosmos-stack-main": "{ServiceName}"
+      },
+      "routes": [
+        {
+          "name": "{ServiceName}",
+          "description": "Expose the ChirpStack web interface",
+          "useHost": true,
+          "target": "http://{ServiceName}:8080",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true
+          {if Context.adminOnly}
+          , "AuthAdmin": true
+          {/if}
+        }
+      ],
+      "healthcheck": {
+        "test": ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/ >/dev/null 2>&1 || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 5,
+        "start_period": 30
+      }
+    },
+    "{ServiceName}-postgres": {
+      "image": "postgres:14-alpine",
+      "container_name": "{ServiceName}-postgres",
+      "restart": "unless-stopped",
+      "post_install": [
+        "mkdir -p /docker-entrypoint-initdb.d",
+        "wget -q -O /docker-entrypoint-initdb.d/001-chirpstack_extensions.sh https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/001-chirpstack_extensions.sh || curl -fsSL -o /docker-entrypoint-initdb.d/001-chirpstack_extensions.sh https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/001-chirpstack_extensions.sh",
+        "chmod +x /docker-entrypoint-initdb.d/001-chirpstack_extensions.sh"
+      ],
+      "environment": [
+        "POSTGRES_USER=chirpstack",
+        "POSTGRES_PASSWORD={Passwords.0}",
+        "POSTGRES_DB=chirpstack"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-postgres-data",
+          "target": "/var/lib/postgresql/data",
+          "type": "volume"
+        }
+      ],
+      "healthcheck": {
+        "test": ["CMD-SHELL", "pg_isready -U chirpstack"],
+        "interval": 10,
+        "timeout": 5,
+        "retries": 5,
+        "start_period": 15
+      },
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      }
+    },
+    "{ServiceName}-redis": {
+      "image": "redis:7-alpine",
+      "container_name": "{ServiceName}-redis",
+      "restart": "unless-stopped",
+      "command": "redis-server --save 300 1 --save 60 100 --appendonly no",
+      "volumes": [
+        {
+          "source": "{ServiceName}-redis-data",
+          "target": "/data",
+          "type": "volume"
+        }
+      ],
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      }
+    },
+    "{ServiceName}-mosquitto": {
+      "image": "eclipse-mosquitto:2",
+      "container_name": "{ServiceName}-mosquitto",
+      "restart": "unless-stopped",
+      "post_install": [
+        "mkdir -p /mosquitto/config",
+        "printf 'listener 1883\\nallow_anonymous true\\n' > /mosquitto/config/mosquitto.conf"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-mosquitto-config",
+          "target": "/mosquitto/config",
+          "type": "volume"
+        }
+      ],
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      }
+    },
+    "{ServiceName}-gateway-bridge": {
+      "image": "chirpstack/chirpstack-gateway-bridge:4",
+      "container_name": "{ServiceName}-gateway-bridge",
+      "restart": "unless-stopped",
+      "depends_on": {
+        "{ServiceName}-mosquitto": {}
+      },
+      "command": "-c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml",
+      "post_install": [
+        "mkdir -p /etc/chirpstack-gateway-bridge",
+        "printf '[integration.mqtt.auth.generic]\\nservers=[\"tcp://{ServiceName}-mosquitto:1883\"]\\nusername=\"\"\\npassword=\"\"\\n' > /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml",
+        "printf '[integration.mqtt]\\nevent_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}\"\\nstate_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}\"\\ncommand_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/command/#\"\\n\\n[backend]\\ntype=\"semtech_udp\"\\n' >> /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-gateway-bridge-config",
+          "target": "/etc/chirpstack-gateway-bridge",
+          "type": "volume"
+        }
+      ]
+      {if Context.exposeGatewayPort}
+      , "ports": [
+        "1700:1700/udp"
+      ]
+      {/if},
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      }
+    },
+    "{ServiceName}-gateway-bridge-basicstation": {
+      "image": "chirpstack/chirpstack-gateway-bridge:4",
+      "container_name": "{ServiceName}-gateway-bridge-basicstation",
+      "restart": "unless-stopped",
+      "command": "-c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-{Context.region}.toml",
+      "depends_on": {
+        "{ServiceName}-mosquitto": {}
+      },
+      "post_install": [
+        "mkdir -p /etc/chirpstack-gateway-bridge",
+        "printf '[integration.mqtt.auth.generic]\\nservers=[\"tcp://{ServiceName}-mosquitto:1883\"]\\nusername=\"\"\\npassword=\"\"\\n\\n[integration.mqtt]\\nevent_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}\"\\nstate_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}\"\\ncommand_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/command/#\"\\n\\n[backend]\\ntype=\"basic_station\"\\n' > /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-{Context.region}.toml"
+      ],
+      "volumes": [
+        {
+          "source": "{ServiceName}-gateway-bridge-basicstation-config",
+          "target": "/etc/chirpstack-gateway-bridge",
+          "type": "volume"
+        }
+      ]
+      {if Context.exposeBasicstationPort}
+      , "ports": [
+        "3001:3001"
+      ]
+      {/if},
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      }
+    },
+    "{ServiceName}-rest-api": {
+      "image": "chirpstack/chirpstack-rest-api:4",
+      "container_name": "{ServiceName}-rest-api",
+      "restart": "unless-stopped",
+      "command": "--server {ServiceName}:8080 --bind 0.0.0.0:8090 --insecure",
+      "depends_on": {
+        "{ServiceName}": {}
+      },
+      "labels": {
+        "cosmos-stack": "{ServiceName}"
+      },
+      "routes": [
+        {
+          "name": "{ServiceName}-rest-api",
+          "description": "Expose the ChirpStack REST API (Swagger UI)",
+          "useHost": true,
+          "target": "http://{ServiceName}-rest-api:8090",
+          "mode": "SERVAPP",
+          "Timeout": 14400000,
+          "ThrottlePerMinute": 12000,
+          "BlockCommonBots": true,
+          "SmartShield": {
+            "Enabled": true
+          },
+          "AuthEnabled": true,
+          "AuthAdmin": true
+        }
+      ]
+    }
+  }
+}
