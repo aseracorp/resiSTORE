@@ -73,12 +73,12 @@
         "MQTT_BROKER_HOST={ServiceName}-mosquitto",
         "REDIS_HOST={ServiceName}-redis",
         "POSTGRESQL_HOST={ServiceName}-postgres",
+        "API_SECRET={Passwords.1}",
         "TZ=Europe/Zurich"
       ],
       "post_install": [
         "mkdir -p /etc/chirpstack",
-        "wget -q -O /etc/chirpstack/chirpstack.toml https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/chirpstack.toml || curl -fsSL -o /etc/chirpstack/chirpstack.toml https://aseracorp.github.io/resiSTORE/servapps/ChirpStack/artefacts/chirpstack.toml",
-        "sed -i 's/chirpstack:chirpstack@/chirpstack:{Passwords.0}@/g' /etc/chirpstack/chirpstack.toml"
+        "printf '[logging]\\nlevel=\"info\"\\n\\n[postgresql]\\ndsn=\"postgres://chirpstack:{Passwords.0}@$POSTGRESQL_HOST/chirpstack?sslmode=disable\"\\nmax_open_connections=10\\nmin_idle_connections=0\\n\\n[redis]\\nservers=[\"redis://$REDIS_HOST/\"]\\ntls_enabled=false\\ncluster=false\\n\\n[network]\\nnet_id=\"000000\"\\nenabled_regions=[\"eu868\"]\\n\\n[api]\\nbind=\"0.0.0.0:8080\"\\nsecret=\"{Passwords.1}\"\\n\\n[integration]\\nenabled=[\"mqtt\"]\\n\\n[integration.mqtt]\\nserver=\"tcp://$MQTT_BROKER_HOST:1883/\"\\njson=true\\n' > /etc/chirpstack/chirpstack.toml"
       ],
       "volumes": [
         {
@@ -195,11 +195,13 @@
       "depends_on": {
         "{ServiceName}-mosquitto": {}
       },
-      "command": "-c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml",
-      "post_install": [
-        "mkdir -p /etc/chirpstack-gateway-bridge",
-        "printf '[integration.mqtt.auth.generic]\\nservers=[\"tcp://{ServiceName}-mosquitto:1883\"]\\nusername=\"\"\\npassword=\"\"\\n' > /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml",
-        "printf '[integration.mqtt]\\nevent_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}\"\\nstate_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}\"\\ncommand_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/command/#\"\\n\\n[backend]\\ntype=\"semtech_udp\"\\n' >> /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge.toml"
+      "environment": [
+        "INTEGRATION__MQTT__AUTH__GENERIC__SERVERS=tcp://{ServiceName}-mosquitto:1883",
+        "INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}",
+        "INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}",
+        "INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/command/#",
+        "BACKEND__TYPE=semtech_udp",
+        "BACKEND__SEMTECH__UDP__UDP_BIND=0.0.0.0:1700"
       ],
       "volumes": [
         {
@@ -221,13 +223,16 @@
       "image": "chirpstack/chirpstack-gateway-bridge:4",
       "container_name": "{ServiceName}-gateway-bridge-basicstation",
       "restart": "unless-stopped",
-      "command": "-c /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-{Context.region}.toml",
       "depends_on": {
         "{ServiceName}-mosquitto": {}
       },
-      "post_install": [
-        "mkdir -p /etc/chirpstack-gateway-bridge",
-        "printf '[integration.mqtt.auth.generic]\\nservers=[\"tcp://{ServiceName}-mosquitto:1883\"]\\nusername=\"\"\\npassword=\"\"\\n\\n[integration.mqtt]\\nevent_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}\"\\nstate_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}\"\\ncommand_topic_template=\"{Context.region}/gateway/{{ .GatewayID }}/command/#\"\\n\\n[backend]\\ntype=\"basic_station\"\\n' > /etc/chirpstack-gateway-bridge/chirpstack-gateway-bridge-basicstation-{Context.region}.toml"
+      "environment": [
+        "INTEGRATION__MQTT__AUTH__GENERIC__SERVERS=tcp://{ServiceName}-mosquitto:1883",
+        "INTEGRATION__MQTT__EVENT_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/event/{{ .EventType }}",
+        "INTEGRATION__MQTT__STATE_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/state/{{ .StateType }}",
+        "INTEGRATION__MQTT__COMMAND_TOPIC_TEMPLATE={Context.region}/gateway/{{ .GatewayID }}/command/#",
+        "BACKEND__TYPE=basic_station",
+        "BACKEND__BASIC_STATION__BIND=:3001"
       ],
       "volumes": [
         {
