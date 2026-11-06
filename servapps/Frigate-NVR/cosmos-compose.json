@@ -21,9 +21,16 @@
          },
          {
             "name": "sharedMemory",
-            "label": "How much shared memory in bytes do you want (default is 268435456 = 256MB)?",
+            "label": "How much shared memory do you want? (shm_size in bytes, must be a number)",
             "initialValue": "268435456",
-            "type": "text"
+            "type": "select",
+            "options": [
+               ["268435456", "256MB (268435456 bytes) - default"],
+               ["536870912", "512MB (536870912 bytes)"],
+               ["1073741824", "1GB (1073741824 bytes)"],
+               ["2147483648", "2GB (2147483648 bytes)"],
+               ["4294967296", "4GB (4294967296 bytes)"]
+            ]
          },
          {
             "name": "cache",
@@ -39,7 +46,7 @@
          "privileged": true,
          "restart": "unless-stopped",
          "image": "ghcr.io/blakeblackshear/frigate:stable",
-         "shm_size": "{if Context.sharedMemory}{Context.sharedMemory}{else}268435456{/if}",
+         "shm_size": {if Context.sharedMemory}{Context.sharedMemory}{else}268435456{/if},
          "devices": [
             "/dev/bus/usb:/dev/bus/usb",
             "/dev/apex_0:/dev/apex_0",
